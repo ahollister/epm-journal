@@ -31,6 +31,19 @@ Append-only log of significant project decisions. Each entry should record what 
 - A cross-platform JS-only audio solution (e.g. `expo-av`, `react-native-audio`) — insufficient timing precision.
 - A single cross-platform C++ audio engine — the maintenance cost of bridging both platforms through one abstraction wasn't justified; using each platform's first-class audio API directly is simpler and more reliable.
 
+## 2025-07-16 — Scaffold shell: routes delegate to feature folders
+
+**What was decided:** The placeholder tab screens (`practice.tsx`, `journal.tsx`, `progress.tsx`) were moved from `src/app/(tabs)/` into `src/features/<feature>/`, leaving the route files as thin re-exports.
+
+**Why:**
+- The architecture stance says `app/` routes should be thin composers, not contain screen implementations.
+- Feature folders own their UI components — even placeholder screens should live there so the right pattern is in place from day one.
+- When real features land, developers extend the existing feature folder rather than needing to extract from `app/`.
+
+**What was rejected:** Leaving full component implementations in `app/` route files — this would set the wrong pattern and require later extraction.
+
+---
+
 ## 2025-07-16 — Gap Click scheduling as a domain function
 
 **What was decided:** The Gap Click scheduling logic (when to play/silence clicks during gap exercises) lives as a pure function in `domain/`, separate from the native audio transport.
