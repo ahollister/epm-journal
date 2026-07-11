@@ -128,3 +128,59 @@ Diff:
 ```diff
 
 ```
+---
+
+**2026-07-09T22:20:13.200Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added routing shell to architecture layers diagram + new Routing shell section; appended EPM Journal, Expo Router, and three-tab glossary entries; recorded Expo Router tab navigator decision.
+
+Old hash: 26d07aaa790214b70a9b0f899c210d1d96208836b0856e069fdde341abb6572d
+New hash: 45b9825da90ec842a6cbca9dfcbed1eb6aeb852761540c334394c184935c4079
+Entry ID: 2f0b5692-feb7-4d4e-803d-9de58cd1bc60
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-09T22:20:13.200Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added routing shell to architecture layers diagram + new Routing shell section; appended EPM Journal, Expo Router, and three-tab glossary entries; recorded Expo Router tab navigator decision.
+
+Old hash: b0c7559ee126856369f6fd754719a9cb57e348a769e3e21cbcf692b324ab51f0
+New hash: 4c99586b7baa51591b51ea12c74027c3e8aac50143a3cebedb9d1798396b61de
+Entry ID: ef3c78ae-64d0-42c4-a6dc-bb9d7134e480
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-09T22:20:13.200Z** - `decisions.md` (lifecycle.task-completed)
+
+Summary: Added routing shell to architecture layers diagram + new Routing shell section; appended EPM Journal, Expo Router, and three-tab glossary entries; recorded Expo Router tab navigator decision.
+
+Old hash: 56aa6f450c44d5b7cbd55fa065e6935f314176da2e414b108571e8914f234314
+New hash: 740dba3fba527eacf7e8df021edb901b40b2307c6f4ce77c2ae149ccfcf93245
+Entry ID: 39534664-9722-465a-b0a6-0ba042e04ba0
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-11T14:13:43.871Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: dc1940a8-6217-4931-b0ab-4fdf97420128
+
+Diff:
+```diff
+
+```

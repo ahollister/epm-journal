@@ -39,3 +39,14 @@ Append-only log of significant project decisions. Each entry should record what 
 - Scheduling policy (which beat, when to mute, when to resume) is business logic — pure input-to-output, testable with Jest.
 - The native module concerns itself only with "play this sound at this precise time" — it doesn't know about gap exercises.
 - Keeps the boundary clean: the Zustand store computes the schedule via domain functions and passes a simple instruction list to the native module.
+
+## 2025-07-16 — Expo Router with three-tab navigator shell
+
+**What was decided:** The app uses Expo Router (file-based routing) with a bottom tab navigator as the primary navigation shell. Three tabs define the main areas: Practice (session runner), Journal (practice journal and recordings), and Progress (skill wheel, goals, cycle review). Route files are thin one-line re-exports that compose feature components from their respective feature folders.
+
+**Why:**
+- Expo Router's file-based routing maps cleanly to the feature-folder structure — each route simply re-exports its corresponding feature screen.
+- The three-tab structure provides immediate access to any area without stacking, matching the three core user activities identified for v1.
+- Thin route files keep the navigation layer decoupled from UI logic — components live in feature folders where they can be developed and tested independently.
+
+**What was rejected:** (Initial scaffold — no prior navigation approach was in place.)

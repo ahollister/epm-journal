@@ -5,12 +5,29 @@ High-level shape of the system. The big pieces, how they fit together, and the c
 ## Layers
 
 ```
+src/app/                ← Expo Router (thin route files, compose features)
+      ↓ composes
 feature-folder/          ← UI (React components) + Zustand store (colocated)
       ↓ imports
 domain/                  ← Pure business-logic functions (zero deps)
       ↓ produces data consumed by
 native/                  ← Platform-native modules (iOS: AVAudioEngine, Android: Oboe/AAudio)
 ```
+
+### Routing shell (`src/app/`)
+Expo Router provides file-based routing. Route files under `src/app/` are thin — they compose feature components without owning UI logic themselves.
+
+The primary navigation shell is a bottom tab navigator with three tabs:
+
+| Tab | Route | Feature |
+|-----|-------|---------|
+| Practice | `(tabs)/practice` | Session runner (placeholder) |
+| Journal | `(tabs)/journal` | Practice journal and recordings (placeholder) |
+| Progress | `(tabs)/progress` | Skill wheel, goals, cycle review (placeholder) |
+
+The root layout wraps tabs in a Stack navigator; the index route redirects to the Practice tab.
+
+**Thin route pattern:** Route files are one-line re-exports — `export { default } from "@/features/<name>/<Name>Screen"`. All component logic and styling lives in the feature folder. Route files exist only to map URLs to features.
 
 ### Feature folders (`features/<name>/`)
 Each feature folder owns:

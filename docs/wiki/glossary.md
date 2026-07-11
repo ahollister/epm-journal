@@ -14,3 +14,9 @@ Project-specific terminology and definitions. When something is referred to by a
 - **AVAudioEngine** — Apple's low-latency audio framework for iOS/macOS. Used as the iOS backend for the metronome engine.
 - **Oboe/AAudio** — Google's low-latency audio libraries for Android. Oboe is a C++ wrapper that can use AAudio (API 27+) or fall back to OpenSL ES. Used as the Android backend for the metronome engine.
 - **Foreground service** — An Android service that runs with a persistent notification, allowing the app to continue audio playback when backgrounded. Used to keep the metronome audible during practice sessions with the screen off or another app in the foreground.
+
+- **EPM Journal** — The application name. A mobile-first, offline-first practice journal for musicians, built with Expo/React Native.
+- **Expo Router** — Expo's file-based routing framework. Route files under `src/app/` map filesystem paths to screen components. Route files are kept thin — they re-export feature components rather than owning UI logic.
+- **Practice tab** — The session runner tab. Hosts the active practice session UI (metronome, recording, timer).
+- **Journal tab** — The practice journal tab. Browsing past sessions, recordings, and notes.
+- **Progress tab** — The progress tracking tab. Skill wheel visualization, SMART goals, and cycle review.
