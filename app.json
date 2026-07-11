@@ -22,7 +22,6 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false,
       "permissions": [
         "RECORD_AUDIO",
         "POST_NOTIFICATIONS",
