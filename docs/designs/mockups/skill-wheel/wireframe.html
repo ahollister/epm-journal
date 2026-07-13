@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wireframe</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #1f2937;
+        background: #fff;
+        line-height: 1.5;
+      }
+      /* Layout helper for full-page layouts. Grid + place-items avoids
+         the flex centering trap where a child with max-width but no
+         width collapses to min-content. The inner element gets
+         width: 100% so the agent's max-width caps as expected. */
+      .page-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+      .page-wrap > * {
+        width: 100%;
+      }
+      .placeholder {
+        background: #e5e7eb;
+        color: #6b7280;
+        padding: 1rem;
+        border: 1px dashed #9ca3af;
+        text-align: center;
+        font-size: 0.875rem;
+      }
+      .box {
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+      .gray-box {
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body><style>
+  .chart {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+  .ring, .axis, .spoke, .vertex, .label, .center-dot {
+    position: absolute;
+    box-sizing: border-box;
+  }
+  .ring {
+    border: 1px dashed #bbb;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .axis {
+    left: 50%;
+    top: 50%;
+    transform-origin: 0 0;
+  }
+  .spoke {
+    height: 0;
+    border-top: 1px solid #ccc;
+  }
+  .vertex {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #555;
+    border: 1px solid #fff;
+    transform: translate(-50%, -50%);
+  }
+  .center-dot {
+    width: 4px;
+    height: 4px;
+    background: #999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .label {
+    font-size: 11px;
+    color: #333;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 80px;
+    line-height: 1.2;
+  }
+  .scale-tick {
+    position: absolute;
+    font-size: 9px;
+    color: #999;
+    transform: translate(-50%, -50%);
+  }
+  .polygon {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+</style>
+
+<div class="page-wrap">
+  <div style="max-width: 420px; width: 100%; padding: 16px 4px;">
+
+    <!-- Component header — wireframes the radar chart as a reusable component, not a screen -->
+    <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px 8px;">
+      <div style="font-size: 14px; font-weight: 600;">SkillWheelChart</div>
+      <div style="font-size: 11px; color: #777;">component · variable axes</div>
+    </div>
+
+    <!-- The radar chart itself, centered, square aspect ratio -->
+    <div class="box" style="padding: 16px;">
+      <div class="chart">
+
+        <!-- Concentric grid rings at 2.5, 5, 7.5, 10 (4 rings per spec) -->
+        <div class="ring" style="width: 100%; height: 100%;"></div>
+        <div class="ring" style="width: 75%; height: 75%;"></div>
+        <div class="ring" style="width: 50%; height: 50%;"></div>
+        <div class="ring" style="width: 25%; height: 25%;"></div>
+
+        <!-- 8 axis spokes as representative, with one "..." spoke to imply variable count -->
+        <!-- top (0°) -->
+        <div class="axis" style="width: 50%; transform: rotate(0deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- top-right (45°) -->
+        <div class="axis" style="width: 50%; transform: rotate(45deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- right (90°) -->
+        <div class="axis" style="width: 50%; transform: rotate(90deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- bottom-right (135°) -->
+        <div class="axis" style="width: 50%; transform: rotate(135deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- bottom (180°) -->
+        <div class="axis" style="width: 50%; transform: rotate(180deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- bottom-left (225°) -->
+        <div class="axis" style="width: 50%; transform: rotate(225deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- left (270°) -->
+        <div class="axis" style="width: 50%; transform: rotate(270deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- top-left (315°) -->
+        <div class="axis" style="width: 50%; transform: rotate(315deg);">
+          <div class="spoke" style="width: 100%;"></div>
+        </div>
+        <!-- 8th axis placeholder to imply variable count -->
+        <div class="axis" style="width: 50%; transform: rotate(22.5deg);">
+          <div class="spoke" style="width: 100%; border-top-style: dashed;"></div>
+        </div>
+
+        <!-- Center dot -->
+        <div class="center-dot" style="left: 50%; top: 50%;"></div>
+
+        <!-- Scale ticks on the top spoke (0°) showing band values -->
+        <div class="scale-tick" style="left: 75%; top: 25%;">2.5</div>
+        <div class="scale-tick" style="left: 62.5%; top: 37.5%;">5</div>
+        <div class="scale-tick" style="left: 87.5%; top: 12.5%;">7.5</div>
+        <div class="scale-tick" style="left: 95%; top: 5%;">10</div>
+
+        <!-- Data polygon overlay (SVG so it renders a real filled polygon connecting vertices) -->
+        <svg class="polygon" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <!-- 8 axes at 22.5° increments starting from top; vertices plotted along each axis
+               as a fraction of the radius (1 = outer ring). Scores shown vary to imply shape. -->
+          <polygon
+            points="
+              50,18
+              72,32
+              82,55
+              68,75
+              38,80
+              22,62
+              28,38
+              58,24
+            "
+            fill="#999"
+            fill-opacity="0.35"
+            stroke="#555"
+            stroke-width="0.6"
+          />
+        </svg>
+
+        <!-- Vertex markers (tappable per spec) -->
+        <div class="vertex" style="left: 50%; top: 18%;"></div>
+        <div class="vertex" style="left: 72%; top: 32%;"></div>
+        <div class="vertex" style="left: 82%; top: 55%;"></div>
+        <div class="vertex" style="left: 68%; top: 75%;"></div>
+        <div class="vertex" style="left: 38%; top: 80%;"></div>
+        <div class="vertex" style="left: 22%; top: 62%;"></div>
+        <div class="vertex" style="left: 28%; top: 38%;"></div>
+        <div class="vertex" style="left: 58%; top: 24%;"></div>
+
+        <!-- Characteristic labels at axis endpoints (outside the outermost ring) -->
+        <div class="label" style="left: 50%; top: 2%;">Tempo<br>stability</div>
+        <div class="label" style="left: 92%; top: 12%;">Comping</div>
+        <div class="label" style="left: 98%; top: 55%;">Sight-<br>reading</div>
+        <div class="label" style="left: 92%; top: 95%;">Transcription</div>
+        <div class="label" style="left: 50%; top: 100%;">Tone<br>control</div>
+        <div class="label" style="left: 8%; top: 95%;">Improvisation</div>
+        <div class="label" style="left: 2%; top: 55%;">Dynamics</div>
+        <div class="label" style="left: 8%; top: 12%;">Phrasing</div>
+
+      </div>
+    </div>
+
+    <!-- Component props / contract — surface what this thing accepts -->
+    <div style="margin-top: 16px; padding: 0 4px;">
+      <div style="font-size: 12px; font-weight: 600; margin-bottom: 6px;">Props (shared component)</div>
+      <div class="box" style="padding: 10px 12px; font-size: 12px; line-height: 1.6;">
+        <div><span style="color: #777;">characteristics</span> — { name, score }[], length 4–8 (variable)</div>
+        <div><span style="color: #777;">previousScores?</span> — optional overlay polygon for cycle review</div>
+        <div><span style="color: #777;">onVertexTap?</span> — fires with characteristic id (onboarding confirm only)</div>
+        <div><span style="color: #777;">size?</span> — chart box width; defaults to container</div>
+      </div>
+    </div>
+
+    <!-- Consumers — make the reuse constraint visible -->
+    <div style="margin-top: 16px; padding: 0 4px;">
+      <div style="font-size: 12px; font-weight: 600; margin-bottom: 6px;">Used by</div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <div class="box" style="padding: 8px 12px; font-size: 12px;">Onboarding · Stage 5 confirmation</div>
+        <div class="box" style="padding: 8px 12px; font-size: 12px;">Progress tab · ongoing wheel view</div>
+        <div class="box" style="padding: 8px 12px; font-size: 12px;">Cycle Review · current vs. previous overlay</div>
+      </div>
+    </div>
+
+  </div>
+</div></body>
+</html>

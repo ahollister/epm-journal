@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #1f2937;
+        background: #fff;
+        line-height: 1.5;
+      }
+      /* Layout helper for full-page layouts. Grid + place-items avoids
+         the flex centering trap where a child with max-width but no
+         width collapses to min-content. The inner element gets
+         width: 100% so the agent's max-width caps as expected. */
+      .page-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+      .page-wrap > * {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body><style>body{background:#0a0f0d;color:#f0f4f1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;line-height:1.5;margin:0}.page-wrap{background:#0a0f0d}.box{background:#141a17;border:1px solid #1f2925;border-radius:12px}.wheel{position:relative;width:100%;aspect-ratio:1/1}.wheel svg{position:absolute;inset:0;width:100%;height:100%}.ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px dashed #1f2925;border-radius:50%}.spoke{position:absolute;left:50%;top:50%;width:1px;height:50%;background:#1f2925;transform-origin:50% 0}.tick{position:absolute;font-size:9px;font-family:monospace;color:#5e6b64;transform:translate(-50%,-50%)}.lbl{position:absolute;display:flex;align-items:center;gap:6px;font-size:11px;color:#f0f4f1;transform:translate(-50%,-50%);white-space:nowrap}.lbl .sw{width:8px;height:8px;border-radius:2px}.lbl .sc{font-family:monospace;font-size:10px;color:#9ba8a0}.crumb{font-size:11px;color:#5e6b64;font-family:monospace;margin-bottom:4px}.ttl{font-size:16px;font-weight:600}.sub{font-size:12px;color:#9ba8a0;margin-top:2px}.chip{font-size:10px;font-family:monospace;color:#9ba8a0;background:#1e2622;border:1px solid #1f2925;padding:3px 8px;border-radius:9999px}.row{display:flex;padding:11px 14px;gap:14px;align-items:baseline}.row+.row{border-top:1px solid #1f2925}.row .k{color:#5e6b64;font-size:11px;min-width:130px;font-family:monospace}.row .v{color:#9ba8a0;font-size:13px;flex:1}.row .v code{color:#86efac;background:#1e2622;padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace}.row .opt{color:#5e6b64;font-size:10px;font-family:monospace;margin-left:auto}.cons{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#141a17;border:1px solid #1f2925;border-radius:8px;font-size:13px;color:#9ba8a0}.cons .dot{width:6px;height:6px;border-radius:50%;background:#22c55e}.cons .ctx{color:#5e6b64;font-size:10px;margin-left:auto;font-family:monospace;text-transform:uppercase;letter-spacing:.06em}.sec{font-size:10px;font-weight:600;color:#5e6b64;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;padding:0 4px;display:flex;align-items:center;gap:8px}.sec::after{content:"";flex:1;height:1px;background:#1f2925}.ctr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:monospace;font-size:13px;color:#9ba8a0;text-align:center}.ctr .v{font-size:18px;color:#f0f4f1;font-weight:600;display:block}.ctr .l{font-size:9px;color:#5e6b64;text-transform:uppercase;letter-spacing:.1em;margin-top:2px;display:block}.cn{position:absolute;display:flex;align-items:center;gap:6px;font-size:11px;color:#f0f4f1;transform:translate(-50%,-50%);white-space:nowrap}.cn .sw{width:10px;height:10px;border-radius:3px;flex-shrink:0}.cn .sn{font-family:monospace;font-size:10px;color:#9ba8a0;margin-left:2px}.wedge{pacity:.92}.wedge:hover{opacity:1}</style>
+<div class="page-wrap"><div style="max-width:460px;width:100%;padding:16px 4px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:0 4px 14px;gap:12px"><div><div class="crumb">/ charts</div><div class="ttl">SkillWheelChart</div><div class="sub">Equal-width pie wedges, length = score / 10.</div></div><div><span class="chip">v3</span></div></div>
+<div class="box" style="padding:18px"><div class="wheel">
+<div class="ring" style="width:84%;height:84%"></div><div class="ring" style="width:63%;height:63%"></div><div class="ring" style="width:42%;height:42%"></div><div class="ring" style="width:28%;height:28%"></div>
+<div class="tick" style="left:71%;top:29%">2.5</div><div class="tick" style="left:81.5%;top:18.5%">5</div><div class="tick" style="left:92%;top:8%">7.5</div><div class="tick" style="left:100%;top:0%">10</div>
+<svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet"><g transform="translate(100 100)">
+<!-- 8 wedges, each 45deg wide, length = score/10 * 80px (inner radius 28px) -->
+<!-- Wedge 1: 0deg-45deg, score 8.2 -> r=65.6 -->
+<path class="wedge" d="M28 0 L65.6 0 A65.6 65.6 0 0 1 46.39 46.39 L28 28 A28 28 0 0 0 28 0 Z" fill="#34d399"/>
+<!-- Wedge 2: 45deg-90deg, score 6.5 -> r=52 -->
+<path class="wedge" d="M0 28 L46.39 46.39 A52 52 0 0 1 0 52 L0 28 Z" fill="#22d3ee"/>
+<!-- Wedge 3: 90deg-135deg, score 5.4 -> r=43.2 -->
+<path class="wedge" d="M0 28 L0 43.2 A43.2 43.2 0 0 1 -30.55 30.55 L-19.8 19.8 A28 28 0 0 0 0 28 Z" fill="#fbbf24"/>
+<!-- Wedge 4: 135deg-180deg, score 3.8 -> r=30.4 -->
+<path class="wedge" d="M-19.8 19.8 L-30.55 30.55 A30.4 30.4 0 0 1 -30.4 0 L-28 0 A28 28 0 0 0 -19.8 19.8 Z" fill="#f472b6"/>
+<!-- Wedge 5: 180deg-225deg, score 7.3 -> r=58.4 -->
+<path class="wedge" d="M-28 0 L-58.4 0 A58.4 58.4 0 0 1 -41.3 41.3 L-19.8 19.8 A28 28 0 0 0 -28 0 Z" fill="#a78bfa"/>
+<!-- Wedge 6: 225deg-270deg, score 4.7 -> r=37.6 -->
+<path class="wedge" d="M-19.8 -19.8 L-41.3 -41.3 A37.6 37.6 0 0 1 0 -37.6 L0 -28 A28 28 0 0 0 -19.8 -19.8 Z" fill="#fb7185"/>
+<!-- Wedge 7: 270deg-315deg, score 6.9 -> r=55.2 -->
+<path class="wedge" d="M19.8 -19.8 L55.2 0 A55.2 55.2 0 0 1 39.04 39.04 L19.8 19.8 A28 28 0 0 0 19.8 -19.8 Z" fill="#60a5fa"/>
+<!-- Wedge 8: 315deg-360deg, score 7.1 -> r=56.8 -->
+<path class="wedge" d="M19.8 19.8 L39.04 39.04 A56.8 56.8 0 0 1 56.8 19.84 L28 0 A28 28 0 0 0 19.8 19.8 Z" fill="#2dd4bf"/>
+</g></svg>
+<!-- Previous score marker rings (underlay) -->
+<g transform="translate(100 100)">
+<!-- Example: wedge 4 (transcription) previously was 5.2, now 3.8 - visible arc peek -->
+<path d="M-19.8 19.8 L-41.6 41.6 A41.6 41.6 0 0 1 -41.6 0 L-28 0 A28 28 0 0 0 -19.8 19.8 Z" fill="none" stroke="#f472b6" stroke-width="1.5" opacity="0.5" stroke-dasharray="2 2"/>
+<!-- Wedge 6 (improvisation) previously was 3.2, now 4.7 - inside current, no peek -->
+<path d="M-19.8 -19.8 L-25.6 -25.6 A25.6 25.6 0 0 1 0 -25.6 L0 -28 A28 28 0 0 0 -19.8 -19.8 Z" fill="none" stroke="#fb7185" stroke-width="1.5" opacity="0.4"/>
+</g>
+</svg>
+<!-- Spokes (full radius) -->
+<div class="spoke" style="transform:rotate(0deg)"></div>
+<div class="spoke" style="transform:rotate(45deg)"></div>
+<div class="spoke" style="transform:rotate(90deg)"></div>
+<div class="spoke" style="transform:rotate(135deg)"></div>
+<div class="spoke" style="transform:rotate(180deg)"></div>
+<div class="spoke" style="transform:rotate(225deg)"></div>
+<div class="spoke" style="transform:rotate(270deg)"></div>
+<div class="spoke" style="transform:rotate(315deg)"></div>
+<!-- Center average -->
+<div class="ctr"><span class="v">6.2</span><span class="l">avg</span></div>
+<!-- Labels at outer edge with color swatch -->
+<div class="cn" style="left:50%;top:8%"><span class="sw" style="background:#34d399"></span>Tempo stability<span class="sn">8.2</span></div>
+<div class="cn" style="left:85%;top:15%"><span class="sw" style="background:#22d3ee"></span>Comping<span class="sn">6.5</span></div>
+<div class="cn" style="left:92%;top:50%"><span class="sw" style="background:#fbbf24"></span>Sight-reading<span class="sn">5.4</span></div>
+<div class="cn" style="left:85%;top:85%"><span class="sw" style="background:#f472b6"></span>Transcription<span class="sn">3.8</span></div>
+<div class="cn" style="left:50%;top:92%"><span class="sw" style="background:#a78bfa"></span>Tone control<span class="sn">7.3</span></div>
+<div class="cn" style="left:15%;top:85%"><span class="sw" style="background:#fb7185"></span>Improvisation<span class="sn">4.7</span></div>
+<div class="cn" style="left:8%;top:50%"><span class="sw" style="background:#60a5fa"></span>Dynamics<span class="sn">6.9</span></div>
+<div class="cn" style="left:15%;top:15%"><span class="sw" style="background:#2dd4bf"></span>Phrasing<span class="sn">7.1</span></div>
+</div></div>
+
+<div style="margin-top:18px;padding:0 4px"><div class="sec">Component props</div><div class="box">
+<div class="row"><span class="k">characteristics</span><span class="v">{ name, score }[] · <code style="color:#86efac;background:#1e2622;padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace">length 4–8</code></span></div>
+<div class="row"><span class="k">previousScores?</span><span class="v">striped underlay arc per wedge when previous &gt; current</span><span class="opt">optional</span></div>
+<div class="row"><span class="k">onWedgeTap?</span><span class="v">fires <code style="color:#86efac;background:#1e2622;padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace">(id, score)</code></span><span class="opt">optional</span></div>
+<div class="row"><span class="k">size?</span><span class="v">chart box width; defaults to container</span><span class="opt">optional</span></div>
+</div></div>
+
+<div style="margin-top:18px;padding:0 4px"><div class="sec">Used by</div><div style="display:flex;flex-direction:column;gap:8px">
+<div class="cons"><span class="dot" style="background:#34d399"></span><span>Onboarding · Stage 5 confirmation</span><span class="ctx">confirm</span></div>
+<div class="cons"><span class="dot" style="background:#22d3ee"></span><span>Progress tab · ongoing wheel view</span><span class="ctx">read</span></div>
+<div class="cons"><span class="dot" style="background:#a78bfa"></span><span>Cycle Review · current vs. previous</span><span class="ctx">compare</span></div>
+</div></div>
+</div></div>
+</html></body>
+</html>

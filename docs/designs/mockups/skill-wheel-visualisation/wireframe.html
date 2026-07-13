@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wireframe</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #1f2937;
+        background: #fff;
+        line-height: 1.5;
+      }
+      /* Layout helper for full-page layouts. Grid + place-items avoids
+         the flex centering trap where a child with max-width but no
+         width collapses to min-content. The inner element gets
+         width: 100% so the agent's max-width caps as expected. */
+      .page-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+      .page-wrap > * {
+        width: 100%;
+      }
+      .placeholder {
+        background: #e5e7eb;
+        color: #6b7280;
+        padding: 1rem;
+        border: 1px dashed #9ca3af;
+        text-align: center;
+        font-size: 0.875rem;
+      }
+      .box {
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+      .gray-box {
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body><style>
+  .wheel-card {
+    max-width: 460px;
+    padding: 20px;
+    font-family: system-ui, sans-serif;
+  }
+  .wheel-card header {
+    margin-bottom: 16px;
+  }
+  .wheel-card h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .wheel-card .meta {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+  }
+  .wheel-svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  .weakest {
+    margin-top: 16px;
+    padding: 12px;
+    border: 1px dashed #999;
+  }
+  .weakest-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #666;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .weakest-value {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .cta {
+    padding: 6px 12px;
+    border: 1px solid #999;
+    background: #eee;
+    font: inherit;
+    font-size: 13px;
+  }
+</style>
+
+<div class="page-wrap">
+  <div class="box wheel-card">
+    <header>
+      <h2>Skill profile</h2>
+      <p class="meta">6 characteristics &middot; last updated after yesterday's session</p>
+    </header>
+
+    <svg class="wheel-svg" width="360" height="360" viewBox="0 0 360 360">
+      <!--
+        Classic Nightingale coxcomb geometry:
+          center (180,180), max radius R = 140 (score 10), r = score * 14
+          6 wedges, each a full 60 deg with NO gaps (contiguous petals)
+          wedge for axis i spans [i*60 - 30, i*60 + 30] deg, clockwise from top
+          score is radial; adjacent petals share edges -> one continuous bloom
+      -->
+
+      <!-- 5 reference rings (scores 1, 3, 6, 8, 10) -->
+      <circle cx="180" cy="180" r="14"  fill="none" stroke="#ddd" stroke-width="1"/>
+      <circle cx="180" cy="180" r="42"  fill="none" stroke="#ddd" stroke-width="1"/>
+      <circle cx="180" cy="180" r="84"  fill="none" stroke="#ddd" stroke-width="1"/>
+      <circle cx="180" cy="180" r="112" fill="none" stroke="#ddd" stroke-width="1"/>
+      <circle cx="180" cy="180" r="140" fill="none" stroke="#999" stroke-width="1"/>
+
+      <!-- Tone: axis 0, span -30..30, score 3, r = 42 -->
+      <path d="M 180 180 L 159.00 143.63 A 42 42 0 0 1 201.00 143.63 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- Rhythm: axis 60, span 30..90, score 6, r = 84 -->
+      <path d="M 180 180 L 222.00 107.28 A 84 84 0 0 1 264.00 180.00 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- Listening: axis 120, span 90..150, score 7, r = 98 -->
+      <path d="M 180 180 L 278.00 180.00 A 98 98 0 0 1 229.00 264.87 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- Improv: axis 180, span 150..210, score 4, r = 56 -->
+      <path d="M 180 180 L 208.00 228.50 A 56 56 0 0 1 152.00 228.50 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- Repertoire: axis 240, span 210..270, score 5, r = 70 -->
+      <path d="M 180 180 L 145.00 240.62 A 70 70 0 0 1 110.00 180.00 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- Technique: axis 300, span 270..330, score 8, r = 112 -->
+      <path d="M 180 180 L 68.00 180.00 A 112 112 0 0 1 124.00 82.99 Z"
+            fill="rgba(120,120,120,0.35)" stroke="#555" stroke-width="1"/>
+
+      <!-- perimeter labels: characteristic + score -->
+      <text x="180" y="18"  text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Tone &middot; 3</text>
+      <text x="318" y="100" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Rhythm &middot; 6</text>
+      <text x="318" y="262" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Listening &middot; 7</text>
+      <text x="180" y="342" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Improv &middot; 4</text>
+      <text x="42"  y="262" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Repertoire &middot; 5</text>
+      <text x="42"  y="100" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#000">Technique &middot; 8</text>
+    </svg>
+
+    <div class="weakest">
+      <div class="weakest-label">Weakest area</div>
+      <div class="weakest-value">Tone &mdash; 3/10</div>
+      <button class="cta">Focus next session</button>
+    </div>
+  </div>
+</div></body>
+</html>
