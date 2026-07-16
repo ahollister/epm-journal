@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
+    "@react-native-async-storage/async-storage": "2.1.2",
     "expo": "~53.0.0",
     "expo-av": "^15.1.7",
     "expo-constants": "~17.1.8",
@@ -10,6 +11,7 @@
     "expo-notifications": "~0.31.5",
     "expo-router": "~5.1.11",
     "expo-status-bar": "~2.2.3",
+    "nanoid": "^6.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.6",
@@ -17,10 +19,16 @@
     "react-native-safe-area-context": "~5.4.0",
     "react-native-screens": "4.11.1",
     "react-native-svg": "15.11.2",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.0.14",
+    "jest": "^30.4.2",
+    "jest-expo": "^57.0.2",
+    "react-test-renderer": "19.0.0",
     "typescript": "~5.8.3"
   },
   "scripts": {
@@ -28,6 +36,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios --localhost",
     "ios:device": "expo start --tunnel",
+    "test": "jest",
     "web": "expo start --web"
   },
   "private": true,
@@ -45,5 +54,11 @@
     "overrides": {
       "react-dom": "19.0.0"
     }
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(.pnpm|nanoid|(jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg))"
+    ]
   }
 }
