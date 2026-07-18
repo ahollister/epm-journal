@@ -32,6 +32,9 @@ importers:
       expo-status-bar:
         specifier: ~2.2.3
         version: 2.2.3(react-native@0.79.6(@babel/core@7.29.7)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      nanoid:
+        specifier: ^3.3.15
+        version: 3.3.15
       react:
         specifier: 19.0.0
         version: 19.0.0
