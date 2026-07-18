@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  react-dom: 19.0.0
+
 importers:
 
   .:
@@ -632,7 +635,7 @@ packages:
       '@expo/log-box': ^57.0.0
       expo: '*'
       react: '*'
-      react-dom: '*'
+      react-dom: 19.0.0
       react-native: '*'
     peerDependenciesMeta:
       react-dom:
@@ -2494,7 +2497,7 @@ packages:
     resolution: {integrity: sha512-OOSgrw+aON6R3hRosCau/xVxdLzbjEcsLysYedka0ZON4ZZe6n9xgeN9ZkoejhARM36oTlUgHIQqxGutEJ9Wxg==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
+      react-dom: 19.0.0
 
   react-native@0.79.6:
     resolution: {integrity: sha512-kvIWSmf4QPfY41HC25TR285N7Fv0Pyn3DAEK8qRL9dA35usSaxsJkHfw+VqnonqJjXOaoKCEanwudRAJ60TBGA==}
