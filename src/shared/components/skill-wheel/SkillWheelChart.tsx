@@ -64,15 +64,19 @@ function SkillWheelChartBase({
       const score = characteristic.score;
       const hasScore = isUsableScore(score);
       const colour = colourForIndex(index);
+      const midAngle = startAngle + wedgeAngle / 2;
 
       return {
+        anchor: labelAnchor(CENTER, CENTER, MAX_RADIUS, midAngle),
         characteristic,
         colour,
         endAngle,
         hasScore,
         index,
         label: truncateName(characteristic.name),
-        outerRadius: hasScore ? scoreToRadius(score) : 0,
+        // An unrated characteristic remains visible as a muted sector rather
+        // than collapsing into the centre dot.
+        outerRadius: hasScore ? scoreToRadius(score) : MAX_RADIUS,
         startAngle,
       };
     });
@@ -136,10 +140,7 @@ function SkillWheelChartBase({
 
           <Circle cx={CENTER} cy={CENTER} r={CENTER_DOT_R} fill={colors.textMuted} />
 
-          {chartItems.map(({ characteristic, colour, hasScore, index, label }) => {
-            const angle = -90 + (index + 0.5) * (360 / characteristics.length);
-            const anchor = labelAnchor(CENTER, CENTER, MAX_RADIUS, angle);
-
+          {chartItems.map(({ anchor, characteristic, colour, hasScore, index, label }) => {
             return (
               <SvgText
                 key={`label-${characteristic.id}-${index}`}
