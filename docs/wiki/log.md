@@ -702,3 +702,773 @@ Diff:
 ```diff
 
 ```
+---
+
+**2026-07-13T22:51:42.429Z** - `architecture.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 45b9825da90ec842a6cbca9dfcbed1eb6aeb852761540c334394c184935c4079
+New hash: 773d7288690c6bb37aee88ac2dd418b420c85b1844d3e124f3797dfb30d70401
+Entry ID: 383df97b-97b4-460f-b2f9-ff3f2a577b3a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-13T22:51:42.430Z** - `project-context.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 37e89de13b9693b3dc97c0da298720de27c4bf9b97fb1cea4c8442f06bf5db6a
+New hash: ab9b52fe479deeb1555832394b96f8d6468299851134626ec97b6db6a655d0e8
+Entry ID: 66f8e5ce-7c29-4c5d-a45f-11acbef89c4a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:23:50.516Z** - `decisions.md` (signal.notify-wiki)
+
+Summary: Recorded the fixed 4-band rubric decision in decisions.md, updated Stage 4 and characteristic extraction sections in features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md to replace per-characteristic tailored bands with the fixed rubric, added "Fixed 4-band rubric" to glossary.md.
+
+Old hash: 9c21edf99b4cc9a0739467e990a2c8e22360d9b3688ed519337b3ae10b372a7b
+New hash: 917c7c2446054cb368f9e48ae30748c85ad63581ab129dc7e610b04aae1e7ad7
+Entry ID: b5955604-841f-49d7-8ad0-afeb7e744d84
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:23:50.517Z** - `features/skill-wheel-onboarding.md` (signal.notify-wiki)
+
+Summary: Recorded the fixed 4-band rubric decision in decisions.md, updated Stage 4 and characteristic extraction sections in features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md to replace per-characteristic tailored bands with the fixed rubric, added "Fixed 4-band rubric" to glossary.md.
+
+Old hash: 26811c39b1916a259ae44bfb67d8f9c0c75952b773b1b4732baf803c33709607
+New hash: 77e19f9870f46680dddf89fcf16a49dcf82cee304ca06ae4c4b1e7ede9e43017
+Entry ID: 5d5b46bd-7e9d-49dc-a17a-3504bb0355cb
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:23:50.517Z** - `learnings/skill-wheel-onboarding.md` (signal.notify-wiki)
+
+Summary: Recorded the fixed 4-band rubric decision in decisions.md, updated Stage 4 and characteristic extraction sections in features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md to replace per-characteristic tailored bands with the fixed rubric, added "Fixed 4-band rubric" to glossary.md.
+
+Old hash: 4e8ed0b97709fb2a7a01278c0d6d1df61d9608fe0a7709043dfcd7acaa920eb8
+New hash: 354026d74d45308c322789850b19df58881983ede022186841628fd88312b17e
+Entry ID: ff4bd503-9f29-4fd7-b3a1-4751b534333f
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:23:50.518Z** - `glossary.md` (signal.notify-wiki)
+
+Summary: Recorded the fixed 4-band rubric decision in decisions.md, updated Stage 4 and characteristic extraction sections in features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md to replace per-characteristic tailored bands with the fixed rubric, added "Fixed 4-band rubric" to glossary.md.
+
+Old hash: 7994bee9f7364d956e92e512f3d44542e6bc89415a7574de862f608c09b34280
+New hash: 51029e38c3d095e25f098ea24ab29d89f4184e0da7e7d8d2a2b923b4386385bc
+Entry ID: 510b53a3-7e53-4405-a817-3cb6e699f746
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.690Z** - `decisions.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 917c7c2446054cb368f9e48ae30748c85ad63581ab129dc7e610b04aae1e7ad7
+New hash: 454ffc13ba69cbf7117b1ccb818fa1b8462ffd993306e7731a219b23b5e4e3c3
+Entry ID: ec19b90e-076a-43ce-bde1-47013251277d
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.691Z** - `learnings/design-tokens-theme-module.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: (none)
+New hash: cd78b25a178b54e2fcc813d06a37769000424fdee8e7bed22bc3dfe86e05dc2a
+Entry ID: 4640a1a8-dc63-49cd-b1db-2eac30b694cb
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.691Z** - `learnings/skill-wheel-chart-implementation.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: (none)
+New hash: abab9cf4b7b66f6b2d8a74e23e25fc07849fb6922e5ddd2d6a5d2843c4b65cea
+Entry ID: 16369497-4a08-472f-b31c-3bb2ba0ffd5a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.691Z** - `features/skill-wheel-onboarding.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 77e19f9870f46680dddf89fcf16a49dcf82cee304ca06ae4c4b1e7ede9e43017
+New hash: e9a628577af9fbfe968352c75334bca2ead2b76e015ce81999c5efd70f2ede7b
+Entry ID: 510e80d1-13d3-48b0-9f99-8878ca398c68
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.691Z** - `architecture.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 773d7288690c6bb37aee88ac2dd418b420c85b1844d3e124f3797dfb30d70401
+New hash: 4e13915301f04b10ec0e78c31139fe44f7b6fe7dba41e91358e90ea7743fb518
+Entry ID: 5bfdbe5b-e5b7-4078-8cc8-340e33ff84ae
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T21:33:14.691Z** - `index.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 1851683ca8ab8bd41464b72da8949ddbafe6f1a0295813f26fa0aa57dab0f55b
+New hash: d74be3336bba83c0f19404f3187bc6478af3d1a8aa45f452a67d9527bceb9c23
+Entry ID: 1f1cc230-8c7d-48cc-91b4-2e2e8f17e3f5
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T22:49:50.447Z** - `decisions.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 454ffc13ba69cbf7117b1ccb818fa1b8462ffd993306e7731a219b23b5e4e3c3
+New hash: 44b4352bb0fe303196258a7926706eb0fea09e8851c72eb7af84886a42288ea7
+Entry ID: 309b2adf-5646-4405-ba84-15a7a3f1e46c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T22:49:50.448Z** - `glossary.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: 51029e38c3d095e25f098ea24ab29d89f4184e0da7e7d8d2a2b923b4386385bc
+New hash: a0f3e2e7c333679f289e122d7e67ca2cb37505a4aeb5058dfc408ee59261bc1a
+Entry ID: 9511f058-02c2-4e8d-8c52-9ca044827290
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-14T22:49:50.448Z** - `features/skill-wheel-onboarding.md` (signal.notify-wiki)
+
+Summary: no summary
+
+Old hash: e9a628577af9fbfe968352c75334bca2ead2b76e015ce81999c5efd70f2ede7b
+New hash: eecc5e0f56dd5a13960d60d0b5226d5e8677d5e4cbe72f954d8deff9a1e49856
+Entry ID: 68ffb25e-a2d1-4f6b-b33d-0d281521580a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T09:29:12.191Z** - `learnings/test-harness-setup.md` (lifecycle.task-completed)
+
+Summary: Added Test Harness & Dependency Setup learnings page, updated architecture.md to reflect installed dependencies (zustand, AsyncStorage, nanoid, jest-expo), appended jest-expo config decision, and added nanoid/transformIgnorePatterns glossary terms.
+
+Old hash: (none)
+New hash: b3ba40e140e928d57c8ea2291c99e7b5529ea7b0caec0903edff7903127b0b64
+Entry ID: b5676d27-1d4c-4ea6-a9d6-9da8fe093ba2
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T09:29:12.191Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added Test Harness & Dependency Setup learnings page, updated architecture.md to reflect installed dependencies (zustand, AsyncStorage, nanoid, jest-expo), appended jest-expo config decision, and added nanoid/transformIgnorePatterns glossary terms.
+
+Old hash: 4e13915301f04b10ec0e78c31139fe44f7b6fe7dba41e91358e90ea7743fb518
+New hash: e53bb21896adca3c39aa22e1c8f0ba45aa87b79c0746e512f029f0d390670deb
+Entry ID: 282be54f-034d-4fa7-bdf4-85e96ab31a11
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T09:29:12.191Z** - `decisions.md` (lifecycle.task-completed)
+
+Summary: Added Test Harness & Dependency Setup learnings page, updated architecture.md to reflect installed dependencies (zustand, AsyncStorage, nanoid, jest-expo), appended jest-expo config decision, and added nanoid/transformIgnorePatterns glossary terms.
+
+Old hash: 44b4352bb0fe303196258a7926706eb0fea09e8851c72eb7af84886a42288ea7
+New hash: 89bd8de8a21763292bc248405b3d422b4de02ace58bc25470c9f9856a886e3be
+Entry ID: 7b73ebf6-92ce-404a-b20f-4a95851678ab
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T09:29:12.191Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added Test Harness & Dependency Setup learnings page, updated architecture.md to reflect installed dependencies (zustand, AsyncStorage, nanoid, jest-expo), appended jest-expo config decision, and added nanoid/transformIgnorePatterns glossary terms.
+
+Old hash: a0f3e2e7c333679f289e122d7e67ca2cb37505a4aeb5058dfc408ee59261bc1a
+New hash: f34221ca7041349654514ed398c75459788a2468986e06084917267c783c26bd
+Entry ID: 3598276b-27f4-4544-a523-5ba7a3c20fb1
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T09:29:12.191Z** - `index.md` (lifecycle.task-completed)
+
+Summary: Added Test Harness & Dependency Setup learnings page, updated architecture.md to reflect installed dependencies (zustand, AsyncStorage, nanoid, jest-expo), appended jest-expo config decision, and added nanoid/transformIgnorePatterns glossary terms.
+
+Old hash: d74be3336bba83c0f19404f3187bc6478af3d1a8aa45f452a67d9527bceb9c23
+New hash: c24b2ffced9373496a73c06f376f14c0f8d17e8ffc4ea5a07de46adece2f112e
+Entry ID: 93b87851-01fd-49e0-92fc-a7d90ec7f4a1
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T10:03:55.866Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: a710a29f-9408-48a7-9861-7cc99af775e4
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T10:44:40.225Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 4edb5464-e08b-46a8-919e-11c460d102fe
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T10:44:50.846Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 27e85e13-ae70-4561-b5e8-61e54bb0c587
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T10:57:13.855Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 9556239f-567e-41a3-9f81-830f088539d5
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T19:34:22.297Z** - `learnings/design-tokens-theme-module.md` (lifecycle.task-completed)
+
+Summary: Corrected learnings/design-tokens-theme-module.md to reflect that theme.ts exports concrete literal values (not CSS var references) as named exports (not a single theme object), captured design decisions (no theming framework, shadow-glow exclusion, comment traceability), and appended a corresponding decision to decisions.md.
+
+Old hash: cd78b25a178b54e2fcc813d06a37769000424fdee8e7bed22bc3dfe86e05dc2a
+New hash: c7cbb37677c3386a85445a4df1f1b960d31f8325450b5e3b76be3d4bbae87f76
+Entry ID: 3d29df75-e9f2-4e82-9605-2bc627f769e1
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T19:34:22.297Z** - `decisions.md` (lifecycle.task-completed)
+
+Summary: Corrected learnings/design-tokens-theme-module.md to reflect that theme.ts exports concrete literal values (not CSS var references) as named exports (not a single theme object), captured design decisions (no theming framework, shadow-glow exclusion, comment traceability), and appended a corresponding decision to decisions.md.
+
+Old hash: 89bd8de8a21763292bc248405b3d422b4de02ace58bc25470c9f9856a886e3be
+New hash: 60e1099887a3d4201bf9367f4148af7c68807bb11397aa26e487df5e8f32b094
+Entry ID: f213be85-b9fc-419d-a3e8-4282f8e67010
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T20:15:04.838Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 3dbb7efd-c17b-4dc1-a235-a34e5ce24676
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T20:42:22.510Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 2cdfdb59-4880-4049-b261-11069a7f5c3a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T21:32:27.790Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: dee93c67-4e31-44f1-b64e-fe4c7163d57b
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T21:56:25.124Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 9106c6ae-149b-40e9-ae43-076db4ee9be9
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:01:09.511Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added domain types (Characteristic, ThreeLists, Baseline) to architecture artifacts table, glossary, decisions (domain placement), and feature spec Architecture Placement table.
+
+Old hash: e53bb21896adca3c39aa22e1c8f0ba45aa87b79c0746e512f029f0d390670deb
+New hash: b25b500d9ebfac1e431022d283664eea93a9011f8fb264809e95516a8552d1a1
+Entry ID: 8913297c-370f-44f2-95cf-47b997216f36
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:01:09.512Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added domain types (Characteristic, ThreeLists, Baseline) to architecture artifacts table, glossary, decisions (domain placement), and feature spec Architecture Placement table.
+
+Old hash: f34221ca7041349654514ed398c75459788a2468986e06084917267c783c26bd
+New hash: 1bff8647350b7421dbe428ffe7a1042e0d58b86d9fcd877b2ee4558cbcc85ff8
+Entry ID: c5abd77d-29e3-4370-ad44-7e9573b9f455
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:01:09.512Z** - `decisions.md` (lifecycle.task-completed)
+
+Summary: Added domain types (Characteristic, ThreeLists, Baseline) to architecture artifacts table, glossary, decisions (domain placement), and feature spec Architecture Placement table.
+
+Old hash: 60e1099887a3d4201bf9367f4148af7c68807bb11397aa26e487df5e8f32b094
+New hash: 2af957e0c6848b757c2f941fcf3be3f03f718117e03e006879ddeeb24a0e8203
+Entry ID: 675adc7f-6113-44c8-846a-1c062d104c18
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:01:09.512Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added domain types (Characteristic, ThreeLists, Baseline) to architecture artifacts table, glossary, decisions (domain placement), and feature spec Architecture Placement table.
+
+Old hash: eecc5e0f56dd5a13960d60d0b5226d5e8677d5e4cbe72f954d8deff9a1e49856
+New hash: 8f97fed9f8c9298cd5b18f39a1cbc198276a24176c58cdace6850d2526746cf1
+Entry ID: 0ebd40fd-2584-4aeb-9a98-42d77f53f239
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:05:56.549Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added ID generation utility (`src/shared/lib/id.ts`) to the implemented artifacts table in architecture.md
+
+Old hash: b25b500d9ebfac1e431022d283664eea93a9011f8fb264809e95516a8552d1a1
+New hash: b27cc417aafd8b23f8e42d79336ff8bae24644e76380070982163fc1addb3697
+Entry ID: c2b48797-9327-4aee-9e9f-01e593782dde
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:13:11.577Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: b27cc417aafd8b23f8e42d79336ff8bae24644e76380070982163fc1addb3697
+New hash: 24ec6cb95f412a4cddbffbabc24891bf06312c8aa6df3d5d957dfc43f174cb2a
+Entry ID: b6f92b83-cb27-40b0-b6d2-e5600134c954
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:13:11.577Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: 1bff8647350b7421dbe428ffe7a1042e0d58b86d9fcd877b2ee4558cbcc85ff8
+New hash: 49bfe453a4fe0534921c04189985b5ea7e4ec3ee549776f087c58a2cd1f62767
+Entry ID: 4813d2c3-5ca7-4f4b-901a-7506693c7a47
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:13:11.577Z** - `learnings/persistence-layer.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: (none)
+New hash: c14ef1126c68ab9824ec41103bcc39b81a79d8fba72d58fcb682fe3fdccdbe35
+Entry ID: 8d72c119-e855-4f78-a19f-845c662ec56a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-16T22:13:11.577Z** - `index.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: c24b2ffced9373496a73c06f376f14c0f8d17e8ffc4ea5a07de46adece2f112e
+New hash: 164dec14fa3375969894219736c2a0282f3a914e9cd160a14d81dddde2e5a381
+Entry ID: 107a7ec1-7844-41a5-91bc-0ce95730b1fb
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-17T14:30:14.365Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 9bff8204-16b6-45d1-9d5e-8af1f7abfd32
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-17T14:32:44.311Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 4dcab02f-188a-45eb-9594-99e46c4b1f5d
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-17T14:39:00.729Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 052760b0-04ab-4dee-aa9a-5a61334a7687
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-17T20:45:15.803Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 33a43060-346c-4e66-b00e-a0cf74ef07c5
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-17T20:45:57.525Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 13faaaba-7bfd-4674-9677-b23539689147
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T20:34:30.596Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: a55a45e6-10fc-4e79-87ed-09284a1674ca
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T20:35:36.551Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 1295ee3c-502d-4ecf-8ce4-0f00a71e45da
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T20:38:00.574Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md "Implemented artifacts" table to document the ID utility's call site (onboarding store's addCharacteristic action, never from domain).
+
+Old hash: 24ec6cb95f412a4cddbffbabc24891bf06312c8aa6df3d5d957dfc43f174cb2a
+New hash: cd39316ca18e3e618bfd7623db91a1b841adb4716317fc21ef2f0bf5be9d737d
+Entry ID: 51a794c2-178d-443d-8023-8d52b9ddfef4
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T20:38:16.779Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 157740ca-f4ea-4f3c-a6a3-cab2effaf911
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:07:42.848Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 4f433abc-388d-46ea-8f33-267954443065
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:08:32.729Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 0297033f-34e0-4b81-8881-014748e6b6b7
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:09:51.238Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: a1b9a760-14dd-498a-9d86-8cc6c0b64808
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:11:42.900Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 870b01a3-d303-473b-abac-d35f2b07f7c3
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:25:32.187Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 5b2a15fd-4edd-4963-add3-472deef34267
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:26:42.964Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 8ecb0cfa-a08e-48b7-a62b-1552d43d6982
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-18T21:28:01.833Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 1abe884d-d4d8-4b89-beba-fa94c292e996
+
+Diff:
+```diff
+
+```

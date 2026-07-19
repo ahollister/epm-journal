@@ -110,20 +110,31 @@ Characteristics emerge from the user's Three Lists (Stage 2) and are refined dur
 - **Practice friction points** — e.g., "I avoid improvising because I don't know what to play" → characteristic: "Spontaneous melodic creation"
 - **Performance goals** — e.g., "I want to play with a cleaner tone at high volumes" → characteristic: "Dynamic control and tone consistency"
 
-Each characteristic maps to a score band (1–3, 4–6, 7–8, 9–10), giving the user concrete behavioral anchors rather than abstract numbers. The band descriptions are generated or adapted to fit the specific characteristic.
+Each characteristic is rated using the **"visualize your 10"** method from Benny Greb's book. The user is guided by four characteristic-agnostic prompts to build a mental picture of what mastery looks like for that specific characteristic, then rates by gut in ~10 seconds on a **0–10 scale**. The four prompts are:
+
+1. **What would you be able to do at a 10?** — visualize the concrete abilities that define mastery for this characteristic.
+2. **What elements are included?** — break down what sub-skills or components make up that picture of mastery.
+3. **Why aren't you already at 10?** — identify the gaps between current ability and the visualized ideal.
+4. **What's the max?** — define the ceiling: is 10 an achievable human maximum for this characteristic, or a theoretical ideal?
+
+This is characteristic-anchored self-assessment driven entirely by the user's own visualization, not by pre-authored band descriptions. The four prompts are static copy constants in the feature layer — no domain module for rating bands. See the [2026-05-14 reversal decision](../decisions.md).
 
 ### Example: user-defined characteristic extraction
 
-A guitarist's "Improvements" list includes "I want to stop rushing fills." The extracted characteristic is "Maintaining steady tempo through fills." The bands might be:
+A guitarist's "Improvements" list includes "I want to stop rushing fills." The extracted characteristic is "Maintaining steady tempo through fills."
 
-| Band | Characteristics |
-|------|-----------------|
-| 1–3 (Beginner) | Cannot keep time through fills; noticeable rushing or dragging whenever leaving the groove |
-| 4–6 (Intermediate) | Simple fills stay in time; complex or longer fills cause drift |
-| 7–8 (Advanced) | Solid time through most fills at moderate tempos; only complex passages at fast tempos show drift |
-| 9–10 (Expert) | Fills are rhythmically unshakable at any tempo; can deliberately play ahead/behind the beat within fills |
+The user then goes through the four "visualize your 10" prompts for this characteristic:
 
-The user reads these and picks the band that best describes them, then narrows to a specific number within that band. This is **characteristic-anchored self-assessment**: the characteristics do the heavy lifting, and the number is the summary.
+| Prompt | User's mental answer |
+|--------|---------------------|
+| What would you be able to do at a 10? | "Play any fill at any tempo without losing the pulse — the time is rock-solid no matter what I throw in." |
+| What elements are included? | "Subdivisions, triplet fills, cross-rhythms, tempo changes — all without drifting." |
+| Why aren't you already at 10? | "I rush when I get excited during fills, especially at faster tempos and with odd groupings." |
+| What's the max? | "Studio-drummer-level time — the kind where the click track is redundant." |
+
+After ~10 seconds of reflection, the user rates themselves: "Based on that picture of a 10, I'm around a 4 — I can hold time through simple fills at moderate tempos, but anything complex or fast and I drift."
+
+The same four prompts appear for every characteristic — only the characteristic name changes. Each rating is a gut-check against the user's own visualized ceiling, not against an external rubric.
 
 ## Self-Rating Rules
 
@@ -131,15 +142,11 @@ The onboarding enforces three self-rating rules to ensure the baseline is honest
 
 ### Rule 1: Avoid 5 (the midpoint bias)
 
-Musicians, when unsure, gravitate toward the middle. A 5 says "I don't know" or "I'm average" — it produces flat, low-signal wheels where every dimension is a 5.
+Musicians, when unsure, gravitate toward the middle. On a 0–10 scale, 5 is the arithmetic midpoint — it says "I don't know" or "I'm average" — and produces flat, low-signal wheels where every dimension is a 5.
 
-**The rule:** The onboarding gently discourages 5. If the user selects 5, it prompts: *"5 is the hardest score to learn from. Do you lean closer to 'I can do this sometimes' (4) or 'I can usually do this' (6)?"* This forces a direction.
+**The rule:** The onboarding gently discourages 5. If the user selects 5, it prompts: *"5 is the hardest score to learn from. Do you lean closer to 'I can do this sometimes' (4) or 'I can usually do this' (6)?"* This forces a direction. Because the scale is 0–10, 5 sits at the true centre — the nudge is well-founded.
 
 The same applies to the midpoint of any band. The goal is a wheel with shape — peaks and valleys that reveal the real profile.
-
-A flat wheel (all characteristics within 1–2 points of each other) is low-signal. It either means the user didn't engage honestly or they're an extreme outlier (truly uniform across all characteristics — rare even among pros).
-
-**The rule:** On the confirmation screen, if the range (max − min) is ≤ 2, the onboarding flags it: *"Your scores are very close together. Every musician has relative strengths and weaknesses. Would you like to review your ratings?"* The user can proceed anyway, but the nudge is there.
 
 ### Rule 3: The 10-second rule (go with your gut)
 
@@ -187,20 +194,26 @@ After extraction, the user sees their full set of characteristics as a list: "Yo
 
 ### Stage 4: Self-Rating on each characteristic (1 screen per characteristic)
 
-The user rates themselves (1–10) on each characteristic, one at a time. This is where the characteristic-anchored self-assessment happens.
+The user rates themselves (0–10) on each characteristic, one at a time. This is where the "visualize your 10" self-assessment happens.
 
 Each screen contains:
 1. **Characteristic name** — the user's own wording (e.g., "Maintaining steady tempo through fills").
-2. **Characteristic bands** — 4 bands (1–3, 4–6, 7–8, 9–10), each with 2–4 concrete behavioral statements tailored to the characteristic.
-3. **Slider or numeric pad** — the user selects a number 1–10. Default position is "not set."
-4. **"Tell me more" expandable** (optional) — deeper examples.
+2. **The four "visualize your 10" prompts** — characteristic-agnostic, same for every characteristic:
+   - **What would you be able to do at a 10?**
+   - **What elements are included?**
+   - **Why aren't you already at 10?**
+   - **What's the max?**
+3. **Slider or numeric pad** — the user selects a number 0–10. Default position is "not set."
+4. **Rating scale reference** — the 0–10 scale with midpoint 5 clearly marked.
 5. **Progress indicator** — "Characteristic 3 of 6" with dots or a progress bar.
+
+> **Design decision (2026-05-14 — REVERSAL):** An earlier decision introduced a fixed 4-band rubric (Beginner/Intermediate/Advanced/Expert). This has been reversed — the book contains no behavioural bands. The authoritative mechanism is the four "visualize your 10" prompts above, which are static copy constants in the feature layer. The `ratingBands.ts` domain module (RATING_BANDS/bandForScore) is deleted. See [Decisions](../decisions.md).
 
 The order is user-defined (the order they confirmed characteristics in Stage 3).
 
 ### Stage 5: Confirmation and wheel preview (1 screen)
 
-Shows the resulting radar chart with all characteristics plotted:
+Shows the resulting rose chart with all characteristics plotted:
 
 - **The wheel is the hero** — large, centered, immediately readable. Peaks and valleys are visually obvious.
 - Tap any characteristic point to go back and adjust that rating.
@@ -208,7 +221,7 @@ Shows the resulting radar chart with all characteristics plotted:
 - **"Looks good"** primary button confirms and advances.
 - **"Adjust"** secondary option returns to the characteristic list for edits.
 
-The wheel preview MUST use the same radar chart component as the main Skill Wheel Visualization (`features/progress/`). Visual consistency between onboarding and ongoing tracking is non-negotiable.
+The wheel preview MUST use the same SkillWheelChart component from `src/shared/components/skill-wheel/SkillWheelChart.tsx`. Visual consistency between onboarding and ongoing tracking is non-negotiable.
 
 ### Stage 6: Goal suggestion (1 screen)
 
@@ -247,7 +260,7 @@ The skill wheel is a **polar bar / rose chart** with 6 equal 60° wedges — one
 | Wedges | 6 equal 60° wedges, one per user-defined characteristic |
 | Center | (180, 180) |
 | Max radius | 140 (= score 10) |
-| Scale per axis | 1–10 |
+| Scale per axis | 0–10 |
 | Gap between wedges | 4° — wedges read as separate blocks, no connecting polygon |
 | Grid rings | 5 concentric reference rings at r=14, 42, 84, 112, 140 (scale bands 1, 3, 6, 8, 10) |
 | Fill | Solid fill within each wedge (no inter-wedge polygon) |
@@ -326,49 +339,18 @@ The primary suggestion is always #1 (the absolute lowest). But the user sees all
 | Aspect | Location |
 |--------|----------|
 | Tab | **Progress** (bottom tab navigator) |
-| Route file | Modal or stack screen within Progress tab — e.g., `src/app/(tabs)/progress/onboarding.tsx` |
-| Feature folder | `features/progress/` — React components (onboarding screens, radar chart) + Zustand store |
+| Route file | `app/onboarding.tsx` — single Expo Router route; stage navigation driven by store stage machine, not route transitions |
+| Feature folder | `features/progress/` — React components (onboarding screens) + Zustand store |
+| Shared component | `src/shared/components/skill-wheel/SkillWheelChart.tsx` — the rose chart widget, shared by onboarding and Progress tab |
+| Domain types | `src/domain/onboarding/types.ts` — `Characteristic`, `ThreeLists`, `Baseline`; zero-dependency, consumed by onboarding store, chart, and future Progress/Cycle-Review |
 | Domain logic | `domain/` — Skill wheel calculations (scoring, aggregation, weakest-slice algorithm) |
 | Native integration | None |
-
-### Domain functions (pure, zero-dependency)
-
-| Function | Input | Output |
-|----------|-------|--------|
-| `computeWheelShape(characteristics)` | `Characteristic[]` — array of `{ name: string, score: 1–10 }` | `WheelData` (normalized for radar chart rendering, variable axes) |
-| `pickWeakestSlices(characteristics, count?)` | characteristics + count (default 3) | `Characteristic[]` sorted by score ASC, user-defined-order tiebreak |
-| `detectFlatWheel(characteristics, threshold?)` | characteristics + max range threshold (default 2) | `{ isFlat: boolean, range: number }` |
-| `suggestFocusArea(characteristics)` | characteristics | `{ primary: Characteristic, alternatives: Characteristic[] }` |
-| `validateScoreRange(score)` | number | `{ valid: boolean }` — must be integer 1–10, not 0, not null |
-
-Key change from prior design: domain functions accept a variable-length array of user-defined characteristics rather than a fixed-shape object with six named dimensions. This reflects the book-grounded model where characteristics emerge from the Three Lists exercise.
-
-All domain functions are testable with plain Jest. No React, no React Native, no persistence.
-
-### Store bridging (Zustand)
-
-The Progress feature's Zustand store (`features/progress/store.ts`):
-
-1. Holds in-progress onboarding state: `{ currentStep, threeLists: { who, why, improvements }, characteristics: Characteristic[], ratings: Map<string, number>, isComplete }`
-2. Calls domain functions: `computeWheelShape()`, `pickWeakestSlices()`, `detectFlatWheel()`, `suggestFocusArea()`
-3. Enforces self-rating rules at the UI level (nudge on 5, flat-wheel detection on confirm)
-4. Persists the completed baseline and first-cycle focus areas
-5. Exposes reactive state and actions to onboarding screen components
-
-Components never import `domain/` directly — they go through the store.
-
-### Relationship to other features
-
-- **Skill Wheel Visualization** — shares the radar chart component. Same component, different data source (onboarding: self-assessment; ongoing: session-derived).
-- **Cycle Review** — consumes the onboarding baseline for first-cycle deltas. Without it, cycle review has no "before."
-- **SMART Goal Tracking** — focus characteristics from onboarding become the first cycle's goal dimensions.
-- **Practice Journal** — no direct dependency, but the baseline date is recorded as a journal event.
 
 ## UX Principles
 
 **Overarching constraint: Onboarding must NOT feel like a boring form-filling exercise.** Every design decision in the flow serves this goal. The four mechanisms that deliver it:
 
-1. **Characteristic-anchored self-rating** — users match themselves to concrete behavioral descriptions drawn from their own Three Lists, rather than picking abstract numbers. The characteristics do the heavy lifting; the number is just the summary.
+1. **Characteristic-anchored self-rating** — users match themselves to concrete behavioral descriptions (the fixed 4-band rubric: Beginner 1–3, Intermediate 4–6, Advanced 7–8, Expert 9–10), rather than picking abstract numbers. The band descriptions do the heavy lifting; the number is just the summary.
 2. **10-second gut-check pace** — the flow encourages fast, intuitive answers. The UI doesn't enforce a hard timer, but the copy and scannable design push the user toward snap judgments. Overthinking produces inflated or deflated scores.
 3. **Progress visibility** — "Characteristic 3 of 6" keeps the user oriented and the end in sight. No surprise length; the user always knows where they are and how much remains.
 4. **The radar chart as visual payoff** — the wheel preview at confirmation is the reward for completing the rating screens. It transforms individual ratings into a meaningful, glanceable profile. This is the moment the user shifts from "I'm filling out a form" to "this is my musical fingerprint."
@@ -376,16 +358,16 @@ Components never import `domain/` directly — they go through the store.
 ### Principles from project context (restated here)
 
 - One characteristic per screen (no overwhelming forms).
-- Concrete, musician-friendly descriptions drawn from the user's own words (not abstract numbers).
+- Concrete, musician-friendly descriptions (not abstract numbers).
 - The wheel is visual — users understand their profile at a glance.
 - Onboarding is skippable but gently encouraged (the baseline powers cycle review deltas).
 
 ### Additional UX principles from the self-rating design
 
-- **Don't let the user rate until they've read.** The slider/input appears below the characteristics, after a slight scroll. This encourages reading before rating.
+- **Don't let the user rate until they've read.** The slider/input appears below the band descriptions, after a slight scroll. This encourages reading before rating.
 - **No zero or null scores.** All characteristics must be rated to produce a wheel. The confirmation screen is gated — "Confirm" is disabled until all characteristics have values.
 - **Progress is always visible.** The user always knows they're on "Characteristic 3 of 6" — no surprise length.
-- **The wheel is the reward.** After the rating screens, the confirmation screen with the radar chart feels like a payoff — "here's your musical profile."
+- **The wheel is the reward.** After the rating screens, the confirmation screen with the rose chart feels like a payoff — "here's your musical profile."
 
 ## Self-Assessment vs. Session-Derived Scores
 
@@ -410,11 +392,13 @@ Over time, session-derived scores become the primary data source, and the self-a
 ## Key Constraints
 
 - Onboarding must reuse the existing skill wheel domain functions — no duplicate scoring logic.
-- The radar chart component must be shared between onboarding preview and the main Skill Wheel Visualization, and must accept a variable number of axes.
+- The rose chart component is shared between onboarding preview and the main Skill Wheel Visualization, and must accept a variable number of axes. It lives at `src/shared/components/skill-wheel/SkillWheelChart.tsx`, not in a feature folder — see the [2026-05-14 chart placement decision](../decisions.md).
+- Onboarding is a single Expo Router route (`app/onboarding.tsx`) with a store-driven stage machine — not one route per stage.
 - Onboarding is skippable; the app must handle the "no baseline" case gracefully in cycle review.
 - The Progress feature folder may not import from other feature folders.
 - Self-rating domain functions (validation, weakest-slice, flat detection) must be pure — no side effects, no platform dependencies.
 - All user-defined characteristics must be rated before confirmation; no partial wheels can be saved.
+- **One-time flow only.** Re-baselining, session-derived score computation, and profile editing are out of scope for this epic — they belong to the ongoing Skill Wheel Visualization and Cycle Review features.
 
 ## Related Pages
 
@@ -453,3 +437,27 @@ Prior models (all superseded):
 3. **Radar chart restored** (2025-07-18 reversal, also recorded in error — not a real signed-off decision).
 
 See [Decisions](../decisions.md) for the full history and the 2026-05-13 authoritative decision.
+
+## Architecture Placement
+
+| Aspect | Location |
+|--------|----------|
+| Tab | **Progress** (bottom tab navigator) |
+| Route file | `app/onboarding.tsx` — single Expo Router route; stage navigation driven by store stage machine, not route transitions |
+| Feature folder | `features/progress/` — React components (onboarding screens) + Zustand store |
+| Shared component | `src/shared/components/skill-wheel/SkillWheelChart.tsx` — the rose chart widget, shared by onboarding and Progress tab |
+| Domain logic | `domain/` — Skill wheel calculations (scoring, aggregation, weakest-slice algorithm) |
+| Native integration | None |
+
+### Shared component constraint
+
+The rose chart component MUST be a single, shared implementation used by:
+- **Onboarding confirmation (Stage 5)** — first-ever view, baseline snapshot.
+- **Skill Wheel Visualization (Progress tab)** — ongoing view, updated over cycles.
+- **Cycle Review** — overlay of current vs. previous cycle.
+
+The component accepts a variable-length array of characteristics as props. Two chart implementations = visual drift = user confusion. One component, props-driven.
+
+**Placement:** The chart lives at `src/shared/components/skill-wheel/SkillWheelChart.tsx` — in the shared components directory, NOT in `features/progress/`. This is because both the onboarding flow and the Progress tab consume the chart, and feature folders may not import from each other. See the [2026-05-14 decision](../decisions.md).
+
+**Placement variants:** The same widget appears on the Progress tab and cycle review; only the date stamp and CTA label change between placements.

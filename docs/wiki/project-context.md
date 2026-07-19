@@ -44,7 +44,7 @@ EPM (Effective Practice Method) is a structured framework for deliberate musical
 The codebase follows a **feature-folder + pure domain/** architecture:
 
 ```
-src/app/                ← Expo Router (thin route files)
+app/                     ← Expo Router (thin route files)
       ↓ composes
 features/<name>/         ← UI (React components) + Zustand store (colocated)
       ↓ imports
@@ -59,9 +59,7 @@ native/                  ← Platform-native modules (iOS: AVAudioEngine, Androi
 - **Components** never import `domain/` or native modules directly — they go through the Zustand store.
 - **Route files** are thin one-line re-exports — e.g., `export { default } from "@/features/practice/PracticeScreen"`.
 
-See [Architecture](./architecture.md) and [Decisions](./decisions.md) for full rationale.
-
----
+> **⚠️ Implementation status (2026-05-13):** This is the target architecture. Currently, `domain/`, `features/`, and `shared/` contain only `.gitkeep` files. Zustand is not installed. No domain functions, stores, or feature components are implemented. See [Architecture](./architecture.md) and [Decisions](./decisions.md).
 
 ## V1 Feature Priority
 

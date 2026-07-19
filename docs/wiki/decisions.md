@@ -103,3 +103,158 @@ Append-only log of significant project decisions. Each entry should record what 
 **What was rejected:** Both the radar/spider chart (with connecting polygon) and the stacked-horizontal-bar layout. The 2025-07-18 reversal entry that restored the radar chart was not a real signed-off decision and is superseded by this entry.
 
 **Implications:** All three placements (onboarding confirmation, Progress tab, cycle review) use the rose-chart form. Domain functions are unaffected — they produce the same data; only the visual encoding changes.
+
+## 2026-05-14 — Fixed 4-band rubric for self-rating (replaces per-characteristic name-keyed lookup)
+
+**What was decided:** The self-rating stage (Stage 4 of onboarding) uses a FIXED 4-band rubric — the same four bands (Beginner 1–3, Intermediate 4–6, Advanced 7–8, Expert 9–10) shown for every characteristic, with the selected number highlighting the matching band. Band descriptions are ~4 string constants, not per-characteristic lookups.
+
+**Why:**
+- The PRD (FR-B2.2/FR-B2.4) originally called for per-characteristic behavioural band descriptions sourced from a name-keyed lookup ("static content that adapts to the characteristic name, not AI-generated"). This is unbuildable because characteristic names are free-form text (FR-A2.4) — a name-keyed lookup would miss for essentially every real user.
+- AI generation is a Vision non-goal, so dynamically generating per-characteristic band descriptions is not an option.
+- A fixed 4-band rubric preserves the Vision's "characteristic-anchored rating" pillar — the user still matches themselves to a description, not a bare number — while being buildable as simple constants.
+
+**What was rejected:**
+- Per-characteristic name-keyed lookup (unbuildable — free-form names can't be keyed).
+- AI-generated band descriptions (Vision non-goal).
+- Bare number rating (e.g., "rate yourself 1–10") — this IS the failure mode the Vision opens by criticising ("I'm a 6 out of 10 guitarist"). Rejected to preserve the characteristic-anchored rating experience.
+
+**Implications:** FR-B2 is approved/upstream and now diverges from this decision. The PM should update the PRD to specify fixed-rubric bands. All documentation describing per-characteristic tailored band descriptions should be updated to reflect the fixed 4-band rubric.
+
+## 2026-05-14 — SkillWheelChart placed in `src/shared/components/skill-wheel/`, not `features/progress/`
+
+**What was decided:** The SkillWheelChart component lives at `src/shared/components/skill-wheel/SkillWheelChart.tsx`, not in the Progress feature folder as the Chart PRD (FR12.2/FR12.3) originally specified.
+
+**Why:**
+- Both the onboarding flow and the Progress tab consume the chart component.
+- Feature folders may not import from each other — a hard architectural constraint.
+- Placing the chart in `src/shared/components/` makes it a shared UI primitive, available to any consumer without violating the feature-folder import rule.
+- The shared placement still satisfies the original intent: a single, props-driven component used by onboarding confirmation, Progress tab, and cycle review — no duplicate implementations.
+
+**What was rejected:** Colocating the chart in `features/progress/` — this would force onboarding (which may have its own feature folder or live elsewhere) to import from the Progress feature folder, violating the architecture constraint.
+
+**Implications:** The Chart PRD (FR12.2/FR12.3) should be updated to reflect the actual `src/shared/components/skill-wheel/` placement. All wiki pages referencing `features/progress/` as the chart's location should be updated.
+
+---
+
+## 2026-05-14 — AsyncStorage for V1 onboarding persistence (not SQLite, not zustand/persist)
+
+**What was decided:** The onboarding baseline is persisted via AsyncStorage with a single JSON snapshot + `onboardingComplete` boolean flag. No zustand/persist middleware. No SQLite. The write is atomic-ish: the baseline snapshot is written first, then the flag is set — both at Stage 7 (Completion).
+
+**Why:**
+- AsyncStorage is already available in the Expo managed workflow with zero additional native dependencies.
+- A single JSON snapshot is sufficient for the V1 one-time onboarding flow — there is no re-baselining, no history, no incremental updates.
+- The `onboardingComplete` flag acts as a cheap gate: the app reads one boolean to decide whether to show onboarding or skip it. No need to deserialize the full baseline on cold start.
+- Avoiding zustand/persist middleware keeps the persistence layer explicit and auditable — the store calls AsyncStorage directly at a known point (Stage 7) rather than relying on automatic serialization middleware.
+- SQLite is overkill for V1: the data shape is a single snapshot, not a relational model with queryable history.
+
+**What was rejected:**
+- SQLite — unnecessary for a single-snapshot V1 baseline; adds native dependency complexity.
+- zustand/persist middleware — automatic persistence would fire on every store mutation, risking partial writes mid-flow; explicit write at Stage 7 is simpler and safer.
+- Writing the flag before the snapshot — if the flag write succeeds but the snapshot write fails, the app would think onboarding is complete but have no data.
+
+**Implications:** If re-baselining or profile editing are added later, the persistence layer may need to evolve (multiple snapshots, versioning, migration). The atomic-ish write order (baseline first, flag second) means a crash between the two writes leaves a saved baseline but no flag — the app should handle this by checking for orphaned baseline data on startup.
+
+---
+
+## 2026-05-14 — Onboarding is a single Expo Router route (`app/onboarding.tsx`), not seven routes
+
+**What was decided:** The full 7-stage onboarding flow lives behind a single Expo Router route at `app/onboarding.tsx`. Stage navigation is driven by a Zustand store stage machine (currentStep), not by Expo Router route transitions. There is one route, not seven.
+
+**Why:**
+- The onboarding stages are a linear, gated sequence — the user cannot jump directly to Stage 4 without passing through Stages 1–3. Expo Router routes are URL-addressable by default, which would allow deep-linking into mid-flow stages.
+- A single route with a store-driven stage machine keeps the stage sequence authoritative and unskippable (except for the explicit skip at Stage 1).
+- Seven routes would mean seven screen components, seven URL paths, and risk of users bookmarking or deep-linking into mid-flow stages — all complexity with no benefit.
+- The store stage machine is simpler to test: advance the stage in the store, assert the rendered screen. No navigation mocking needed.
+
+**What was rejected:** One Expo Router route per stage (7 routes) — unnecessary route proliferation, deep-link risk, harder to enforce stage gating.
+
+**Implications:** The route file at `app/onboarding.tsx` composes the onboarding feature component, which reads `currentStep` from the store and renders the appropriate stage screen. The feature spec's Architecture Placement table should be updated from `src/app/(tabs)/progress/onboarding.tsx` to `app/onboarding.tsx`.
+
+---
+
+## 2026-05-14 (REVERSAL) — Fixed 4-band rubric replaced with "visualize your 10" self-rating prompts; 0–10 scale adopted
+
+**What was decided:** The 2026-05-14 decision (above) to use a fixed 4-band rubric (Beginner/Intermediate/Advanced/Expert) for self-rating has been reversed. After reviewing Benny Greb's *Effective Practicing for Musicians* — the book the entire Skill Wheel arc rebuilds — the book contains **NO behavioural bands at all**. Its rating mechanism is: the user visualizes what a 10 means for their characteristic, guided by four generic, characteristic-agnostic prompts, then rates by gut in ~10 seconds. The four prompts are:
+
+1. What would you be able to do at a 10?
+2. What elements are included?
+3. Why aren't you already at 10?
+4. What's the max?
+
+The self-rating stage now anchors to the user's self-built "visualize your 10" via these four fixed prompts — **not** any pre-authored bands. Additionally, the rating scale is standardized to **0–10** (was 1–10 in PRD/Vision) to match both the book and the chart axes, and so the midpoint-avoidance nudge (5 = indecision) sits at the true arithmetic centre of the scale.
+
+**Why:**
+- The fixed 4-band rubric was an invention that drifted from the source material. Greb's book uses NO behavioural bands — the rating mechanism is entirely user-driven: visualize what a 10 means, then rate by gut.
+- The Vision doc (§3) captured this correctly; the PRD (FR-B2) is where it drifted into an invented rubric.
+- The four prompts are characteristic-agnostic and buildable as static copy constants in the feature layer — no per-characteristic content needed, no domain module for rating bands.
+- Standardizing on 0–10 matches both the book and the chart axes (which already use 0–10). The midpoint-avoidance nudge at 5 now sits at the true arithmetic centre, strengthening the nudge.
+
+**What was rejected:**
+- The fixed 4-band rubric (Beginner 1–3, Intermediate 4–6, Advanced 7–8, Expert 9–10) — invented, not in the source material.
+- The 1–10 rating scale — mismatched with the book (0–10) and the chart axes.
+- The `ratingBands.ts` domain module (RATING_BANDS/bandForScore) — deleted; the prompts are feature-layer static copy, not domain logic.
+
+**Implications:**
+- The `ratingBands.ts` domain module (RATING_BANDS/bandForScore) is deleted. The four "visualize your 10" prompts move to a feature-layer static-copy constant.
+- FR-B2, AC11/AC12, FR-A5 data model, and Vision §3 are PM action items for upstream PRD updates.
+- All wiki pages referencing the fixed 4-band rubric or the 1–10 scale should be updated to reflect the "visualize your 10" prompts and the 0–10 scale.
+- The midpoint-avoidance nudge (Rule 1) at score 5 is now at the true arithmetic centre of the 0–10 scale, reinforcing its rationale.
+
+---
+
+## 2026-05-14 — Test harness: jest-expo preset, nanoid ESM transform, react-test-renderer@19.0.0 pin
+
+**What was decided:** The test harness uses `jest-expo` preset with a `transformIgnorePatterns` exception for `nanoid` (which ships ESM). `react-test-renderer` is pinned to `19.0.0` to match React 19. Tests run via `"test": "jest"` in `package.json` scripts.
+
+**Why:**
+- `jest-expo` provides the canonical Jest preset for Expo projects, handling all the standard React Native transforms out of the box.
+- `nanoid` ships as ESM, but Jest (running in Node) needs ESM modules to be transformed to CJS. The default `jest-expo` `transformIgnorePatterns` excludes all `node_modules`, so `nanoid` must be exempted explicitly. Without this, any test importing `nanoid` fails with an ESM syntax error. This is a known jest-expo footgun.
+- `react-test-renderer` must match the React version or `useSyncExternalStore` breaks (React 18 vs 19 internal API difference). Expo SDK 53 uses React 19, so `react-test-renderer` is pinned to `19.0.0`.
+- Putting the Jest config in `package.json` (rather than a separate `jest.config.js`) keeps configuration centralized and avoids an extra file for a simple preset + one transform exception.
+
+**What was rejected:**
+- A separate `jest.config.js` file — unnecessary for the current config complexity; `package.json` is sufficient.
+- Not adding `transformIgnorePatterns` — would make `nanoid` (and any future ESM-only dependency) untestable.
+- Using a different test framework (Vitest, Mocha) — Jest is the standard for React Native / Expo projects, and `jest-expo` eliminates the need for manual transform configuration.
+
+**Implications:** Any future dependency that ships ESM (rather than CJS) must be added to `transformIgnorePatterns`. The `react-test-renderer` version must stay in lockstep with the React version used by Expo — upgrading Expo SDK may require bumping the pin.
+
+
+---
+
+## 2026-05-14 — Theme module: flat token objects, no theming framework
+
+**What was decided:** The theme module (`src/shared/lib/theme.ts`) exports named `as const` objects (`colors`, `fontSize`, `space`, `radius`) with concrete literal values (hex strings, numbers), not CSS variable references. It is explicitly NOT a theming framework — no light mode, no context provider, no `ThemeContext`. The `--shadow-glow` CSS box-shadow token is intentionally excluded because it doesn't port to React Native; chart press feedback uses fill-opacity instead.
+
+**Why:**
+- Concrete literal values work everywhere in React Native — `StyleSheet.create`, inline styles, SVG props — without requiring CSS-variable resolution at runtime.
+- Named exports (`import { colors } from …`) are simpler than a single `theme` object with nested access (`theme.colors.…`).
+- Avoiding a theming framework (no light mode, no provider) keeps the module dead-simple: one file, one import, zero runtime cost.
+- `--shadow-glow` is a CSS box-shadow string; RN's shadow system is incompatible. Translating it would produce a poor approximation. The chart uses fill-opacity bump on press instead, which is a cleaner RN-native approach.
+
+**What was rejected:**
+- Exporting CSS variable references (e.g., `'var(--color-color-accent-primary)'`) — RN doesn't resolve CSS vars in `StyleSheet.create`.
+- A `ThemeContext` / provider pattern — unnecessary indirection for a single-theme app.
+- Attempting to translate `--shadow-glow` to RN shadow props.
+
+**Implications:** The values are hand-transcribed from `docs/designs/design-system.html:16-63`. If the design mockup changes, the theme module must be updated manually. A comment in the module links back to the source line range for traceability.
+
+---
+
+## 2026-05-14 — Shared domain types placed in `domain/onboarding/`, not a feature folder
+
+**What was decided:** The shared domain types `Characteristic`, `ThreeLists`, and `Baseline` live at `src/domain/onboarding/types.ts` — in the domain layer, not in any feature folder.
+
+**Why:**
+- `Characteristic` is consumed by the onboarding store, the SkillWheelChart component (`src/shared/components`), and future Progress/Cycle-Review features. None of these may import from another feature folder.
+- `ThreeLists` and `Baseline` are consumed by the onboarding feature (store + stage screens) and the persistence layer.
+- Placing them in `domain/` makes them available to all consumers without violating the feature-folder import constraint.
+- The module is zero-dependency (no React, no RN, no AsyncStorage) — pure TypeScript interfaces only, consistent with the domain layer constraint.
+
+**What was rejected:** Placing the types in a feature folder (e.g., `features/onboarding/`) — this would force other consumers (chart, Progress, Cycle-Review) to import from a feature folder, violating the architecture constraint.
+
+**Implications:**
+- `Characteristic.score` is optional (undefined during Stage 3 of onboarding) but required-in-practice on a persisted `Baseline` (Stage 5 gates on all-rated). No separate `RatedCharacteristic` type — not worth the ceremony.
+- `ThreeLists.why` is keyed by name, not id — matches Three Lists FR5 verbatim and the documented duplicate-name edge case.
+- `Baseline.userId` is `"local"` — no auth exists yet; field present so future multi-user doesn't require migration.
+- `Baseline.version` is `1` — explicit schema version for forward migration, even though V1 has no migration path.
