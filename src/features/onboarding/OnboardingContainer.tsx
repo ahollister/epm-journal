@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { type Stage } from '@/domain/onboarding/stages';
 import { useOnboardingStore } from '@/features/onboarding/store';
-import { ProgressChrome } from '@/features/onboarding/ProgressChrome';
+import { ProgressChrome } from '@/features/onboarding/components/ProgressChrome';
 import {
   Characteristics,
   Complete,
