@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text as NativeText, View } from 'react-native';
 import Svg, {
   Circle,
@@ -19,6 +19,7 @@ import {
   MAX_RADIUS,
   RING_SCORES,
   VIEWBOX,
+  hitWedgePath,
   labelAnchor,
   scoreToRadius,
   wedgePath,
@@ -36,6 +37,7 @@ export interface SkillWheelChartProps {
 
 const LABEL_MAX_LENGTH = 25;
 const WEDGE_FILL_OPACITY = 0.5;
+const PRESSED_WEDGE_FILL_OPACITY = 0.75;
 const MUTED_WEDGE_OPACITY = 0.35;
 const FOCUS_BUTTON_GRADIENT_ID = 'skill-wheel-focus-button-gradient';
 
@@ -47,6 +49,7 @@ type ChartGeometry = {
   scoreLabel: string;
   colour: string;
   label: ReturnType<typeof labelAnchor>;
+  hitPath: string;
 };
 
 function truncateLabel(name: string): string {
@@ -69,6 +72,8 @@ function SkillWheelChartComponent({
   showWeakest = false,
   onFocusCtaPress,
 }: SkillWheelChartProps) {
+  const [pressedId, setPressedId] = useState<string | null>(null);
+
   const geometry = useMemo<ChartGeometry[]>(() => {
     if (characteristics.length > 12) {
       console.warn(
@@ -93,6 +98,7 @@ function SkillWheelChartComponent({
         scoreLabel: displayScore(score),
         colour: hasScore ? colourForIndex(index) : colors.bgOverlay,
         label: labelAnchor(CENTER, CENTER, MAX_RADIUS, startAngle + wedgeAngle / 2),
+        hitPath: hitWedgePath(CENTER, CENTER, startAngle, endAngle),
       };
     });
   }, [characteristics]);
@@ -189,27 +195,58 @@ function SkillWheelChartComponent({
             />
           ))}
 
+          {interactive &&
+            geometry.map((wedge) => (
+              <Path
+                key={`hit-${wedge.id}`}
+                testID={`skill-wheel-hit-${wedge.id}`}
+                d={wedge.hitPath}
+                fill="transparent"
+                stroke="transparent"
+                strokeWidth={0}
+                onPress={() => onWedgeTap?.(wedge.id)}
+                onPressIn={() => setPressedId(wedge.id)}
+                onPressOut={() =>
+                  setPressedId((currentId) =>
+                    currentId === wedge.id ? null : currentId,
+                  )
+                }
+              />
+            ))}
+
           {geometry.map((wedge) => {
             const isHighlighted = highlightIds.includes(wedge.id);
             const isMuted = wedge.score === undefined;
+            const isPressed = interactive && pressedId === wedge.id;
 
             return (
               <Path
                 key={wedge.id}
+                testID={`skill-wheel-wedge-${wedge.id}`}
                 d={wedge.path}
                 fill={wedge.colour}
-                fillOpacity={isMuted ? MUTED_WEDGE_OPACITY : WEDGE_FILL_OPACITY}
+                fillOpacity={
+                  isPressed
+                    ? PRESSED_WEDGE_FILL_OPACITY
+                    : isMuted
+                      ? MUTED_WEDGE_OPACITY
+                      : WEDGE_FILL_OPACITY
+                }
                 stroke={wedge.colour}
                 strokeOpacity={1}
                 strokeWidth={isHighlighted ? 3 : 1.5}
-                onPress={
-                  interactive && onWedgeTap ? () => onWedgeTap(wedge.id) : undefined
-                }
+                pointerEvents="none"
               />
             );
           })}
 
-          <Circle cx={CENTER} cy={CENTER} r={CENTER_DOT_R} fill={colors.textMuted} />
+          <Circle
+            cx={CENTER}
+            cy={CENTER}
+            r={CENTER_DOT_R}
+            fill={colors.textMuted}
+            pointerEvents="none"
+          />
 
           {geometry.map((wedge) => {
             const isHighlighted = highlightIds.includes(wedge.id);
@@ -225,9 +262,7 @@ function SkillWheelChartComponent({
                 fontWeight={isHighlighted ? 600 : 500}
                 textAnchor={wedge.label.textAnchor}
                 alignmentBaseline="middle"
-                onPress={
-                  interactive && onWedgeTap ? () => onWedgeTap(wedge.id) : undefined
-                }
+                pointerEvents="none"
               >
                 {wedge.name}{' '}
                 <TSpan
