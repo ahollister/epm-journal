@@ -6,7 +6,11 @@ export default function RootLayout() {
       <Stack.Screen name="(tabs)" />
       <Stack.Screen
         name="onboarding"
-        options={{ presentation: 'fullScreenModal', headerShown: false }}
+        options={{
+          presentation: 'fullScreenModal',
+          headerShown: false,
+          gestureEnabled: false,
+        }}
       />
     </Stack>
   );
