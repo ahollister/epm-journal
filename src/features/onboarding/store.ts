@@ -20,6 +20,7 @@ export interface OnboardingState extends DomainOnboardingState {
   stage: Stage;
   subStep: number;
   focusAreas: string[];
+  shouldDismiss: boolean;
   error: unknown;
   next(): void;
   back(): void;
@@ -43,7 +44,13 @@ function emptyThreeLists(): ThreeLists {
 
 function initialState(): Pick<
   OnboardingState,
-  'stage' | 'subStep' | 'threeLists' | 'characteristics' | 'focusAreas' | 'error'
+  | 'stage'
+  | 'subStep'
+  | 'threeLists'
+  | 'characteristics'
+  | 'focusAreas'
+  | 'shouldDismiss'
+  | 'error'
 > {
   return {
     stage: 'intro',
@@ -51,6 +58,7 @@ function initialState(): Pick<
     threeLists: emptyThreeLists(),
     characteristics: [],
     focusAreas: [],
+    shouldDismiss: false,
     error: null,
   };
 }
@@ -98,6 +106,7 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     const state = get();
 
     if (state.stage === 'intro') {
+      set({ shouldDismiss: true });
       return;
     }
 

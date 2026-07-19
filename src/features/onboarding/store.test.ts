@@ -86,6 +86,22 @@ describe('useOnboardingStore', () => {
     });
   });
 
+  it('requests dismissal when going back from intro without clearing data', () => {
+    useOnboardingStore.setState({
+      characteristics: [characteristics[0]],
+      focusAreas: ['first'],
+    });
+
+    useOnboardingStore.getState().back();
+
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'intro',
+      shouldDismiss: true,
+      characteristics: [characteristics[0]],
+      focusAreas: ['first'],
+    });
+  });
+
   it('jumps to the selected characteristic rating', () => {
     useOnboardingStore.setState({ characteristics });
 
@@ -152,6 +168,7 @@ describe('useOnboardingStore', () => {
       threeLists: { who: [], why: {}, improvements: [] },
       characteristics: [],
       focusAreas: [],
+      shouldDismiss: false,
       error: null,
     });
   });
