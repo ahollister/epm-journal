@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { useEffect } from 'react';
+import { BackHandler, StyleSheet, View } from 'react-native';
 
 import { type Stage } from '@/domain/onboarding/stages';
 import { useOnboardingStore } from '@/features/onboarding/store';
@@ -41,7 +42,24 @@ function renderStage(stage: Stage, subStep: number) {
 export function OnboardingContainer() {
   const stage = useOnboardingStore((state) => state.stage);
   const subStep = useOnboardingStore((state) => state.subStep);
+  const back = useOnboardingStore((state) => state.back);
   const hasProgressChrome = stage !== 'intro' && stage !== 'complete';
+
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (stage === 'intro') {
+          return false;
+        }
+
+        back();
+        return true;
+      },
+    );
+
+    return () => subscription.remove();
+  }, [back, stage]);
 
   return (
     <View style={styles.container}>
