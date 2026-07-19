@@ -2,12 +2,22 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useOnboardingStore } from '@/features/onboarding/store';
 import { colors, fontSize, space } from '@/shared/lib/theme';
+import { CompletionScreen } from './stages/CompletionScreen';
 
 interface StageScreenProps {
   title: string;
   description: string;
   actionLabel?: string;
   onAction?: () => void;
+  error?: unknown;
+}
+
+function errorMessage(error: unknown): string {
+  if (error instanceof Error && error.message.length > 0) {
+    return `Couldn’t save your baseline: ${error.message}`;
+  }
+
+  return 'Couldn’t save your baseline. Please try again.';
 }
 
 function StageScreen({
@@ -15,11 +25,17 @@ function StageScreen({
   description,
   actionLabel = 'Continue',
   onAction,
+  error,
 }: StageScreenProps) {
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
+      {error ? (
+        <Text accessibilityRole="alert" style={styles.error}>
+          {errorMessage(error)}
+        </Text>
+      ) : null}
       {onAction ? (
         <Pressable accessibilityRole="button" onPress={onAction} style={styles.button}>
           <Text style={styles.buttonLabel}>{actionLabel}</Text>
@@ -68,16 +84,41 @@ export function Rating() {
 
 export function Confirm() {
   const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Review your wheel" description="Take a look at the shape of your starting point." onAction={next} />;
+  const complete = useOnboardingStore((state) => state.complete);
+  const error = useOnboardingStore((state) => state.error);
+  const onAction = error
+    ? () => void complete().catch(() => undefined)
+    : next;
+
+  return (
+    <StageScreen
+      title="Review your wheel"
+      description="Take a look at the shape of your starting point."
+      actionLabel={error ? 'Retry' : undefined}
+      error={error}
+      onAction={onAction}
+    />
+  );
 }
 
 export function Focus() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Choose a focus" description="Pick where you want to begin your first practice cycle." onAction={next} />;
+  const complete = useOnboardingStore((state) => state.complete);
+  const error = useOnboardingStore((state) => state.error);
+  const onAction = () => void complete().catch(() => undefined);
+
+  return (
+    <StageScreen
+      title="Choose a focus"
+      description="Pick where you want to begin your first practice cycle."
+      actionLabel={error ? 'Retry' : 'Save my baseline'}
+      error={error}
+      onAction={onAction}
+    />
+  );
 }
 
 export function Complete() {
-  return <StageScreen title="You’re ready" description="Your starting point is saved. Let’s make your next practice count." />;
+  return <CompletionScreen />;
 }
 
 const styles = StyleSheet.create({
@@ -97,6 +138,12 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     lineHeight: 25,
     marginTop: space.md,
+  },
+  error: {
+    color: colors.statusDanger,
+    fontSize: fontSize.sm,
+    lineHeight: 20,
+    marginTop: space.lg,
   },
   button: {
     alignSelf: 'flex-start',
