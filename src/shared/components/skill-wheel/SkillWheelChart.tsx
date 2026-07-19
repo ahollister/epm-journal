@@ -1,9 +1,18 @@
 import React, { memo, useMemo } from 'react';
 import { Pressable, StyleSheet, Text as NativeText, View } from 'react-native';
-import Svg, { Circle, Path, Text, TSpan } from 'react-native-svg';
+import Svg, {
+  Circle,
+  Defs,
+  LinearGradient,
+  Path,
+  Rect,
+  Stop,
+  Text,
+  TSpan,
+} from 'react-native-svg';
 
 import type { Characteristic } from '../../../domain/onboarding/types';
-import { colors } from '../../lib/theme';
+import { colors, fontSize, radius, space } from '../../lib/theme';
 import {
   CENTER,
   CENTER_DOT_R,
@@ -28,6 +37,7 @@ export interface SkillWheelChartProps {
 const LABEL_MAX_LENGTH = 25;
 const WEDGE_FILL_OPACITY = 0.5;
 const MUTED_WEDGE_OPACITY = 0.35;
+const FOCUS_BUTTON_GRADIENT_ID = 'skill-wheel-focus-button-gradient';
 
 type ChartGeometry = {
   id: string;
@@ -87,16 +97,81 @@ function SkillWheelChartComponent({
     });
   }, [characteristics]);
 
+  const weakestId = highlightIds[0];
+  const weakest = characteristics.find((characteristic) => characteristic.id === weakestId);
+  const weakestIndex = weakest
+    ? characteristics.findIndex((characteristic) => characteristic.id === weakest.id)
+    : -1;
+  const weakestCard = showWeakest ? (
+    <View style={styles.weakestCard}>
+      <View style={styles.weakestHeadingRow}>
+        <NativeText style={styles.weakestHeading}>WEAKEST AREA</NativeText>
+        <View style={styles.headingRule} />
+      </View>
+      {weakest ? (
+        <View style={styles.weakestValueRow}>
+          <View
+            style={[
+              styles.weakestDot,
+              { backgroundColor: colourForIndex(weakestIndex) },
+            ]}
+          />
+          <NativeText style={styles.weakestName}>{weakest.name}</NativeText>
+          <NativeText style={styles.weakestScore}>
+            {displayScore(weakest.score)} / 10
+          </NativeText>
+        </View>
+      ) : (
+        <NativeText style={styles.weakestPlaceholder}>No data yet</NativeText>
+      )}
+      <Pressable
+        accessibilityRole="button"
+        disabled={!onFocusCtaPress}
+        onPress={onFocusCtaPress}
+        style={({ pressed }) => [styles.focusButton, pressed && styles.focusButtonPressed]}
+      >
+        <Svg
+          pointerEvents="none"
+          style={StyleSheet.absoluteFill}
+          width="100%"
+          height="100%"
+        >
+          <Defs>
+            <LinearGradient
+              id={FOCUS_BUTTON_GRADIENT_ID}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <Stop offset="0%" stopColor={colors.accentPrimary} />
+              <Stop offset="100%" stopColor={colors.accentHover} />
+            </LinearGradient>
+          </Defs>
+          <Rect
+            width="100%"
+            height="100%"
+            rx={radius.full}
+            fill={`url(#${FOCUS_BUTTON_GRADIENT_ID})`}
+          />
+        </Svg>
+        <NativeText style={styles.focusButtonText}>Focus next session</NativeText>
+      </Pressable>
+    </View>
+  ) : null;
+
   if (characteristics.length === 0) {
     return (
-      <View style={styles.emptyState}>
-        <NativeText style={styles.emptyStateText}>Complete onboarding to see your skill wheel.</NativeText>
+      <View style={styles.container}>
+        <View style={styles.emptyState}>
+          <NativeText style={styles.emptyStateText}>
+            Complete onboarding to see your skill wheel.
+          </NativeText>
+        </View>
+        {weakestCard}
       </View>
     );
   }
-
-  const weakestId = highlightIds[0];
-  const weakest = characteristics.find((characteristic) => characteristic.id === weakestId);
 
   return (
     <View style={styles.container}>
@@ -167,27 +242,7 @@ function SkillWheelChartComponent({
         </Svg>
       </View>
 
-      {showWeakest && weakest ? (
-        <View style={styles.weakestCard}>
-          <View style={styles.weakestHeadingRow}>
-            <NativeText style={styles.weakestHeading}>Weakest area</NativeText>
-            <View style={styles.headingRule} />
-          </View>
-          <View style={styles.weakestValueRow}>
-            <View style={[styles.weakestDot, { backgroundColor: colourForIndex(characteristics.indexOf(weakest)) }]} />
-            <NativeText style={styles.weakestName}>{weakest.name}</NativeText>
-            <NativeText style={styles.weakestScore}>{displayScore(weakest.score)} / 10</NativeText>
-          </View>
-          <Pressable
-            accessibilityRole="button"
-            disabled={!onFocusCtaPress}
-            onPress={onFocusCtaPress}
-            style={({ pressed }) => [styles.focusButton, pressed && styles.focusButtonPressed]}
-          >
-            <NativeText style={styles.focusButtonText}>Focus next session</NativeText>
-          </Pressable>
-        </View>
-      ) : null}
+      {weakestCard}
     </View>
   );
 }
@@ -203,35 +258,35 @@ const styles = StyleSheet.create({
   emptyState: {
     alignItems: 'center',
     borderColor: colors.borderSubtle,
-    borderRadius: 12,
+    borderRadius: radius.md,
     borderStyle: 'dashed',
     borderWidth: 1,
     justifyContent: 'center',
     minHeight: 120,
-    padding: 16,
+    padding: space.base,
   },
   emptyStateText: {
     color: colors.textMuted,
-    fontSize: 13,
+    fontSize: fontSize.sm,
     textAlign: 'center',
   },
   weakestCard: {
     backgroundColor: colors.accentSoft,
     borderColor: colors.borderSubtle,
-    borderRadius: 12,
+    borderRadius: radius.md,
     borderWidth: 1,
-    marginTop: 24,
-    padding: 16,
+    marginTop: space.lg,
+    padding: space.base,
   },
   weakestHeadingRow: {
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 8,
+    gap: space.sm,
     marginBottom: 10,
   },
   weakestHeading: {
     color: colors.textMuted,
-    fontSize: 11,
+    fontSize: fontSize.xs,
     fontWeight: '600',
     letterSpacing: 1.1,
     textTransform: 'uppercase',
@@ -244,8 +299,8 @@ const styles = StyleSheet.create({
   weakestValueRow: {
     alignItems: 'baseline',
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 16,
+    gap: space.sm,
+    marginBottom: space.base,
   },
   weakestDot: {
     alignSelf: 'center',
@@ -256,28 +311,34 @@ const styles = StyleSheet.create({
   weakestName: {
     color: colors.textPrimary,
     flexShrink: 1,
-    fontSize: 20,
+    fontSize: fontSize.lg,
     fontWeight: '600',
   },
   weakestScore: {
     color: colors.textMuted,
-    fontSize: 13,
+    fontSize: fontSize.sm,
     fontWeight: '500',
+  },
+  weakestPlaceholder: {
+    color: colors.textMuted,
+    fontSize: fontSize.sm,
+    marginBottom: space.base,
   },
   focusButton: {
     alignItems: 'center',
     backgroundColor: colors.accentPrimary,
-    borderRadius: 9999,
+    borderRadius: radius.full,
     justifyContent: 'center',
     minHeight: 44,
-    paddingHorizontal: 24,
+    overflow: 'hidden',
+    paddingHorizontal: space.lg,
   },
   focusButtonPressed: {
     opacity: 0.8,
   },
   focusButtonText: {
     color: colors.accentOn,
-    fontSize: 13,
+    fontSize: fontSize.sm,
     fontWeight: '600',
     letterSpacing: 0.5,
     textTransform: 'uppercase',
