@@ -150,6 +150,30 @@ describe('useOnboardingStore', () => {
     });
   });
 
+  it('does not persist an incomplete set of ratings', async () => {
+    const completeOnboarding = jest.spyOn(
+      baselineRepository,
+      'completeOnboarding',
+    );
+    useOnboardingStore.setState({
+      stage: 'focus',
+      characteristics: [
+        { id: 'first', name: 'First', order: 1, score: 4 },
+        { id: 'second', name: 'Second', order: 2 },
+      ],
+    });
+
+    await expect(useOnboardingStore.getState().complete()).rejects.toThrow(
+      'Rate every characteristic before saving your baseline.',
+    );
+
+    expect(completeOnboarding).not.toHaveBeenCalled();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'focus',
+      error: expect.any(Error),
+    });
+  });
+
   it('resets every onboarding field', () => {
     useOnboardingStore.setState({
       stage: 'focus',

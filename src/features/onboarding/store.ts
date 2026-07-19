@@ -99,6 +99,11 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       return;
     }
 
+    if (nextStage === 'complete') {
+      void state.complete().catch(() => undefined);
+      return;
+    }
+
     set({ stage: nextStage, subStep: 0 });
   },
 
@@ -214,6 +219,15 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
 
   complete: async () => {
     const state = get();
+
+    if (!canAdvance('rating', state)) {
+      const error = new Error(
+        'Rate every characteristic before saving your baseline.',
+      );
+      set({ error });
+      throw error;
+    }
+
     const baseline: Baseline = {
       version: 1,
       characteristics: state.characteristics.map((characteristic) => ({
