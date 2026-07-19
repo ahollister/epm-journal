@@ -81,6 +81,51 @@ describe('useOnboardingStore', () => {
     });
   });
 
+  it('moves through one rating at a time and supports returning to a rating', () => {
+    useOnboardingStore.setState({
+      stage: 'rating',
+      characteristics: [
+        { id: 'one', name: 'One', order: 1 },
+        { id: 'two', name: 'Two', order: 2 },
+        { id: 'three', name: 'Three', order: 3 },
+      ],
+    });
+    const store = useOnboardingStore.getState();
+
+    store.next();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
+      subStep: 0,
+    });
+
+    store.rateCharacteristic('one', 6);
+    store.next();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
+      subStep: 1,
+    });
+
+    store.goToCharacteristicRating('three');
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
+      subStep: 2,
+    });
+
+    store.rateCharacteristic('three', 8);
+    store.next();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
+      subStep: 2,
+    });
+
+    store.rateCharacteristic('two', 7);
+    store.next();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'confirm',
+      subStep: 0,
+    });
+  });
+
   it('persists the baseline only when complete succeeds', async () => {
     const store = useOnboardingStore.getState();
     store.addCharacteristic('Timing');

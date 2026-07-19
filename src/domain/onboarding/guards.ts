@@ -1,6 +1,11 @@
 import type { OnboardingState, ThreeLists } from './types';
 import type { Stage } from './stages';
 
+type OnboardingProgress = OnboardingState & {
+  /** The rating cursor, supplied by the in-memory onboarding store. */
+  subStep?: number;
+};
+
 export function threeListsComplete(lists: ThreeLists): boolean {
   return (
     lists.who.length >= 5 &&
@@ -10,13 +15,28 @@ export function threeListsComplete(lists: ThreeLists): boolean {
   );
 }
 
-export function canAdvance(stage: Stage, state: OnboardingState): boolean {
+export function canAdvance(stage: Stage, state: OnboardingProgress): boolean {
   switch (stage) {
     case 'threeLists':
       return threeListsComplete(state.threeLists);
     case 'characteristics':
       return state.characteristics.length >= 3;
     case 'rating':
+      if (state.subStep !== undefined) {
+        const currentCharacteristic = state.characteristics[state.subStep];
+
+        if (currentCharacteristic?.score == null) {
+          return false;
+        }
+
+        return (
+          state.subStep < state.characteristics.length - 1 ||
+          state.characteristics.every(
+            (characteristic) => characteristic.score != null,
+          )
+        );
+      }
+
       return state.characteristics.every(
         (characteristic) => characteristic.score != null,
       );
