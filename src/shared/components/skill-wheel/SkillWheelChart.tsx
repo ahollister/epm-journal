@@ -1,0 +1,385 @@
+import React, { memo, useMemo, useState } from 'react';
+import { Pressable, StyleSheet, Text as NativeText, View } from 'react-native';
+import Svg, {
+  Circle,
+  Defs,
+  LinearGradient,
+  Path,
+  Rect,
+  Stop,
+  Text,
+  TSpan,
+} from 'react-native-svg';
+
+import type { Characteristic } from '../../../domain/onboarding/types';
+import { colors, fontSize, radius, space } from '../../lib/theme';
+import {
+  CENTER,
+  CENTER_DOT_R,
+  MAX_RADIUS,
+  RING_SCORES,
+  VIEWBOX,
+  hitWedgePath,
+  labelAnchor,
+  scoreToRadius,
+  wedgePath,
+} from './geometry';
+import { colourForIndex } from './palette';
+
+export interface SkillWheelChartProps {
+  characteristics: Characteristic[];
+  interactive?: boolean;
+  onWedgeTap?: (characteristicId: string) => void;
+  highlightIds?: string[];
+  showWeakest?: boolean;
+  onFocusCtaPress?: () => void;
+}
+
+const LABEL_MAX_LENGTH = 25;
+const WEDGE_FILL_OPACITY = 0.5;
+const PRESSED_WEDGE_FILL_OPACITY = 0.75;
+const MUTED_WEDGE_OPACITY = 0.35;
+const FOCUS_BUTTON_GRADIENT_ID = 'skill-wheel-focus-button-gradient';
+
+type ChartGeometry = {
+  id: string;
+  path: string;
+  name: string;
+  score: number | undefined;
+  scoreLabel: string;
+  colour: string;
+  label: ReturnType<typeof labelAnchor>;
+  hitPath: string;
+};
+
+function truncateLabel(name: string): string {
+  if (name.length <= LABEL_MAX_LENGTH) {
+    return name;
+  }
+
+  return `${name.slice(0, LABEL_MAX_LENGTH - 1)}…`;
+}
+
+function displayScore(score: number | undefined): string {
+  return score == null || Number.isNaN(score) ? '—' : String(score);
+}
+
+function SkillWheelChartComponent({
+  characteristics,
+  interactive = false,
+  onWedgeTap,
+  highlightIds = [],
+  showWeakest = false,
+  onFocusCtaPress,
+}: SkillWheelChartProps) {
+  const [pressedId, setPressedId] = useState<string | null>(null);
+
+  const geometry = useMemo<ChartGeometry[]>(() => {
+    if (characteristics.length > 12) {
+      console.warn(
+        `SkillWheelChart received ${characteristics.length} characteristics; labels may overlap.`,
+      );
+    }
+
+    const wedgeAngle = characteristics.length === 0 ? 0 : 360 / characteristics.length;
+
+    return characteristics.map((characteristic, index) => {
+      const hasScore = characteristic.score != null && !Number.isNaN(characteristic.score);
+      const score = hasScore ? characteristic.score : undefined;
+      const radius = hasScore ? scoreToRadius(score as number) : MAX_RADIUS;
+      const startAngle = -90 + index * wedgeAngle;
+      const endAngle = startAngle + wedgeAngle;
+
+      return {
+        id: characteristic.id,
+        path: wedgePath(CENTER, CENTER, 0, radius, startAngle, endAngle),
+        name: truncateLabel(characteristic.name),
+        score,
+        scoreLabel: displayScore(score),
+        colour: hasScore ? colourForIndex(index) : colors.bgOverlay,
+        label: labelAnchor(CENTER, CENTER, MAX_RADIUS, startAngle + wedgeAngle / 2),
+        hitPath: hitWedgePath(CENTER, CENTER, startAngle, endAngle),
+      };
+    });
+  }, [characteristics]);
+
+  const weakestId = highlightIds[0];
+  const weakest = characteristics.find((characteristic) => characteristic.id === weakestId);
+  const weakestIndex = weakest
+    ? characteristics.findIndex((characteristic) => characteristic.id === weakest.id)
+    : -1;
+  const weakestCard = showWeakest ? (
+    <View style={styles.weakestCard}>
+      <View style={styles.weakestHeadingRow}>
+        <NativeText style={styles.weakestHeading}>WEAKEST AREA</NativeText>
+        <View style={styles.headingRule} />
+      </View>
+      {weakest ? (
+        <View style={styles.weakestValueRow}>
+          <View
+            style={[
+              styles.weakestDot,
+              { backgroundColor: colourForIndex(weakestIndex) },
+            ]}
+          />
+          <NativeText style={styles.weakestName}>{weakest.name}</NativeText>
+          <NativeText style={styles.weakestScore}>
+            {displayScore(weakest.score)} / 10
+          </NativeText>
+        </View>
+      ) : (
+        <NativeText style={styles.weakestPlaceholder}>No data yet</NativeText>
+      )}
+      <Pressable
+        accessibilityRole="button"
+        disabled={!onFocusCtaPress}
+        onPress={onFocusCtaPress}
+        style={({ pressed }) => [styles.focusButton, pressed && styles.focusButtonPressed]}
+      >
+        <Svg
+          pointerEvents="none"
+          style={StyleSheet.absoluteFill}
+          width="100%"
+          height="100%"
+        >
+          <Defs>
+            <LinearGradient
+              id={FOCUS_BUTTON_GRADIENT_ID}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <Stop offset="0%" stopColor={colors.accentPrimary} />
+              <Stop offset="100%" stopColor={colors.accentHover} />
+            </LinearGradient>
+          </Defs>
+          <Rect
+            width="100%"
+            height="100%"
+            rx={radius.full}
+            fill={`url(#${FOCUS_BUTTON_GRADIENT_ID})`}
+          />
+        </Svg>
+        <NativeText style={styles.focusButtonText}>Focus next session</NativeText>
+      </Pressable>
+    </View>
+  ) : null;
+
+  if (characteristics.length === 0) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.emptyState}>
+          <NativeText style={styles.emptyStateText}>
+            Complete onboarding to see your skill wheel.
+          </NativeText>
+        </View>
+        {weakestCard}
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.chartWrapper}>
+        <Svg width="100%" height="100%" viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`}>
+          {RING_SCORES.map((ringScore, index) => (
+            <Circle
+              key={`ring-${ringScore}`}
+              cx={CENTER}
+              cy={CENTER}
+              r={scoreToRadius(ringScore)}
+              fill="none"
+              stroke={index === RING_SCORES.length - 1 ? colors.borderStrong : colors.borderSubtle}
+              strokeWidth={1}
+            />
+          ))}
+
+          {interactive &&
+            geometry.map((wedge) => (
+              <Path
+                key={`hit-${wedge.id}`}
+                testID={`skill-wheel-hit-${wedge.id}`}
+                d={wedge.hitPath}
+                fill="transparent"
+                stroke="transparent"
+                strokeWidth={0}
+                onPress={() => onWedgeTap?.(wedge.id)}
+                onPressIn={() => setPressedId(wedge.id)}
+                onPressOut={() =>
+                  setPressedId((currentId) =>
+                    currentId === wedge.id ? null : currentId,
+                  )
+                }
+              />
+            ))}
+
+          {geometry.map((wedge) => {
+            const isHighlighted = highlightIds.includes(wedge.id);
+            const isMuted = wedge.score === undefined;
+            const isPressed = interactive && pressedId === wedge.id;
+
+            return (
+              <Path
+                key={wedge.id}
+                testID={`skill-wheel-wedge-${wedge.id}`}
+                d={wedge.path}
+                fill={wedge.colour}
+                fillOpacity={
+                  isPressed
+                    ? PRESSED_WEDGE_FILL_OPACITY
+                    : isMuted
+                      ? MUTED_WEDGE_OPACITY
+                      : WEDGE_FILL_OPACITY
+                }
+                stroke={wedge.colour}
+                strokeOpacity={1}
+                strokeWidth={isHighlighted ? 3 : 1.5}
+                pointerEvents="none"
+              />
+            );
+          })}
+
+          <Circle
+            cx={CENTER}
+            cy={CENTER}
+            r={CENTER_DOT_R}
+            fill={colors.textMuted}
+            pointerEvents="none"
+          />
+
+          {geometry.map((wedge) => {
+            const isHighlighted = highlightIds.includes(wedge.id);
+            const labelFontSize = characteristics.length >= 10 ? 11 : 13;
+
+            return (
+              <Text
+                key={`label-${wedge.id}`}
+                x={wedge.label.x}
+                y={wedge.label.y}
+                fill={colors.textSecondary}
+                fontSize={labelFontSize}
+                fontWeight={isHighlighted ? 600 : 500}
+                textAnchor={wedge.label.textAnchor}
+                alignmentBaseline="middle"
+                pointerEvents="none"
+              >
+                {wedge.name}{' '}
+                <TSpan
+                  fill={wedge.score === undefined ? colors.textMuted : wedge.colour}
+                  fontWeight={700}
+                >
+                  {wedge.scoreLabel}
+                </TSpan>
+              </Text>
+            );
+          })}
+        </Svg>
+      </View>
+
+      {weakestCard}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+  chartWrapper: {
+    width: '100%',
+    aspectRatio: 1,
+  },
+  emptyState: {
+    alignItems: 'center',
+    borderColor: colors.borderSubtle,
+    borderRadius: radius.md,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    justifyContent: 'center',
+    minHeight: 120,
+    padding: space.base,
+  },
+  emptyStateText: {
+    color: colors.textMuted,
+    fontSize: fontSize.sm,
+    textAlign: 'center',
+  },
+  weakestCard: {
+    backgroundColor: colors.accentSoft,
+    borderColor: colors.borderSubtle,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    marginTop: space.lg,
+    padding: space.base,
+  },
+  weakestHeadingRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: space.sm,
+    marginBottom: 10,
+  },
+  weakestHeading: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    fontWeight: '600',
+    letterSpacing: 1.1,
+    textTransform: 'uppercase',
+  },
+  headingRule: {
+    backgroundColor: colors.borderSubtle,
+    flex: 1,
+    height: 1,
+  },
+  weakestValueRow: {
+    alignItems: 'baseline',
+    flexDirection: 'row',
+    gap: space.sm,
+    marginBottom: space.base,
+  },
+  weakestDot: {
+    alignSelf: 'center',
+    borderRadius: 5,
+    height: 10,
+    width: 10,
+  },
+  weakestName: {
+    color: colors.textPrimary,
+    flexShrink: 1,
+    fontSize: fontSize.lg,
+    fontWeight: '600',
+  },
+  weakestScore: {
+    color: colors.textMuted,
+    fontSize: fontSize.sm,
+    fontWeight: '500',
+  },
+  weakestPlaceholder: {
+    color: colors.textMuted,
+    fontSize: fontSize.sm,
+    marginBottom: space.base,
+  },
+  focusButton: {
+    alignItems: 'center',
+    backgroundColor: colors.accentPrimary,
+    borderRadius: radius.full,
+    justifyContent: 'center',
+    minHeight: 44,
+    overflow: 'hidden',
+    paddingHorizontal: space.lg,
+  },
+  focusButtonPressed: {
+    opacity: 0.8,
+  },
+  focusButtonText: {
+    color: colors.accentOn,
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+    textTransform: 'uppercase',
+  },
+});
+
+export const SkillWheelChart = memo(SkillWheelChartComponent);
+
+export default SkillWheelChart;
