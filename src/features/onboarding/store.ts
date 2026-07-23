@@ -31,6 +31,8 @@ export interface OnboardingState extends DomainOnboardingState {
   removeCharacteristic(id: string): void;
   removeWhoName(index: number): void;
   rateCharacteristic(id: string, score: number): void;
+  setWhyQuality(name: string, index: number, value: string): void;
+  addWhyQuality(name: string): void;
   setFocusAreas(ids: string[]): void;
   complete(): Promise<void>;
   reset(): void;
@@ -242,6 +244,40 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       characteristics: state.characteristics.map((characteristic) =>
         characteristic.id === id ? { ...characteristic, score } : characteristic,
       ),
+    }));
+  },
+
+  setWhyQuality: (name, index, value) => {
+    set((state) => {
+      const qualities = [...(state.threeLists.why[name] ?? [])];
+
+      while (qualities.length <= index) {
+        qualities.push('');
+      }
+
+      qualities[index] = value;
+
+      return {
+        threeLists: {
+          ...state.threeLists,
+          why: {
+            ...state.threeLists.why,
+            [name]: qualities,
+          },
+        },
+      };
+    });
+  },
+
+  addWhyQuality: (name) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        why: {
+          ...state.threeLists.why,
+          [name]: [...(state.threeLists.why[name] ?? ['']), ''],
+        },
+      },
     }));
   },
 
