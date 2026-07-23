@@ -9,8 +9,8 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   },
 }));
 
-import { Intro } from './stages';
-import { useOnboardingStore } from './store';
+import { IntroScreen } from './IntroScreen';
+import { useOnboardingStore } from '../store';
 
 const mockBack = jest.fn();
 
@@ -18,17 +18,25 @@ jest.mock('expo-router', () => ({
   useRouter: () => ({ back: mockBack }),
 }));
 
-describe('Intro', () => {
+describe('IntroScreen', () => {
   beforeEach(() => {
     mockBack.mockClear();
     useOnboardingStore.getState().reset();
   });
 
   it('offers a skip action that returns to the previous route', async () => {
-    const { getByRole } = await render(<Intro />);
+    const { getByRole } = await render(<IntroScreen />);
 
     fireEvent.press(getByRole('button', { name: 'Skip for now' }));
 
     expect(mockBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('advances to the next stage when getting started', async () => {
+    const { getByRole } = await render(<IntroScreen />);
+
+    fireEvent.press(getByRole('button', { name: 'Get Started' }));
+
+    expect(useOnboardingStore.getState().stage).toBe('threeLists');
   });
 });

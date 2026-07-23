@@ -19,10 +19,13 @@ jest.mock('./stages', () => ({
   Confirm: () => null,
   Focus: () => null,
   ImprovementsList: () => null,
-  Intro: () => null,
   Rating: () => null,
   WhoList: () => null,
   WhyList: () => null,
+}));
+
+jest.mock('./stages/IntroScreen', () => ({
+  IntroScreen: () => null,
 }));
 
 describe('OnboardingContainer navigation guard', () => {

@@ -11,17 +11,17 @@ import {
   Confirm,
   Focus,
   ImprovementsList,
-  Intro,
   Rating,
   WhoList,
   WhyList,
 } from '@/features/onboarding/stages';
+import { IntroScreen } from '@/features/onboarding/stages/IntroScreen';
 import { colors } from '@/shared/lib/theme';
 
 function renderStage(stage: Stage, subStep: number) {
   switch (stage) {
     case 'intro':
-      return <Intro />;
+      return <IntroScreen />;
     case 'threeLists':
       if (subStep === 0) return <WhoList />;
       if (subStep === 1) return <WhyList />;

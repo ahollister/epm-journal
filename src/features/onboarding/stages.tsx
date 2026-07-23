@@ -1,5 +1,4 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useRouter } from 'expo-router';
 
 import { useOnboardingStore } from '@/features/onboarding/store';
 import { colors, fontSize, space } from '@/shared/lib/theme';
@@ -42,29 +41,6 @@ function StageScreen({
           <Text style={styles.buttonLabel}>{actionLabel}</Text>
         </Pressable>
       ) : null}
-    </View>
-  );
-}
-
-export function Intro() {
-  const router = useRouter();
-  const next = useOnboardingStore((state) => state.next);
-  return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Build your skill wheel</Text>
-      <Text style={styles.description}>
-        Define the skills that matter to you, then create an honest starting point for your progress.
-      </Text>
-      <Pressable accessibilityRole="button" onPress={next} style={styles.button}>
-        <Text style={styles.buttonLabel}>Get started</Text>
-      </Pressable>
-      <Pressable
-        accessibilityRole="button"
-        onPress={() => router.back()}
-        style={styles.skipButton}
-      >
-        <Text style={styles.skipButtonLabel}>Skip for now</Text>
-      </Pressable>
     </View>
   );
 }
@@ -169,16 +145,5 @@ const styles = StyleSheet.create({
     color: colors.accentOn,
     fontSize: fontSize.base,
     fontWeight: '700',
-  },
-  skipButton: {
-    alignSelf: 'flex-start',
-    marginTop: space.md,
-    paddingHorizontal: space.sm,
-    paddingVertical: space.sm,
-  },
-  skipButtonLabel: {
-    color: colors.textSecondary,
-    fontSize: fontSize.base,
-    fontWeight: '600',
   },
 });
