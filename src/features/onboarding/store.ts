@@ -26,8 +26,10 @@ export interface OnboardingState extends DomainOnboardingState {
   back(): void;
   goToCharacteristicRating(id: string): void;
   addCharacteristic(name: string): void;
+  addWhoName(name: string): void;
   renameCharacteristic(id: string, name: string): void;
   removeCharacteristic(id: string): void;
+  removeWhoName(index: number): void;
   rateCharacteristic(id: string, score: number): void;
   setFocusAreas(ids: string[]): void;
   complete(): Promise<void>;
@@ -81,7 +83,7 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   next: () => {
     const state = get();
 
-    if (!canAdvance(state.stage, state)) {
+    if (!canAdvance(state.stage, state, state.subStep)) {
       return;
     }
 
@@ -162,6 +164,27 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     }));
   },
 
+  addWhoName: (name) => {
+    const trimmedName = name.trim();
+
+    if (trimmedName.length === 0) {
+      return;
+    }
+
+    set((state) => {
+      if (state.threeLists.who.length >= 10) {
+        return state;
+      }
+
+      return {
+        threeLists: {
+          ...state.threeLists,
+          who: [...state.threeLists.who, trimmedName],
+        },
+      };
+    });
+  },
+
   renameCharacteristic: (id, name) => {
     const trimmedName = name.trim();
 
@@ -203,6 +226,15 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
           : {}),
       };
     });
+  },
+
+  removeWhoName: (index) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        who: state.threeLists.who.filter((_, itemIndex) => itemIndex !== index),
+      },
+    }));
   },
 
   rateCharacteristic: (id, score) => {

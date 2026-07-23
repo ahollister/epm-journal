@@ -10,9 +10,27 @@ export function threeListsComplete(lists: ThreeLists): boolean {
   );
 }
 
-export function canAdvance(stage: Stage, s: OnboardingState): boolean {
+export function canAdvance(
+  stage: Stage,
+  s: OnboardingState,
+  subStep?: number,
+): boolean {
   switch (stage) {
     case 'threeLists':
+      if (subStep === 0) {
+        return s.threeLists.who.length >= 5 && s.threeLists.who.length <= 10;
+      }
+
+      if (subStep === 1) {
+        return s.threeLists.who.every(
+          (who) => (s.threeLists.why[who]?.length ?? 0) >= 1,
+        );
+      }
+
+      if (subStep === 2) {
+        return s.threeLists.improvements.length >= 3;
+      }
+
       return threeListsComplete(s.threeLists);
     case 'characteristics':
       return s.characteristics.length >= 3;
