@@ -32,7 +32,9 @@ export function canAdvance(
       }
 
       if (subStep === 2) {
-        return s.threeLists.improvements.length >= 3;
+        // This is the stage boundary, so validate the full exercise again in
+        // case restored or edited state made an earlier sub-step incomplete.
+        return threeListsComplete(s.threeLists);
       }
 
       return threeListsComplete(s.threeLists);

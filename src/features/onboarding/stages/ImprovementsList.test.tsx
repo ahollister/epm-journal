@@ -49,6 +49,15 @@ describe('ImprovementsList', () => {
   });
 
   it('trims, stores, deletes, and advances with three improvements', async () => {
+    const musicians = ['Miles', 'Herbie', 'Wayne', 'Tony', 'Ron'];
+    useOnboardingStore.setState({
+      threeLists: {
+        who: musicians,
+        why: Object.fromEntries(musicians.map((name) => [name, ['Musicality']])),
+        improvements: [],
+      },
+    });
+
     const { getByLabelText, getByRole } = await render(<ImprovementsList />);
 
     for (const value of ['  Steady time  ', 'Better sight-reading', 'Open improvisation']) {
