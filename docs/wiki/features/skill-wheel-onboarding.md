@@ -236,10 +236,12 @@ Based on the wheel shape, the app suggests focus areas for the first practice cy
 
 ### Stage 7: Completion (1 screen)
 
-- Confirmation that the baseline is saved.
-- The first cycle's focus area(s) are set.
-- Primary CTA: "Start your first session" → transitions to the Practice tab.
-- Secondary: "Explore your Progress" → transitions to the Progress tab (skill wheel view).
+- Confirms baseline saved (FR5.1).
+- Lists selected focus areas if `focusAreas.length > 0` (FR5.2): "Your focus for your first cycle: {name1}, {name2}".
+- Primary CTA "Start your first session" → `router.replace('/(tabs)')` (Practice tab, FR5.3).
+- Secondary CTA "Explore your Progress" → `router.replace('/(tabs)/progress')` (Progress tab, FR5.4).
+- Uses `router.replace` so the onboarding route is removed from the stack — back button from Practice/Progress won't re-enter onboarding.
+- **Persistence contract:** `complete()` must succeed (baseline written, then flag set — AC10 ordering) before the store advances to Stage 7. On failure, the user stays on the current stage and sees an inline error + "Retry" button. The completion screen is never shown with unsaved data.
 
 ### Skippable but encouraged
 
@@ -277,14 +279,7 @@ The skill wheel is a **polar bar / rose chart** with 6 equal 60° wedges — one
 
 ### Shared component constraint
 
-The rose chart component MUST be a single, shared implementation used by:
-- **Onboarding confirmation (Stage 5)** — first-ever view, baseline snapshot.
-- **Skill Wheel Visualization (Progress tab)** — ongoing view, updated over cycles.
-- **Cycle Review** — overlay of current vs. previous cycle.
-
-The component accepts a variable-length array of characteristics as props. Two chart implementations = visual drift = user confusion. One component, props-driven, colocated in `features/progress/`.
-
-**Placement variants:** The same widget appears on the Progress tab and cycle review; only the date stamp and CTA label change between placements.
+*(Consolidated into the main [Architecture Placement](#architecture-placement) section above. The chart lives at `src/shared/components/skill-wheel/SkillWheelChart.tsx` — see the [2026-05-14 chart placement decision](../decisions.md).)*
 
 ## Picking the 3 Weakest Slices
 
@@ -342,8 +337,8 @@ The primary suggestion is always #1 (the absolute lowest). But the user sees all
 | Route file | `app/onboarding.tsx` — single Expo Router route; stage navigation driven by store stage machine, not route transitions |
 | Feature folder | `features/progress/` — React components (onboarding screens) + Zustand store |
 | Shared component | `src/shared/components/skill-wheel/SkillWheelChart.tsx` — the rose chart widget, shared by onboarding and Progress tab |
-| Domain types | `src/domain/onboarding/types.ts` — `Characteristic`, `ThreeLists`, `Baseline`; zero-dependency, consumed by onboarding store, chart, and future Progress/Cycle-Review |
-| Domain logic | `domain/` — Skill wheel calculations (scoring, aggregation, weakest-slice algorithm) |
+| Domain types | `src/domain/onboarding/types.ts` — `Characteristic`, `ThreeLists`, `Baseline`, `OnboardingState`; zero-dependency, consumed by onboarding store, guards, chart, and future Progress/Cycle-Review |
+| Domain logic | `src/domain/onboarding/stages.ts` — stage machine (7 stages, `Stage` type); `src/domain/onboarding/guards.ts` — `canAdvance` and `threeListsComplete` pure navigation guards; plus skill wheel calculations (scoring, aggregation, weakest-slice algorithm) |
 | Native integration | None |
 
 ## UX Principles
@@ -385,9 +380,7 @@ Over time, session-derived scores become the primary data source, and the self-a
 
 ---
 
-## Current Status
-
-**Design corrected (2025-07-18).** The six canonical dimensions have been replaced with user-defined characteristics per the book (Benny Greb's *Effective Practice for Musicians*). The Three Lists exercise (Who → Why → Improvements) followed by characteristic extraction is now the dimension-definition mechanism. The flow has been restructured from 5 stages to 7 stages to accommodate this. Domain functions need updating to accept variable-length characteristic arrays instead of fixed-shape six-dimension objects. No onboarding UI or store logic is implemented yet. The radar chart component is pending.
+**Domain layer, routing, container, and Stage 7 implemented; stages 1–6 pending.** The stage machine (`stages.ts` — 7 stages, `Stage` type), navigation guards (`guards.ts` — `canAdvance` and `threeListsComplete` with 21 boundary/truth-table tests), and shared domain types (`types.ts` — `Characteristic`, `ThreeLists`, `Baseline`, `OnboardingState`) are implemented as pure zero-dependency domain functions. The onboarding store, route (`app/onboarding.tsx` — registered as full-screen modal above the tab bar), container (`OnboardingContainer.tsx` — stage-driven rendering with conditional `<ProgressChrome />` for stages 2–6), persistence layer (`baselineRepository`), and Stage 7 (`CompletionScreen.tsx` — confirms baseline saved, conditionally lists focus areas, uses `router.replace` for Practice/Progress CTAs) are also implemented. Dark theme is forced: `app.json` `userInterfaceStyle: "dark"`, `<StatusBar style="light" />` at route root, `backgroundColor: colors.bgBase` on container. Entry point: Progress tab empty state → `router.push('/onboarding')`. No auto-launch on first run. Stage screens for stages 1–6 are pending. The rose chart component (`SkillWheelChart`) is implemented and shared. Design corrected (2025-07-18): user-defined characteristics via Three Lists → characteristic extraction, not six canonical dimensions.
 
 ## Key Constraints
 
@@ -461,3 +454,6 @@ The component accepts a variable-length array of characteristics as props. Two c
 **Placement:** The chart lives at `src/shared/components/skill-wheel/SkillWheelChart.tsx` — in the shared components directory, NOT in `features/progress/`. This is because both the onboarding flow and the Progress tab consume the chart, and feature folders may not import from each other. See the [2026-05-14 decision](../decisions.md).
 
 **Placement variants:** The same widget appears on the Progress tab and cycle review; only the date stamp and CTA label change between placements.
+
+
+**Update (2026-05-15): Stage 1 (IntroScreen) implemented.** Lives at `src/features/onboarding/stages/IntroScreen.tsx`. Renders an example `<SkillWheelChart characteristics={dummyData} interactive={false} />` with 6 hardcoded characteristics (Tone, Timing, Technique, Repertoire, Improvisation, Ear Training) and scores `[3, 6, 7, 4, 5, 8]` — clear peaks and valleys (FR11.1). Caption: "This is what a skill wheel looks like after assessment." (FR11.4). Value-prop copy in musician-friendly language (FR1.1, FR1.3). "Get Started" → `store.next()` (advances to Stage 2). "Skip for now" → `router.back()` (dismisses onboarding, no baseline saved, Progress tab empty state shown — FR1.5). Dark `colors.bgBase` background, no progress chrome (intro stage, Orchestration FR3.1). Stages 2–6 remain pending.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wireframe</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #1f2937;
+        background: #fff;
+        line-height: 1.5;
+      }
+      /* Layout helper for full-page layouts. Grid + place-items avoids
+         the flex centering trap where a child with max-width but no
+         width collapses to min-content. The inner element gets
+         width: 100% so the agent's max-width caps as expected. */
+      .page-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+      .page-wrap > * {
+        width: 100%;
+      }
+      .placeholder {
+        background: #e5e7eb;
+        color: #6b7280;
+        padding: 1rem;
+        border: 1px dashed #9ca3af;
+        text-align: center;
+        font-size: 0.875rem;
+      }
+      .box {
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+      .gray-box {
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>

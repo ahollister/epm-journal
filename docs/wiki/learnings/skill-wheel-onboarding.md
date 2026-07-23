@@ -44,27 +44,12 @@ Saves the baseline assessment, sets the first cycle's focus areas, and transitio
 | Aspect | Location |
 |--------|----------|
 | Tab | **Progress** (bottom tab navigator) |
-| Route file | Likely a modal or stack screen within the Progress tab |
+| Route file | `app/onboarding.tsx` — single Expo Router route; stage navigation driven by store stage machine, not route transitions |
 | Feature folder | `features/progress/` — React components + Zustand store |
-| Domain logic | `domain/` — Skill wheel calculations (reused for baseline scoring) |
+| Domain logic | `src/domain/onboarding/stages.ts` — stage machine (7 stages, `Stage` type); `src/domain/onboarding/guards.ts` — `canAdvance` and `threeListsComplete` pure navigation guards (21 tests); plus skill wheel calculations (reused for baseline scoring) |
 | Native integration | None |
 
-### Store bridging
-
-The Progress feature's Zustand store:
-1. Holds the in-progress self-assessment ratings during onboarding.
-2. Calls the skill wheel calculation domain functions to produce the baseline wheel.
-3. Persists the completed baseline and first-cycle focus areas.
-4. Exposes onboarding state (current step, ratings, completion status) to UI components.
-
-### Relationship to other features
-
-- **Skill Wheel Visualization** — the same radar chart component used for ongoing progress visualization should render the onboarding preview. This ensures visual consistency between the baseline view and all future wheel views.
-- **Cycle Review** — the onboarding baseline is the reference point for the first cycle review's deltas. If onboarding is skipped, the first cycle review has no baseline and must either prompt onboarding or use the first self-assessment as the baseline.
-
-## Current Status
-
-**UX design in progress.** The flow is defined (see above). No onboarding UI or store logic is implemented yet. The skill wheel calculation domain functions (reused by onboarding) are in place.
+**Domain layer, routing, container, store, persistence, and Stage 7 implemented; stages 1–6 pending.** The stage machine (`stages.ts`), navigation guards (`guards.ts` — `canAdvance` and `threeListsComplete` with 21 boundary/truth-table tests), and shared domain types (`types.ts` — including `OnboardingState`) are implemented as pure zero-dependency domain functions. The onboarding store, route (`app/onboarding.tsx` — full-screen modal above tab bar), container (`OnboardingContainer.tsx` — stage-driven rendering, `<ProgressChrome />` for stages 2–6 only, forced dark theme), persistence layer (`baselineRepository`), and Stage 7 (`CompletionScreen.tsx` — confirms baseline saved, conditionally lists focus areas, `router.replace` CTAs for Practice and Progress) are also in place. Entry point: Progress tab empty state → `router.push('/onboarding')`; no auto-launch on first run. Stage screens for stages 1–6 are pending. The rose chart component (`SkillWheelChart`) is implemented and shared across onboarding confirmation, Progress tab, and cycle review.
 
 ## Key Constraints
 
@@ -73,22 +58,17 @@ The Progress feature's Zustand store:
 - Onboarding is skippable but the app must handle the "no baseline" case gracefully in cycle review.
 - The Progress feature folder may not import from other feature folders.
 
-## Related Pages
-
 - [Skill Wheel Visualization](./skill-wheel-visualization.md) — the main wheel view; shares the radar chart component and domain functions
 - [Cycle Review](./cycle-review.md) — consumes the onboarding baseline for deltas
 - [SMART Goal Tracking](./smart-goal-tracking.md) — focus areas selected during onboarding become the basis for first-cycle goals
 - [Project Context](../project-context.md) — full onboarding flow specification
 - [Glossary](../glossary.md) — Skill wheel, Progress tab
 
-**Part of the Skill Wheel + Onboarding epic.** The flow is defined (see above and the [full feature spec](../features/skill-wheel-onboarding.md)). No onboarding UI or store logic is implemented yet. The skill wheel calculation domain functions (reused by onboarding) are in place. The shared radar chart component is pending.
+**Part of the Skill Wheel + Onboarding epic.** The route (`app/onboarding.tsx`), container (`OnboardingContainer.tsx`), store, persistence layer, and domain functions are implemented. Stage screens (UI components for each of the 7 stages) are pending. The rose chart component (`SkillWheelChart`) is implemented and shared.
 
 Re-baselining, session-derived scores, and profile editing are explicitly out of scope for this epic — onboarding is a one-time flow only.
 
 **Book grounding:** The onboarding flow is directly grounded in Benny Greb's *Effective Practice Method* book — the 3 Lists exercise (Who/Why/Improvements), characteristic extraction as "peeling the onion," the wheel as a "car tire" metaphor, and the weakest-slice focus strategy. See the [full feature spec](../features/skill-wheel-onboarding.md#book-grounding) for the complete book-to-app mapping.
-
-
----
 
 ## Chart Model History
 
@@ -99,3 +79,6 @@ Prior models (all superseded):
 - Stacked horizontal bars (2025-07-18, recorded in error)
 
 See [Decisions](../decisions.md) for the full history and the 2026-05-13 authoritative decision.
+
+
+**Update (2026-05-15): Stage 1 (IntroScreen) implemented** at `src/features/onboarding/stages/IntroScreen.tsx`. Shows an example rose chart with 6 hardcoded dummy characteristics and scores `[3, 6, 7, 4, 5, 8]`. "Get Started" advances to Stage 2; "Skip for now" dismisses onboarding with no data persisted. Dark background, no progress chrome. Stages 2–6 remain pending.

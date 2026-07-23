@@ -1542,3 +1542,479 @@ Diff:
 ```diff
 
 ```
+---
+
+**2026-07-19T21:14:43.836Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added geometry module to architecture status tables and documented the geometry separation pattern in skill-wheel-chart-implementation.md (constants, functions, hitWedgePath touch-target rationale, pure-function testability).
+
+Old hash: cd39316ca18e3e618bfd7623db91a1b841adb4716317fc21ef2f0bf5be9d737d
+New hash: 9a11883c280f2e2bf98ab50a698d79e9de6ccf1337620749496c01befd084be2
+Entry ID: e52b9fb7-9880-4a7e-8c97-96035518fbce
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:14:43.839Z** - `learnings/skill-wheel-chart-implementation.md` (lifecycle.task-completed)
+
+Summary: Added geometry module to architecture status tables and documented the geometry separation pattern in skill-wheel-chart-implementation.md (constants, functions, hitWedgePath touch-target rationale, pure-function testability).
+
+Old hash: abab9cf4b7b66f6b2d8a74e23e25fc07849fb6922e5ddd2d6a5d2843c4b65cea
+New hash: 68a96a718ce6648ffa2c824d2faafc5d3e9450156b69783cf5f5b5e9d5267cdb
+Entry ID: 34380617-09df-4a37-a6b1-bbf9f24ad3ae
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:26:04.035Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added palette.ts to architecture status table and glossary; documented defensive rendering patterns (React.memo, useMemo, empty-state, missing scores, N>12 warning, score clamping, centre dot) in skill-wheel-chart-implementation.md.
+
+Old hash: 9a11883c280f2e2bf98ab50a698d79e9de6ccf1337620749496c01befd084be2
+New hash: c7d80b3f97d2d1580457c13cd5c972fc6d874b88ea5034d61c5c72d4ef199170
+Entry ID: 58484611-38d2-46b4-bda1-e08f1439e52e
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:26:04.036Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added palette.ts to architecture status table and glossary; documented defensive rendering patterns (React.memo, useMemo, empty-state, missing scores, N>12 warning, score clamping, centre dot) in skill-wheel-chart-implementation.md.
+
+Old hash: 49bfe453a4fe0534921c04189985b5ea7e4ec3ee549776f087c58a2cd1f62767
+New hash: b8a3fe6023c26675e85ff35db195f6905c941903b8a3f6a2c43deb463da0c503
+Entry ID: d3051c0f-3146-48f1-8709-6015ab76d30c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:26:04.036Z** - `learnings/skill-wheel-chart-implementation.md` (lifecycle.task-completed)
+
+Summary: Added palette.ts to architecture status table and glossary; documented defensive rendering patterns (React.memo, useMemo, empty-state, missing scores, N>12 warning, score clamping, centre dot) in skill-wheel-chart-implementation.md.
+
+Old hash: 68a96a718ce6648ffa2c824d2faafc5d3e9450156b69783cf5f5b5e9d5267cdb
+New hash: 60d42bf06b33d88799f2d943945e596cc60d3a67279efd39a9f507e7ad433f29
+Entry ID: 8cb18d3d-fde3-4afb-872b-1882b6421dcb
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:33:11.538Z** - `learnings/skill-wheel-chart-implementation.md` (lifecycle.task-completed)
+
+Summary: Added "Weakest-Area Card Sub-Component" section to learnings/skill-wheel-chart-implementation.md documenting the integrated card, parent-delegated weakest determination via highlightIds[0], react-native-svg LinearGradient for CTA fill, and defensive "No data yet" fallback.
+
+Old hash: 60d42bf06b33d88799f2d943945e596cc60d3a67279efd39a9f507e7ad433f29
+New hash: 5dd9f78a1ceab17123f7fa08ea717d013b4d74b739af6bfc268f1b1573bd9eb2
+Entry ID: 380439db-f47c-480a-9288-6606c750cd93
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:42:17.429Z** - `learnings/skill-wheel-chart-implementation.md` (lifecycle.task-completed)
+
+Summary: Added "Interactive Mode" section to chart implementation learnings page documenting the `interactive` prop gating, `hitWedgePath` overlays for iOS HIG compliance, `pressedId` state for 0.5→0.75 fillOpacity press feedback, and edge-case handling (missing callback, rapid taps, no Reanimated).
+
+Old hash: 5dd9f78a1ceab17123f7fa08ea717d013b4d74b739af6bfc268f1b1573bd9eb2
+New hash: 6404bc7725279a94600460b125441c6c25ebf8fe77b9af33580f6fda2f2324e2
+Entry ID: 005f0af4-91df-41f9-b643-ca0037dcccb7
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:49:53.712Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: c7d80b3f97d2d1580457c13cd5c972fc6d874b88ea5034d61c5c72d4ef199170
+New hash: a1d531b278a9c81ecfc3651665ea5edc4fe944238110f442574ae58115d85f9c
+Entry ID: 8182a053-450a-4c54-b7ce-57a8d413818f
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:49:53.713Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: b8a3fe6023c26675e85ff35db195f6905c941903b8a3f6a2c43deb463da0c503
+New hash: 39d27a0fec1a234fc422d7239cde569896f9d95ed920a21c3b79c629a9ff00f7
+Entry ID: 921dbf05-6d89-48e1-81c4-c6e1d6510f4c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:49:53.713Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: 8f97fed9f8c9298cd5b18f39a1cbc198276a24176c58cdace6850d2526746cf1
+New hash: dbaecfd5ef1b0d781a9c3ac185f5df610984e8420120aac2385eca0f133f93ab
+Entry ID: 11f211c6-03ed-419c-b0c6-7cc022a4b288
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T21:49:53.713Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: no summary
+
+Old hash: 354026d74d45308c322789850b19df58881983ede022186841628fd88312b17e
+New hash: b83c499a16e8b3db9ed702734767959ca6356d9bb333c2d6f7fe710e4067c9ae
+Entry ID: 2edb0c70-ce28-441a-9b11-b6b4989b449c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:00:10.880Z** - `learnings/onboarding-store.md` (lifecycle.task-completed)
+
+Summary: Created learnings/onboarding-store.md capturing the store's design decisions (subStep cursor, wedge-tap navigation, complete() failure semantics, no persist middleware, ratings on Characteristic.score) and updated index.md to list the new page.
+
+Old hash: (none)
+New hash: f8651b49923325011dfdaa994d04772a8726203d625ed7183b130fd125e16528
+Entry ID: 99d28d36-9bdb-4025-84f8-7096458c70e8
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:00:10.880Z** - `index.md` (lifecycle.task-completed)
+
+Summary: Created learnings/onboarding-store.md capturing the store's design decisions (subStep cursor, wedge-tap navigation, complete() failure semantics, no persist middleware, ratings on Characteristic.score) and updated index.md to list the new page.
+
+Old hash: 164dec14fa3375969894219736c2a0282f3a914e9cd160a14d81dddde2e5a381
+New hash: 2e1282c94f35dccb1182580409e6424a3524aae7fc91ca2785fa8bb130687a8b
+Entry ID: dae535b6-7a9f-4715-8eda-c81138380979
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:08:24.913Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (fixed stale app.json userInterfaceStyle bullet, added OnboardingContainer to status table), features/skill-wheel-onboarding.md (updated Current Status with container, dark theme, and entry point details), and learnings/skill-wheel-onboarding.md (updated Current Status and corrected stale "no UI or store logic" claim in Related Pages section).
+
+Old hash: a1d531b278a9c81ecfc3651665ea5edc4fe944238110f442574ae58115d85f9c
+New hash: 8456e9112538599bd86a28996c3f088544b5423fa42ad662ca1715126f9e770c
+Entry ID: 071e357a-0e21-45d0-b12b-bf61806cb775
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:08:24.913Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (fixed stale app.json userInterfaceStyle bullet, added OnboardingContainer to status table), features/skill-wheel-onboarding.md (updated Current Status with container, dark theme, and entry point details), and learnings/skill-wheel-onboarding.md (updated Current Status and corrected stale "no UI or store logic" claim in Related Pages section).
+
+Old hash: dbaecfd5ef1b0d781a9c3ac185f5df610984e8420120aac2385eca0f133f93ab
+New hash: 0f236639749e23cc4ae4bb3881eb2fb16829f40b9d2c0b1e32aedebc50a10e0a
+Entry ID: fdbacda8-b558-44f2-9e34-37a624e6bd97
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:08:24.913Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (fixed stale app.json userInterfaceStyle bullet, added OnboardingContainer to status table), features/skill-wheel-onboarding.md (updated Current Status with container, dark theme, and entry point details), and learnings/skill-wheel-onboarding.md (updated Current Status and corrected stale "no UI or store logic" claim in Related Pages section).
+
+Old hash: b83c499a16e8b3db9ed702734767959ca6356d9bb333c2d6f7fe710e4067c9ae
+New hash: 734fc1cce0cd1ecb19dd8e9f10d500897b1036766e8f39ee7f555459c815c71e
+Entry ID: 78b2e447-adb7-42d7-ad12-1dd6f3345622
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:20:23.852Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added ProgressChrome row to architecture.md implementation status table; cleaned up outdated duplicate content in the Current Implementation Status section.
+
+Old hash: 8456e9112538599bd86a28996c3f088544b5423fa42ad662ca1715126f9e770c
+New hash: aba403943c49082075490901d47195d1b0eb9db8a7e73304a4c1746c6f81e664
+Entry ID: 9abdc410-f06b-4cfe-a2d5-077067852f8f
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:36:59.605Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes — geometry module and tests already documented in architecture and chart implementation learnings
+
+Old hash: (none)
+New hash: 63da078685e786792e02216e6a26706921dca469e451c9ed8b16928915129adb
+Entry ID: ee7ff1f2-9423-4555-b89c-c6480e58edca
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:45:46.706Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 3b00b1c1-d50d-4ea9-8227-bf25b2588d28
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T22:53:12.033Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 182200c4-5dea-4b4e-82c0-f03b738199e9
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:04:08.415Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 157149f4-7eab-4067-9fe0-b17dd25f538d
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:09:38.179Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 6352b1e6-0ffc-48d2-9457-7a25ee9d63dc
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:19:22.762Z** - `learnings/onboarding-store.md` (lifecycle.task-completed)
+
+Summary: Updated learnings/onboarding-store.md: named shouldDismiss flag explicitly, noted reset() clears it, expanded test count from 6 to 48 with updated coverage details.
+
+Old hash: f8651b49923325011dfdaa994d04772a8726203d625ed7183b130fd125e16528
+New hash: a25029da714020f59f2b82f2ffeffce924a10f3bb0a8b3aad51e9f9575a492d8
+Entry ID: 536d116a-5396-4d17-a257-81220089d840
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:25:54.015Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 1d34bfa0-e928-4aba-875e-78025b2dcca9
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:31:21.625Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 608e85da-a224-4613-93a8-dbfb1f9a898b
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:42:29.988Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added CompletionScreen to architecture status table, updated Stage 7 description with implementation details (router.replace, retry-on-failure), updated status blurbs in feature spec and learnings to reflect Stage 7 as implemented, and updated store test coverage to include completion/retry and invalid-rating tests.
+
+Old hash: aba403943c49082075490901d47195d1b0eb9db8a7e73304a4c1746c6f81e664
+New hash: fdca8c68816dcecbe04a6b6cb753c5a0e88b77c36581fdc38498fe9d3df3df28
+Entry ID: 1a679a8d-e023-4947-b30a-c73be2d36ea4
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:42:29.989Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added CompletionScreen to architecture status table, updated Stage 7 description with implementation details (router.replace, retry-on-failure), updated status blurbs in feature spec and learnings to reflect Stage 7 as implemented, and updated store test coverage to include completion/retry and invalid-rating tests.
+
+Old hash: 0f236639749e23cc4ae4bb3881eb2fb16829f40b9d2c0b1e32aedebc50a10e0a
+New hash: a7dc508d313a9da57a016fdbd1b8384af6a2439fc37c5dc8d9e4e0f2bcd862dd
+Entry ID: 62e38b70-eecb-4b11-a122-136e354b6118
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:42:29.989Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added CompletionScreen to architecture status table, updated Stage 7 description with implementation details (router.replace, retry-on-failure), updated status blurbs in feature spec and learnings to reflect Stage 7 as implemented, and updated store test coverage to include completion/retry and invalid-rating tests.
+
+Old hash: 734fc1cce0cd1ecb19dd8e9f10d500897b1036766e8f39ee7f555459c815c71e
+New hash: aa46e75304ebe77871ca3f984332480ec20a7083dec54a03116a7a40fc17b33b
+Entry ID: b1407ac1-69af-445d-b210-cf283738d8d0
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:42:29.989Z** - `learnings/onboarding-store.md` (lifecycle.task-completed)
+
+Summary: Added CompletionScreen to architecture status table, updated Stage 7 description with implementation details (router.replace, retry-on-failure), updated status blurbs in feature spec and learnings to reflect Stage 7 as implemented, and updated store test coverage to include completion/retry and invalid-rating tests.
+
+Old hash: a25029da714020f59f2b82f2ffeffce924a10f3bb0a8b3aad51e9f9575a492d8
+New hash: 979989adc5128de95be48894cf612c2634493b4f37645edeb3dbb868fbb875fe
+Entry ID: e7c25821-c3d6-404b-a1ec-a20f4e1f8207
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-19T23:53:47.527Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md implementation status table: OnboardingContainer row now documents BackHandler listener (stages 2-7 consume, stage 1 passes through); Onboarding route row now documents gestureEnabled: false (iOS swipe-back blocked) and intro Skip button.
+
+Old hash: fdca8c68816dcecbe04a6b6cb753c5a0e88b77c36581fdc38498fe9d3df3df28
+New hash: b4e73a005dbc278ee0163d0cba8a958ba16d37b4677c312874c3d92727c5b77b
+Entry ID: 1af3a56f-7b5a-454e-8007-3c4eed6c579c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-20T21:58:04.438Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: bd600dc0-2a2e-4e3b-a192-485421949110
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T21:49:57.634Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Recorded Stage 1 (IntroScreen) implementation in architecture.md table, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md — example rose chart with dummy data, skip/get-started actions, dark background, no progress chrome.
+
+Old hash: b4e73a005dbc278ee0163d0cba8a958ba16d37b4677c312874c3d92727c5b77b
+New hash: b0187ada6cfb84a1afa986de6f10660d84af98a3487535b1eb7a9cee81b03e35
+Entry ID: 825d421b-9574-4081-ba10-5c3ddbb90159
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T21:49:57.636Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Recorded Stage 1 (IntroScreen) implementation in architecture.md table, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md — example rose chart with dummy data, skip/get-started actions, dark background, no progress chrome.
+
+Old hash: a7dc508d313a9da57a016fdbd1b8384af6a2439fc37c5dc8d9e4e0f2bcd862dd
+New hash: 2c44812ab0ffaef76101265563b80bac98c04690466d7b19541bf3fae956b1a0
+Entry ID: c4ecd174-d8ce-427b-adbc-b91cb9022e12
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T21:49:57.636Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Recorded Stage 1 (IntroScreen) implementation in architecture.md table, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md — example rose chart with dummy data, skip/get-started actions, dark background, no progress chrome.
+
+Old hash: aa46e75304ebe77871ca3f984332480ec20a7083dec54a03116a7a40fc17b33b
+New hash: fde9d5aa3ae8c462ba94aa3051c1999c50b225ebec0dd5862ebbe21e1691eec8
+Entry ID: e2de3f2c-0dcd-4bff-a4da-33b1e23940fa
+
+Diff:
+```diff
+
+```
