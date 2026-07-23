@@ -26,9 +26,11 @@ export interface OnboardingState extends DomainOnboardingState {
   back(): void;
   goToCharacteristicRating(id: string): void;
   addCharacteristic(name: string): void;
+  addImprovement(improvement: string): void;
   addWhoName(name: string): void;
   renameCharacteristic(id: string, name: string): void;
   removeCharacteristic(id: string): void;
+  removeImprovement(index: number): void;
   removeWhoName(index: number): void;
   rateCharacteristic(id: string, score: number): void;
   setWhyQuality(name: string, index: number, value: string): void;
@@ -187,6 +189,21 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     });
   },
 
+  addImprovement: (improvement) => {
+    const trimmedImprovement = improvement.trim();
+
+    if (trimmedImprovement.length === 0) {
+      return;
+    }
+
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        improvements: [...state.threeLists.improvements, trimmedImprovement],
+      },
+    }));
+  },
+
   renameCharacteristic: (id, name) => {
     const trimmedName = name.trim();
 
@@ -235,6 +252,17 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       threeLists: {
         ...state.threeLists,
         who: state.threeLists.who.filter((_, itemIndex) => itemIndex !== index),
+      },
+    }));
+  },
+
+  removeImprovement: (index) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        improvements: state.threeLists.improvements.filter(
+          (_, itemIndex) => itemIndex !== index,
+        ),
       },
     }));
   },
