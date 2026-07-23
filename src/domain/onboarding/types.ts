@@ -11,6 +11,11 @@ export interface ThreeLists {
   improvements: string[];
 }
 
+export interface OnboardingState {
+  threeLists: ThreeLists;
+  characteristics: Characteristic[];
+}
+
 export interface Baseline {
   version: 1;
   characteristics: Characteristic[];
