@@ -3,6 +3,13 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useOnboardingStore } from '@/features/onboarding/store';
 import { colors, fontSize, space } from '@/shared/lib/theme';
 import { CompletionScreen } from './stages/CompletionScreen';
+import { ImprovementsList } from './stages/ImprovementsList';
+import { WhoList } from './stages/WhoList';
+import { WhyList } from './stages/WhyList';
+
+export { WhoList } from './stages/WhoList';
+export { WhyList } from './stages/WhyList';
+export { ImprovementsList } from './stages/ImprovementsList';
 
 interface StageScreenProps {
   title: string;
@@ -43,21 +50,6 @@ function StageScreen({
       ) : null}
     </View>
   );
-}
-
-export function WhoList() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Who am I?" description="Start with your musical identity and current abilities." onAction={next} />;
-}
-
-export function WhyList() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Why am I practicing?" description="Capture what motivates you to make music." onAction={next} />;
-}
-
-export function ImprovementsList() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="What do I want to improve?" description="Name the areas where you want to grow." onAction={next} />;
 }
 
 export function Characteristics() {
