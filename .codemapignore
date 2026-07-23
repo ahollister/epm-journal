@@ -1,0 +1,22 @@
+# .codemapignore - patterns to exclude from codemap snapshots.
+# Same syntax as .gitignore.
+#
+# .git/ and .agentdeck/ are always excluded regardless of this file.
+# .gitignore at the project root is also respected, so anything you've
+# already gitignored (target/, __pycache__/, vendor/, dist/, etc.) is
+# excluded for free - no need to duplicate it here.
+
+# Dependencies - never indexed. Seeded here rather than left to .gitignore
+# so they're excluded even when the project's .gitignore lives in a
+# subdirectory, as with an app nested a level down.
+node_modules/
+
+# agentdeck transient worktrees - per-task checked-out copies of the project
+worktrees/
+
+# OS / editor noise (often not in .gitignore)
+.DS_Store
+Thumbs.db
+
+# Add codemap-specific exclusions below - files you DO want git-tracked
+# but DO NOT want walked by codemap snapshots.

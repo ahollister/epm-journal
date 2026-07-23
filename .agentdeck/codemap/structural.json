@@ -1,0 +1,324 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "app/_layout.tsx",
+      "language": "typescript",
+      "loc": 10,
+      "symbols": [
+        {
+          "name": "RootLayout",
+          "kind": "function",
+          "exported": true,
+          "line": 3
+        }
+      ],
+      "imports": [
+        {
+          "raw": "expo-router",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "Stack"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "app/(tabs)/_layout.tsx",
+      "language": "typescript",
+      "loc": 12,
+      "symbols": [
+        {
+          "name": "TabsLayout",
+          "kind": "function",
+          "exported": true,
+          "line": 3
+        }
+      ],
+      "imports": [
+        {
+          "raw": "expo-router",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "Tabs"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "app/(tabs)/index.tsx",
+      "language": "typescript",
+      "loc": 27,
+      "symbols": [
+        {
+          "name": "PracticeScreen",
+          "kind": "function",
+          "exported": true,
+          "line": 3
+        }
+      ],
+      "imports": [
+        {
+          "raw": "react-native",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "StyleSheet",
+            "Text",
+            "View"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "app/(tabs)/journal.tsx",
+      "language": "typescript",
+      "loc": 27,
+      "symbols": [
+        {
+          "name": "JournalScreen",
+          "kind": "function",
+          "exported": true,
+          "line": 3
+        }
+      ],
+      "imports": [
+        {
+          "raw": "react-native",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "StyleSheet",
+            "Text",
+            "View"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "app/(tabs)/progress.tsx",
+      "language": "typescript",
+      "loc": 27,
+      "symbols": [
+        {
+          "name": "ProgressScreen",
+          "kind": "function",
+          "exported": true,
+          "line": 3
+        }
+      ],
+      "imports": [
+        {
+          "raw": "react-native",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "StyleSheet",
+            "Text",
+            "View"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "metro.config.js",
+      "language": "javascript",
+      "loc": 11,
+      "symbols": [],
+      "imports": [],
+      "importedBy": []
+    },
+    {
+      "path": "src/domain/onboarding/types.ts",
+      "language": "typescript",
+      "loc": 21,
+      "symbols": [],
+      "imports": [],
+      "importedBy": [
+        "src/features/onboarding/data/baselineRepository.ts"
+      ]
+    },
+    {
+      "path": "src/features/onboarding/data/baselineRepository.ts",
+      "language": "typescript",
+      "loc": 36,
+      "symbols": [],
+      "imports": [
+        {
+          "raw": "@/domain/onboarding/types",
+          "resolved": "src/domain/onboarding/types.ts",
+          "external": false,
+          "names": [
+            "type",
+            "Baseline"
+          ]
+        },
+        {
+          "raw": "@/shared/lib/storage",
+          "resolved": "src/shared/lib/storage.ts",
+          "external": false,
+          "names": [
+            "getJson",
+            "remove",
+            "setJson"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "src/shared/lib/id.ts",
+      "language": "typescript",
+      "loc": 4,
+      "symbols": [],
+      "imports": [
+        {
+          "raw": "nanoid/non-secure",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "nanoid"
+          ]
+        }
+      ],
+      "importedBy": []
+    },
+    {
+      "path": "src/shared/lib/storage.ts",
+      "language": "typescript",
+      "loc": 25,
+      "symbols": [],
+      "imports": [
+        {
+          "raw": "@react-native-async-storage/async-storage",
+          "resolved": null,
+          "external": true,
+          "names": [
+            "AsyncStorage"
+          ]
+        }
+      ],
+      "importedBy": [
+        "src/features/onboarding/data/baselineRepository.ts"
+      ]
+    },
+    {
+      "path": "src/shared/lib/theme.ts",
+      "language": "typescript",
+      "loc": 58,
+      "symbols": [],
+      "imports": [],
+      "importedBy": []
+    }
+  ],
+  "rankings": {
+    "topFanIn": [
+      {
+        "path": "src/domain/onboarding/types.ts",
+        "count": 1
+      },
+      {
+        "path": "src/shared/lib/storage.ts",
+        "count": 1
+      }
+    ],
+    "topFanOut": [
+      {
+        "path": "src/features/onboarding/data/baselineRepository.ts",
+        "count": 2
+      }
+    ],
+    "topByExports": [
+      {
+        "path": "app/_layout.tsx",
+        "count": 1
+      },
+      {
+        "path": "app/(tabs)/_layout.tsx",
+        "count": 1
+      },
+      {
+        "path": "app/(tabs)/index.tsx",
+        "count": 1
+      },
+      {
+        "path": "app/(tabs)/journal.tsx",
+        "count": 1
+      },
+      {
+        "path": "app/(tabs)/progress.tsx",
+        "count": 1
+      }
+    ],
+    "topByLoc": [
+      {
+        "path": "src/shared/lib/theme.ts",
+        "loc": 58
+      },
+      {
+        "path": "src/features/onboarding/data/baselineRepository.ts",
+        "loc": 36
+      },
+      {
+        "path": "app/(tabs)/index.tsx",
+        "loc": 27
+      },
+      {
+        "path": "app/(tabs)/journal.tsx",
+        "loc": 27
+      },
+      {
+        "path": "app/(tabs)/progress.tsx",
+        "loc": 27
+      },
+      {
+        "path": "src/shared/lib/storage.ts",
+        "loc": 25
+      },
+      {
+        "path": "src/domain/onboarding/types.ts",
+        "loc": 21
+      },
+      {
+        "path": "app/(tabs)/_layout.tsx",
+        "loc": 12
+      },
+      {
+        "path": "metro.config.js",
+        "loc": 11
+      },
+      {
+        "path": "app/_layout.tsx",
+        "loc": 10
+      },
+      {
+        "path": "src/shared/lib/id.ts",
+        "loc": 4
+      }
+    ]
+  },
+  "symbolIndex": {
+    "RootLayout": [
+      "app/_layout.tsx:3"
+    ],
+    "TabsLayout": [
+      "app/(tabs)/_layout.tsx:3"
+    ],
+    "PracticeScreen": [
+      "app/(tabs)/index.tsx:3"
+    ],
+    "JournalScreen": [
+      "app/(tabs)/journal.tsx:3"
+    ],
+    "ProgressScreen": [
+      "app/(tabs)/progress.tsx:3"
+    ]
+  }
+}

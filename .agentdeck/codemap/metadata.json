@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-07-20T11:18:53.559Z",
+  "gitCommit": "b8e260f816bd81c3087a9bb7f89141c5e88560f0",
+  "gitBranch": "main",
+  "parserVersion": "1.0.0",
+  "queriesVersion": "aider-0.85.0",
+  "fileCounts": {
+    "total": 11,
+    "byLanguage": {
+      "typescript": 10,
+      "javascript": 1
+    }
+  },
+  "elapsedMs": 451,
+  "partial": true,
+  "parserSkippedFiles": [],
+  "parserWarnings": [
+    "tsconfig not found: /Users/adam.hollister/Dev/personal/epm-journal/expo/tsconfig.base.json"
+  ]
+}
