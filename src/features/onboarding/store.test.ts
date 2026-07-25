@@ -88,6 +88,23 @@ describe('useOnboardingStore', () => {
     });
   });
 
+  it('does not let an unrated characteristic skip to the next rating', () => {
+    useOnboardingStore.setState({
+      stage: 'rating',
+      characteristics: [
+        { id: 'first', name: 'First', order: 1 },
+        { id: 'second', name: 'Second', order: 2 },
+      ],
+    });
+
+    useOnboardingStore.getState().next();
+
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
+      subStep: 0,
+    });
+  });
+
   it('requests dismissal when going back from intro without clearing data', () => {
     useOnboardingStore.setState({
       characteristics: [characteristics[0]],

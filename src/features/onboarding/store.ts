@@ -98,13 +98,6 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   next: () => {
     const state = get();
 
-    const subStepLimit = nextSubStepLimit(state.stage, state);
-
-    if (subStepLimit !== null && state.subStep < subStepLimit) {
-      set({ subStep: state.subStep + 1 });
-      return;
-    }
-
     if (state.stage === 'rating') {
       const currentCharacteristic = orderedCharacteristics(state.characteristics)[
         state.subStep
@@ -113,7 +106,12 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       if (currentCharacteristic?.score == null) {
         return;
       }
-    } else if (!canAdvance(state.stage, state)) {
+    }
+
+    const subStepLimit = nextSubStepLimit(state.stage, state);
+
+    if (subStepLimit !== null && state.subStep < subStepLimit) {
+      set({ subStep: state.subStep + 1 });
       return;
     }
 
