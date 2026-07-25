@@ -2018,3 +2018,129 @@ Diff:
 ```diff
 
 ```
+---
+
+**2026-07-23T22:19:22.522Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation table and appended status updates to both feature spec pages noting partial Stage 2 progress.
+
+Old hash: b0187ada6cfb84a1afa986de6f10660d84af98a3487535b1eb7a9cee81b03e35
+New hash: 8638e212ca6ef1686d439fef0425da4c6e310f0866065fc81b359d35190219d3
+Entry ID: 2f6fc18d-25eb-4121-8088-56f0cbdc5637
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:19:22.523Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation table and appended status updates to both feature spec pages noting partial Stage 2 progress.
+
+Old hash: 2c44812ab0ffaef76101265563b80bac98c04690466d7b19541bf3fae956b1a0
+New hash: 54c197712e481da655ec1c82e8e49760383c9abaa1f1abe9cbaf188eab98d758
+Entry ID: 514900c9-469a-4a88-b85c-3e3408d7c0b2
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:19:22.523Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation table and appended status updates to both feature spec pages noting partial Stage 2 progress.
+
+Old hash: fde9d5aa3ae8c462ba94aa3051c1999c50b225ebec0dd5862ebbe21e1691eec8
+New hash: 4be0f6c99fcf163fff28560d6deba3364e89fa79aa5273af343a63f98b97f9a1
+Entry ID: 7a9e8bcb-9f1a-4f21-9cbf-ed5b46fc875f
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:27:37.172Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added WhyList implementation row to architecture.md table, appended WhyList status updates to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md.
+
+Old hash: 8638e212ca6ef1686d439fef0425da4c6e310f0866065fc81b359d35190219d3
+New hash: 4e2e1e46def833e104abdb565e278f34d56e95d1e21b7355d11c7c44604492e4
+Entry ID: fb5f05c5-84a3-47bb-be16-61808df262f9
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:27:37.173Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added WhyList implementation row to architecture.md table, appended WhyList status updates to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md.
+
+Old hash: 54c197712e481da655ec1c82e8e49760383c9abaa1f1abe9cbaf188eab98d758
+New hash: aa7a90e47fa1891859d71337c199342450608b73346d321ff8bef042b9288394
+Entry ID: e9966431-9f60-4c52-ba31-d7cb32f776aa
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:27:37.173Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added WhyList implementation row to architecture.md table, appended WhyList status updates to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md.
+
+Old hash: 4be0f6c99fcf163fff28560d6deba3364e89fa79aa5273af343a63f98b97f9a1
+New hash: d26c1cff0ca4cb6a7e395efeacad2e628f7e950080b37abfe3672b9ab0605340
+Entry ID: 093dff05-0556-43d7-89e8-b2e66bb7302c
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:37:26.422Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status table and appended implementation update blocks to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md, marking Stage 2 (Three Lists) as fully implemented.
+
+Old hash: 4e2e1e46def833e104abdb565e278f34d56e95d1e21b7355d11c7c44604492e4
+New hash: 70f1c02dbd0a0d0cb735f74905423e7f1d9300d169f465876f183a51609f9ab8
+Entry ID: 72a65c1b-d91e-48af-ad6d-bae3d94ea170
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:37:26.423Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status table and appended implementation update blocks to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md, marking Stage 2 (Three Lists) as fully implemented.
+
+Old hash: aa7a90e47fa1891859d71337c199342450608b73346d321ff8bef042b9288394
+New hash: cb1cded396d5c042fb509d82aa93906c991ab38b0c599b134df52551c5779463
+Entry ID: 93fc0a4a-4a05-4a6c-9ff0-7b13692712aa
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-23T22:37:26.423Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status table and appended implementation update blocks to features/skill-wheel-onboarding.md and learnings/skill-wheel-onboarding.md, marking Stage 2 (Three Lists) as fully implemented.
+
+Old hash: d26c1cff0ca4cb6a7e395efeacad2e628f7e950080b37abfe3672b9ab0605340
+New hash: d0423fd01232446bd8e948501e9c4028ae823786097f420b88af3aa16a21803f
+Entry ID: 00e4d224-cbe7-4555-a0c7-5952831ab395
+
+Diff:
+```diff
+
+```

@@ -82,3 +82,12 @@ See [Decisions](../decisions.md) for the full history and the 2026-05-13 authori
 
 
 **Update (2026-05-15): Stage 1 (IntroScreen) implemented** at `src/features/onboarding/stages/IntroScreen.tsx`. Shows an example rose chart with 6 hardcoded dummy characteristics and scores `[3, 6, 7, 4, 5, 8]`. "Get Started" advances to Stage 2; "Skip for now" dismisses onboarding with no data persisted. Dark background, no progress chrome. Stages 2–6 remain pending.
+
+
+**Update (2026-05-15): Stage 2 WhoList (sub-step 1 of Three Lists) implemented** at `src/features/onboarding/stages/WhoList.tsx`. Local 3-min timer (component-local — not in store/domain, not persisted), 5–10 name list with add/remove, prompts, and sub-step-aware navigation to WhyList. Remaining Stage 2 sub-steps and Stages 3–6 remain pending.
+
+
+**Update (2026-05-15): Stage 2 WhyList (sub-step 2 of Three Lists) implemented** at `src/features/onboarding/stages/WhyList.tsx`. Two-column layout with Who names on left, quality inputs on right. Unlimited "Add another" per Who. Completion gate: every Who needs ≥1 non-empty Why; empty rows flagged; "Next" disabled until all pass. Data in `store.threeLists.why` as `Record<string, string[]>` keyed by name (duplicate-name sharing accepted for V1). Whitespace-only rejected. "Next" → ImprovementsList; "Back" → WhoList. Remaining sub-step (ImprovementsList) and Stages 3–6 remain pending.
+
+
+**Update (2026-05-15): Stage 2 ImprovementsList (sub-step 3 of Three Lists) implemented** at `src/features/onboarding/stages/ImprovementsList.tsx`. Buffet framing, add/delete list mechanics, min 3 gate, soft nudge at ~12 items (non-blocking), no timer. Stored in `store.threeLists.improvements` (`string[]`). Stage boundary: "Next" revalidates all three lists via `canAdvance('threeLists', state)` before advancing to Characteristics. **All three Stage 2 sub-screens (WhoList, WhyList, ImprovementsList) are now implemented.** Stages 3–6 remain pending.
