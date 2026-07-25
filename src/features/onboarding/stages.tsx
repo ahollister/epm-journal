@@ -5,6 +5,7 @@ import { colors, fontSize, space } from '@/shared/lib/theme';
 import { CompletionScreen } from './stages/CompletionScreen';
 import { CharacteristicDefinition } from './stages/CharacteristicDefinition';
 import { CharacteristicReview } from './stages/CharacteristicReview';
+import { ConfirmationScreen } from './stages/ConfirmationScreen';
 import { RatingScreen } from './stages/RatingScreen';
 
 interface StageScreenProps {
@@ -73,22 +74,7 @@ export function Rating() {
 }
 
 export function Confirm() {
-  const next = useOnboardingStore((state) => state.next);
-  const complete = useOnboardingStore((state) => state.complete);
-  const error = useOnboardingStore((state) => state.error);
-  const onAction = error
-    ? () => void complete().catch(() => undefined)
-    : next;
-
-  return (
-    <StageScreen
-      title="Review your wheel"
-      description="Take a look at the shape of your starting point."
-      actionLabel={error ? 'Retry' : undefined}
-      error={error}
-      onAction={onAction}
-    />
-  );
+  return <ConfirmationScreen />;
 }
 
 export function Focus() {
