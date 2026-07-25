@@ -6,6 +6,7 @@ import { CompletionScreen } from './stages/CompletionScreen';
 import { CharacteristicDefinition } from './stages/CharacteristicDefinition';
 import { CharacteristicReview } from './stages/CharacteristicReview';
 import { ConfirmationScreen } from './stages/ConfirmationScreen';
+import { FocusSelectionScreen } from './stages/FocusSelectionScreen';
 import { RatingScreen } from './stages/RatingScreen';
 
 interface StageScreenProps {
@@ -78,19 +79,7 @@ export function Confirm() {
 }
 
 export function Focus() {
-  const complete = useOnboardingStore((state) => state.complete);
-  const error = useOnboardingStore((state) => state.error);
-  const onAction = () => void complete().catch(() => undefined);
-
-  return (
-    <StageScreen
-      title="Choose a focus"
-      description="Pick where you want to begin your first practice cycle."
-      actionLabel={error ? 'Retry' : 'Save my baseline'}
-      error={error}
-      onAction={onAction}
-    />
-  );
+  return <FocusSelectionScreen />;
 }
 
 export function Complete() {
