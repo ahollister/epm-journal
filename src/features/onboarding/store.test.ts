@@ -60,25 +60,27 @@ describe('useOnboardingStore', () => {
     expect(useOnboardingStore.getState().characteristics).toEqual([]);
   });
 
-  it('gates stage advancement and resets the sub-step at boundaries', () => {
+  it('advances through three-list substeps before gating the stage transition', () => {
     useOnboardingStore.setState({ stage: 'threeLists' });
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'threeLists',
-      subStep: 0,
+      subStep: 1,
     });
 
-    useOnboardingStore.setState({
-      threeLists: completeThreeLists,
-      subStep: 0,
-    });
-    useOnboardingStore.getState().next();
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'threeLists',
       subStep: 2,
     });
 
+    useOnboardingStore.getState().next();
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'threeLists',
+      subStep: 2,
+    });
+
+    useOnboardingStore.setState({ threeLists: completeThreeLists });
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'characteristics',
