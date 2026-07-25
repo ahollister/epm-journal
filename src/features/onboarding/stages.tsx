@@ -4,6 +4,7 @@ import { useOnboardingStore } from '@/features/onboarding/store';
 import { colors, fontSize, space } from '@/shared/lib/theme';
 import { CompletionScreen } from './stages/CompletionScreen';
 import { CharacteristicDefinition } from './stages/CharacteristicDefinition';
+import { CharacteristicReview } from './stages/CharacteristicReview';
 
 interface StageScreenProps {
   title: string;
@@ -62,7 +63,8 @@ export function ImprovementsList() {
 }
 
 export function Characteristics() {
-  return <CharacteristicDefinition />;
+  const subStep = useOnboardingStore((state) => state.subStep);
+  return subStep === 1 ? <CharacteristicReview /> : <CharacteristicDefinition />;
 }
 
 export function Rating() {

@@ -26,6 +26,7 @@ export interface OnboardingState extends DomainOnboardingState {
   back(): void;
   goToCharacteristicRating(id: string): void;
   addCharacteristic(name: string): void;
+  moveCharacteristic(id: string, direction: 'up' | 'down'): void;
   renameCharacteristic(id: string, name: string): void;
   removeCharacteristic(id: string): void;
   rateCharacteristic(id: string, score: number): void;
@@ -63,11 +64,27 @@ function initialState(): Pick<
   };
 }
 
+function orderedCharacteristics(
+  characteristics: DomainOnboardingState['characteristics'],
+) {
+  return [...characteristics].sort((a, b) => a.order - b.order);
+}
+
+function withSequentialOrder(
+  characteristics: DomainOnboardingState['characteristics'],
+) {
+  return orderedCharacteristics(characteristics).map((characteristic, index) => ({
+    ...characteristic,
+    order: index + 1,
+  }));
+}
+
 function nextSubStepLimit(stage: Stage, state: OnboardingState): number | null {
   switch (stage) {
     case 'threeLists':
       return 2;
     case 'characteristics':
+      return 1;
     case 'rating':
       return Math.max(state.characteristics.length - 1, 0);
     default:
@@ -162,6 +179,36 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     }));
   },
 
+  moveCharacteristic: (id, direction) => {
+    set((state) => {
+      const characteristics = orderedCharacteristics(state.characteristics);
+      const index = characteristics.findIndex(
+        (characteristic) => characteristic.id === id,
+      );
+      const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+      if (
+        index === -1 ||
+        targetIndex < 0 ||
+        targetIndex >= characteristics.length
+      ) {
+        return state;
+      }
+
+      [characteristics[index], characteristics[targetIndex]] = [
+        characteristics[targetIndex],
+        characteristics[index],
+      ];
+
+      return {
+        characteristics: characteristics.map((characteristic, itemIndex) => ({
+          ...characteristic,
+          order: itemIndex + 1,
+        })),
+      };
+    });
+  },
+
   renameCharacteristic: (id, name) => {
     const trimmedName = name.trim();
 
@@ -180,12 +227,9 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
 
   removeCharacteristic: (id) => {
     set((state) => {
-      const characteristics = state.characteristics
-        .filter((characteristic) => characteristic.id !== id)
-        .map((characteristic, index) => ({
-          ...characteristic,
-          order: index + 1,
-        }));
+      const characteristics = withSequentialOrder(
+        state.characteristics.filter((characteristic) => characteristic.id !== id),
+      );
 
       const isCursorStage =
         state.stage === 'characteristics' || state.stage === 'rating';
