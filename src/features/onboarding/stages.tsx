@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useOnboardingStore } from '@/features/onboarding/store';
 import { colors, fontSize, space } from '@/shared/lib/theme';
 import { CompletionScreen } from './stages/CompletionScreen';
+import { CharacteristicDefinition } from './stages/CharacteristicDefinition';
 
 interface StageScreenProps {
   title: string;
@@ -61,8 +62,7 @@ export function ImprovementsList() {
 }
 
 export function Characteristics() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Your characteristics" description="Turn your lists into the skills your wheel will track." onAction={next} />;
+  return <CharacteristicDefinition />;
 }
 
 export function Rating() {
