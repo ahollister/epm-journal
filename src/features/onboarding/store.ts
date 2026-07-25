@@ -98,7 +98,15 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   next: () => {
     const state = get();
 
-    if (!canAdvance(state.stage, state)) {
+    if (state.stage === 'rating') {
+      const currentCharacteristic = orderedCharacteristics(state.characteristics)[
+        state.subStep
+      ];
+
+      if (currentCharacteristic?.score == null) {
+        return;
+      }
+    } else if (!canAdvance(state.stage, state)) {
       return;
     }
 
@@ -106,6 +114,10 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
 
     if (subStepLimit !== null && state.subStep < subStepLimit) {
       set({ subStep: state.subStep + 1 });
+      return;
+    }
+
+    if (!canAdvance(state.stage, state)) {
       return;
     }
 
@@ -137,6 +149,11 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       return;
     }
 
+    if (state.stage === 'rating') {
+      set({ stage: 'characteristics', subStep: 1 });
+      return;
+    }
+
     const stageIndex = STAGES.indexOf(state.stage);
     const previousStage = STAGES[stageIndex - 1];
 
@@ -148,7 +165,7 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   },
 
   goToCharacteristicRating: (id) => {
-    const index = get().characteristics.findIndex(
+    const index = orderedCharacteristics(get().characteristics).findIndex(
       (characteristic) => characteristic.id === id,
     );
 
