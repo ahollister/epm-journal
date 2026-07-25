@@ -9,6 +9,7 @@ export interface FlatWheelResult {
 
 export function detectFlatWheel(
   characteristics: Characteristic[],
+  threshold = FLAT_WHEEL_THRESHOLD,
 ): FlatWheelResult {
   const scores = characteristics
     .map((characteristic) => characteristic.score)
@@ -16,7 +17,7 @@ export function detectFlatWheel(
   const range = scores.length > 0 ? Math.max(...scores) - Math.min(...scores) : 0;
 
   return {
-    isFlat: range <= FLAT_WHEEL_THRESHOLD,
+    isFlat: range <= threshold,
     range,
   };
 }
