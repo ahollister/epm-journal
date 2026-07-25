@@ -5,6 +5,7 @@ import { colors, fontSize, space } from '@/shared/lib/theme';
 import { CompletionScreen } from './stages/CompletionScreen';
 import { CharacteristicDefinition } from './stages/CharacteristicDefinition';
 import { CharacteristicReview } from './stages/CharacteristicReview';
+import { RatingScreen } from './stages/RatingScreen';
 
 interface StageScreenProps {
   title: string;
@@ -68,8 +69,7 @@ export function Characteristics() {
 }
 
 export function Rating() {
-  const next = useOnboardingStore((state) => state.next);
-  return <StageScreen title="Rate your skills" description="Give each characteristic an honest starting score." onAction={next} />;
+  return <RatingScreen />;
 }
 
 export function Confirm() {
