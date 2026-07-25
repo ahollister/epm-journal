@@ -23,5 +23,6 @@ This is the project wiki - an agent-curated knowledge base for everything the te
     - [Test Harness & Dependency Setup](./learnings/test-harness-setup.md) — jest-expo preset, nanoid/non-secure for Hermes, transformIgnorePatterns for ESM, react-test-renderer@19.0.0 pin.
     - [Persistence Layer](./learnings/persistence-layer.md) — two-layer design (AsyncStorage wrapper + baselineRepository), versioned keys, atomic-ish writes, defensive reads.
     - [Onboarding Store](./learnings/onboarding-store.md) — Zustand store design: subStep cursor, wedge-tap navigation, complete() as single persistence point, no persist middleware.
+    - [Progress Tab & Baseline Gating](./learnings/progress-tab-baseline-gating.md) — `useBaseline` hook with `useFocusEffect`, empty state, and the FR6.3 graceful degradation seam.
   - **Feature Deep Dives** — comprehensive single-page specs with all book content:
     - [Skill Wheel + Onboarding](./features/skill-wheel-onboarding.md) — complete feature spec: Who/Why/Improvements, characteristic extraction, self-rating rules, wheel visualization, weakest-slice algorithm, and full onboarding flow.

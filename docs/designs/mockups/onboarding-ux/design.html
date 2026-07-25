@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #1f2937;
+        background: #fff;
+        line-height: 1.5;
+      }
+      /* Layout helper for full-page layouts. Grid + place-items avoids
+         the flex centering trap where a child with max-width but no
+         width collapses to min-content. The inner element gets
+         width: 100% so the agent's max-width caps as expected. */
+      .page-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+      .page-wrap > * {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
