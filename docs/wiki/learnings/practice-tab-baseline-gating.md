@@ -13,7 +13,7 @@ The Practice tab mirrors the exact three-state pattern from the Progress tab, ch
 | State | Condition | Rendered |
 |-------|-----------|----------|
 | Loading | `loading === true` | Centered `<ActivityIndicator>` |
-| No baseline | `baseline === null && !loading` | "Get your baseline" heading, value-prop copy about the 10-minute self-assessment, "Start Onboarding" button → `router.push('/onboarding')` |
+| No baseline | `baseline === null && !loading` | "Create your baseline" heading, value-prop copy about the 10-minute self-assessment, "Start Onboarding" button → `router.push('/onboarding')` |
 | Baseline present | `baseline !== null` | Existing "Session runner coming soon" placeholder (will be replaced by the actual Practice experience in a future arc) |
 
 ## Styling
