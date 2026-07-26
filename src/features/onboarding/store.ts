@@ -26,10 +26,16 @@ export interface OnboardingState extends DomainOnboardingState {
   back(): void;
   goToCharacteristicRating(id: string): void;
   addCharacteristic(name: string): void;
+  addImprovement(improvement: string): void;
+  addWhoName(name: string): void;
   moveCharacteristic(id: string, direction: 'up' | 'down'): void;
   renameCharacteristic(id: string, name: string): void;
   removeCharacteristic(id: string): void;
+  removeImprovement(index: number): void;
+  removeWhoName(index: number): void;
   rateCharacteristic(id: string, score: number): void;
+  setWhyQuality(name: string, index: number, value: string): void;
+  addWhyQuality(name: string): void;
   setFocusAreas(ids: string[]): void;
   complete(): Promise<void>;
   reset(): void;
@@ -106,8 +112,6 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       if (currentCharacteristic?.score == null) {
         return;
       }
-    } else if (!canAdvance(state.stage, state)) {
-      return;
     }
 
     const subStepLimit = nextSubStepLimit(state.stage, state);
@@ -196,6 +200,42 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     }));
   },
 
+  addWhoName: (name) => {
+    const trimmedName = name.trim();
+
+    if (trimmedName.length === 0) {
+      return;
+    }
+
+    set((state) => {
+      if (state.threeLists.who.length >= 10) {
+        return state;
+      }
+
+      return {
+        threeLists: {
+          ...state.threeLists,
+          who: [...state.threeLists.who, trimmedName],
+        },
+      };
+    });
+  },
+
+  addImprovement: (improvement) => {
+    const trimmedImprovement = improvement.trim();
+
+    if (trimmedImprovement.length === 0) {
+      return;
+    }
+
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        improvements: [...state.threeLists.improvements, trimmedImprovement],
+      },
+    }));
+  },
+
   moveCharacteristic: (id, direction) => {
     set((state) => {
       const characteristics = orderedCharacteristics(state.characteristics);
@@ -266,11 +306,65 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     });
   },
 
+  removeWhoName: (index) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        who: state.threeLists.who.filter((_, itemIndex) => itemIndex !== index),
+      },
+    }));
+  },
+
+  removeImprovement: (index) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        improvements: state.threeLists.improvements.filter(
+          (_, itemIndex) => itemIndex !== index,
+        ),
+      },
+    }));
+  },
+
   rateCharacteristic: (id, score) => {
     set((state) => ({
       characteristics: state.characteristics.map((characteristic) =>
         characteristic.id === id ? { ...characteristic, score } : characteristic,
       ),
+    }));
+  },
+
+  setWhyQuality: (name, index, value) => {
+    set((state) => {
+      const qualities = [...(state.threeLists.why[name] ?? [])];
+
+      while (qualities.length <= index) {
+        qualities.push('');
+      }
+
+      qualities[index] = value;
+
+      return {
+        threeLists: {
+          ...state.threeLists,
+          why: {
+            ...state.threeLists.why,
+            [name]: qualities,
+          },
+        },
+      };
+    });
+  },
+
+  addWhyQuality: (name) => {
+    set((state) => ({
+      threeLists: {
+        ...state.threeLists,
+        why: {
+          ...state.threeLists.why,
+          [name]: [...(state.threeLists.why[name] ?? ['']), ''],
+        },
+      },
     }));
   },
 

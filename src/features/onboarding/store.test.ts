@@ -60,19 +60,14 @@ describe('useOnboardingStore', () => {
     expect(useOnboardingStore.getState().characteristics).toEqual([]);
   });
 
-  it('gates stage advancement and resets the sub-step at boundaries', () => {
+  it('advances through three-list substeps before gating the stage transition', () => {
     useOnboardingStore.setState({ stage: 'threeLists' });
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'threeLists',
-      subStep: 0,
+      subStep: 1,
     });
 
-    useOnboardingStore.setState({
-      threeLists: completeThreeLists,
-      subStep: 0,
-    });
-    useOnboardingStore.getState().next();
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'threeLists',
@@ -81,7 +76,31 @@ describe('useOnboardingStore', () => {
 
     useOnboardingStore.getState().next();
     expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'threeLists',
+      subStep: 2,
+    });
+
+    useOnboardingStore.setState({ threeLists: completeThreeLists });
+    useOnboardingStore.getState().next();
+    expect(useOnboardingStore.getState()).toMatchObject({
       stage: 'characteristics',
+      subStep: 0,
+    });
+  });
+
+  it('does not let an unrated characteristic skip to the next rating', () => {
+    useOnboardingStore.setState({
+      stage: 'rating',
+      characteristics: [
+        { id: 'first', name: 'First', order: 1 },
+        { id: 'second', name: 'Second', order: 2 },
+      ],
+    });
+
+    useOnboardingStore.getState().next();
+
+    expect(useOnboardingStore.getState()).toMatchObject({
+      stage: 'rating',
       subStep: 0,
     });
   });
