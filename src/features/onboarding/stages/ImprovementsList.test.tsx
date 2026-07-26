@@ -112,4 +112,3 @@ describe('ImprovementsList', () => {
     expect(useOnboardingStore.getState().threeLists.improvements).toHaveLength(13);
   });
 });
-

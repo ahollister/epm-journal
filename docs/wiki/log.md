@@ -2027,6 +2027,14 @@ Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation t
 Old hash: b0187ada6cfb84a1afa986de6f10660d84af98a3487535b1eb7a9cee81b03e35
 New hash: 8638e212ca6ef1686d439fef0425da4c6e310f0866065fc81b359d35190219d3
 Entry ID: 2f6fc18d-25eb-4121-8088-56f0cbdc5637
+=======
+**2026-07-25T19:18:30.756Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added CharacteristicDefinition (Stage 3) to the architecture implementation table; updated feature spec and learnings pages to reflect the free-text entry + inspiration panel implementation (not the PRD's "select list items + app suggests formulation" model); updated all status notes to reflect Stage 1 and Stage 3 Part A as implemented.
+
+Old hash: b0187ada6cfb84a1afa986de6f10660d84af98a3487535b1eb7a9cee81b03e35
+New hash: 5419fbf44b8cec80d0a820db53c173d2a172704cc37458c33c0782e802fa0d34
+Entry ID: a080c98f-ad1f-4da6-939d-45b863e56be6
 
 Diff:
 ```diff
@@ -2041,6 +2049,14 @@ Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation t
 Old hash: 2c44812ab0ffaef76101265563b80bac98c04690466d7b19541bf3fae956b1a0
 New hash: 54c197712e481da655ec1c82e8e49760383c9abaa1f1abe9cbaf188eab98d758
 Entry ID: 514900c9-469a-4a88-b85c-3e3408d7c0b2
+=======
+**2026-07-25T19:18:30.758Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added CharacteristicDefinition (Stage 3) to the architecture implementation table; updated feature spec and learnings pages to reflect the free-text entry + inspiration panel implementation (not the PRD's "select list items + app suggests formulation" model); updated all status notes to reflect Stage 1 and Stage 3 Part A as implemented.
+
+Old hash: 2c44812ab0ffaef76101265563b80bac98c04690466d7b19541bf3fae956b1a0
+New hash: 80ffe156480596a663840fd192f50dc4e02147b39e9155adbd6c823701a76583
+Entry ID: d8baa31f-2c14-43a7-98fb-1007f02d157f
 
 Diff:
 ```diff
@@ -2055,6 +2071,14 @@ Summary: Added WhoList (Stage 2, sub-step 1) to architecture.md implementation t
 Old hash: fde9d5aa3ae8c462ba94aa3051c1999c50b225ebec0dd5862ebbe21e1691eec8
 New hash: 4be0f6c99fcf163fff28560d6deba3364e89fa79aa5273af343a63f98b97f9a1
 Entry ID: 7a9e8bcb-9f1a-4f21-9cbf-ed5b46fc875f
+=======
+**2026-07-25T19:18:30.767Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added CharacteristicDefinition (Stage 3) to the architecture implementation table; updated feature spec and learnings pages to reflect the free-text entry + inspiration panel implementation (not the PRD's "select list items + app suggests formulation" model); updated all status notes to reflect Stage 1 and Stage 3 Part A as implemented.
+
+Old hash: fde9d5aa3ae8c462ba94aa3051c1999c50b225ebec0dd5862ebbe21e1691eec8
+New hash: 5c67166d90c8be82023bbee6fcf7685f0d0181ef99a1900e8092908e4cff2692
+Entry ID: 1afcc3ab-4afb-4562-b797-7975de4937f2
 
 Diff:
 ```diff
@@ -2069,6 +2093,14 @@ Summary: Added WhyList implementation row to architecture.md table, appended Why
 Old hash: 8638e212ca6ef1686d439fef0425da4c6e310f0866065fc81b359d35190219d3
 New hash: 4e2e1e46def833e104abdb565e278f34d56e95d1e21b7355d11c7c44604492e4
 Entry ID: fb5f05c5-84a3-47bb-be16-61808df262f9
+=======
+**2026-07-25T19:30:07.047Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (added CharacteristicReview row to implementation table), features/skill-wheel-onboarding.md (marked Stage 3 Part B as implemented with full details), learnings/onboarding-store.md (documented reorderCharacteristics/renameCharacteristic/removeCharacteristic actions), and learnings/skill-wheel-onboarding.md (status update).
+
+Old hash: 5419fbf44b8cec80d0a820db53c173d2a172704cc37458c33c0782e802fa0d34
+New hash: fb594cfce5fcd84151671cd56131591c0291870a244f4a3709896edd41e68c66
+Entry ID: b9f98bf6-2e22-46ce-8c55-057a46832ff3
 
 Diff:
 ```diff
@@ -2083,6 +2115,14 @@ Summary: Added WhyList implementation row to architecture.md table, appended Why
 Old hash: 54c197712e481da655ec1c82e8e49760383c9abaa1f1abe9cbaf188eab98d758
 New hash: aa7a90e47fa1891859d71337c199342450608b73346d321ff8bef042b9288394
 Entry ID: e9966431-9f60-4c52-ba31-d7cb32f776aa
+=======
+**2026-07-25T19:30:07.048Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (added CharacteristicReview row to implementation table), features/skill-wheel-onboarding.md (marked Stage 3 Part B as implemented with full details), learnings/onboarding-store.md (documented reorderCharacteristics/renameCharacteristic/removeCharacteristic actions), and learnings/skill-wheel-onboarding.md (status update).
+
+Old hash: 80ffe156480596a663840fd192f50dc4e02147b39e9155adbd6c823701a76583
+New hash: 3118a35a6fd9c6eee48692250f5dd0d48176b89a0fc2ca871708f7e0f4797ea0
+Entry ID: 409c0b86-2b1b-4243-960d-72a6a6cadcf4
 
 Diff:
 ```diff
@@ -2097,6 +2137,14 @@ Summary: Added WhyList implementation row to architecture.md table, appended Why
 Old hash: 4be0f6c99fcf163fff28560d6deba3364e89fa79aa5273af343a63f98b97f9a1
 New hash: d26c1cff0ca4cb6a7e395efeacad2e628f7e950080b37abfe3672b9ab0605340
 Entry ID: 093dff05-0556-43d7-89e8-b2e66bb7302c
+=======
+**2026-07-25T19:30:07.048Z** - `learnings/onboarding-store.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (added CharacteristicReview row to implementation table), features/skill-wheel-onboarding.md (marked Stage 3 Part B as implemented with full details), learnings/onboarding-store.md (documented reorderCharacteristics/renameCharacteristic/removeCharacteristic actions), and learnings/skill-wheel-onboarding.md (status update).
+
+Old hash: 979989adc5128de95be48894cf612c2634493b4f37645edeb3dbb868fbb875fe
+New hash: 91f5e916e1bbf6000074b5e1223684af1654717fd4a910c8fa6e89911589ab03
+Entry ID: 08584c79-38cf-47d2-a3be-00f5e68b3d85
 
 Diff:
 ```diff
@@ -2111,6 +2159,14 @@ Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status t
 Old hash: 4e2e1e46def833e104abdb565e278f34d56e95d1e21b7355d11c7c44604492e4
 New hash: 70f1c02dbd0a0d0cb735f74905423e7f1d9300d169f465876f183a51609f9ab8
 Entry ID: 72a65c1b-d91e-48af-ad6d-bae3d94ea170
+=======
+**2026-07-25T19:30:07.048Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Updated architecture.md (added CharacteristicReview row to implementation table), features/skill-wheel-onboarding.md (marked Stage 3 Part B as implemented with full details), learnings/onboarding-store.md (documented reorderCharacteristics/renameCharacteristic/removeCharacteristic actions), and learnings/skill-wheel-onboarding.md (status update).
+
+Old hash: 5c67166d90c8be82023bbee6fcf7685f0d0181ef99a1900e8092908e4cff2692
+New hash: 23ca4cb3d79dca4792afdc46ccd1f93d942f231f00235e5566d6c9b0c229509f
+Entry ID: be40c765-30e1-4cba-9932-71a932ce266f
 
 Diff:
 ```diff
@@ -2125,6 +2181,14 @@ Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status t
 Old hash: aa7a90e47fa1891859d71337c199342450608b73346d321ff8bef042b9288394
 New hash: cb1cded396d5c042fb509d82aa93906c991ab38b0c599b134df52551c5779463
 Entry ID: 93fc0a4a-4a05-4a6c-9ff0-7b13692712aa
+=======
+**2026-07-25T19:39:11.581Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Marked Stage 4 (RatingScreen) as implemented in architecture.md and features/skill-wheel-onboarding.md, fixed stale UX Principles #1 (4-band rubric → "visualize your 10"), added glossary entries for ratingPrompts/midpoint nudge/SCALE_MIN-SCALE_MAX, and documented Stage 4 sequential-rating navigation in onboarding-store.md.
+
+Old hash: 3118a35a6fd9c6eee48692250f5dd0d48176b89a0fc2ca871708f7e0f4797ea0
+New hash: 8510c8ab5d4b5cfba5e3fae6ff9fcf96781afa31e08fb9ced941f611ce0c7e97
+Entry ID: 3484629e-e06f-4545-9e85-a1b2d9e03d22
 
 Diff:
 ```diff
@@ -2139,6 +2203,238 @@ Summary: Added ImprovementsList (Stage 2 sub-step 3) to architecture.md status t
 Old hash: d26c1cff0ca4cb6a7e395efeacad2e628f7e950080b37abfe3672b9ab0605340
 New hash: d0423fd01232446bd8e948501e9c4028ae823786097f420b88af3aa16a21803f
 Entry ID: 00e4d224-cbe7-4555-a0c7-5952831ab395
+=======
+**2026-07-25T19:39:11.583Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Marked Stage 4 (RatingScreen) as implemented in architecture.md and features/skill-wheel-onboarding.md, fixed stale UX Principles #1 (4-band rubric → "visualize your 10"), added glossary entries for ratingPrompts/midpoint nudge/SCALE_MIN-SCALE_MAX, and documented Stage 4 sequential-rating navigation in onboarding-store.md.
+
+Old hash: fb594cfce5fcd84151671cd56131591c0291870a244f4a3709896edd41e68c66
+New hash: 40d1fec514eadc6f0a44a13b9945cf263374c0bd81c87b1b1a73529b93585d64
+Entry ID: 2a13e5a2-5f29-4ff0-a566-73f6ca21d344
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:39:11.584Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Marked Stage 4 (RatingScreen) as implemented in architecture.md and features/skill-wheel-onboarding.md, fixed stale UX Principles #1 (4-band rubric → "visualize your 10"), added glossary entries for ratingPrompts/midpoint nudge/SCALE_MIN-SCALE_MAX, and documented Stage 4 sequential-rating navigation in onboarding-store.md.
+
+Old hash: 39d27a0fec1a234fc422d7239cde569896f9d95ed920a21c3b79c629a9ff00f7
+New hash: ca73c4cda755f2c5db992c18bffc103c911bda43f223ea6f57a904b01089876b
+Entry ID: 9b1e6e37-cdfa-4d7e-9619-b88527fa32bf
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:39:11.584Z** - `learnings/onboarding-store.md` (lifecycle.task-completed)
+
+Summary: Marked Stage 4 (RatingScreen) as implemented in architecture.md and features/skill-wheel-onboarding.md, fixed stale UX Principles #1 (4-band rubric → "visualize your 10"), added glossary entries for ratingPrompts/midpoint nudge/SCALE_MIN-SCALE_MAX, and documented Stage 4 sequential-rating navigation in onboarding-store.md.
+
+Old hash: 91f5e916e1bbf6000074b5e1223684af1654717fd4a910c8fa6e89911589ab03
+New hash: 28cf857518b035073106cbe2de284c96f5ffacf713caeb27743d27e9e68109ff
+Entry ID: d43dbdf5-93d4-4e9c-867c-2033808615d7
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:46:50.363Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added Stage 5 (ConfirmationScreen) implementation details across four pages: updated the Stage 5 section in features/skill-wheel-onboarding.md to describe the actual interactive coxcomb + flat-wheel nudge implementation, appended status updates to architecture.md and learnings/skill-wheel-onboarding.md, and added detectFlatWheel and flat-wheel nudge to glossary.md.
+
+Old hash: cb1cded396d5c042fb509d82aa93906c991ab38b0c599b134df52551c5779463
+New hash: b83c42863a7f7c04b6c63da0c44ecca77242fbfa653140325607f5a03217f7bd
+Entry ID: 3a92ff4b-7752-44db-85da-a79ff255ee13
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:46:50.363Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added Stage 5 (ConfirmationScreen) implementation details across four pages: updated the Stage 5 section in features/skill-wheel-onboarding.md to describe the actual interactive coxcomb + flat-wheel nudge implementation, appended status updates to architecture.md and learnings/skill-wheel-onboarding.md, and added detectFlatWheel and flat-wheel nudge to glossary.md.
+
+Old hash: 70f1c02dbd0a0d0cb735f74905423e7f1d9300d169f465876f183a51609f9ab8
+New hash: 93ab597eb2d3c5700d8c9edc199f4944dac8eb2241447673be7cb99a932730e4
+Entry ID: d191cf50-86be-4df2-b6d6-17b8c556386a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:46:50.364Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added Stage 5 (ConfirmationScreen) implementation details across four pages: updated the Stage 5 section in features/skill-wheel-onboarding.md to describe the actual interactive coxcomb + flat-wheel nudge implementation, appended status updates to architecture.md and learnings/skill-wheel-onboarding.md, and added detectFlatWheel and flat-wheel nudge to glossary.md.
+
+Old hash: ca73c4cda755f2c5db992c18bffc103c911bda43f223ea6f57a904b01089876b
+New hash: 164cdcde2264c15cdf361659371afdcf4f342f94ea6fb833e2983c6575c414d7
+Entry ID: 51e9f8fe-3bdf-4a6d-b2b0-e523b8b3c970
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:46:50.364Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added Stage 5 (ConfirmationScreen) implementation details across four pages: updated the Stage 5 section in features/skill-wheel-onboarding.md to describe the actual interactive coxcomb + flat-wheel nudge implementation, appended status updates to architecture.md and learnings/skill-wheel-onboarding.md, and added detectFlatWheel and flat-wheel nudge to glossary.md.
+
+Old hash: d0423fd01232446bd8e948501e9c4028ae823786097f420b88af3aa16a21803f
+New hash: dde2ec278394ab27b92b8259970009b6f336178e7e39d51e5f69890ca963018c
+Entry ID: 7bd3b986-ecbb-4f0f-8795-724eb08152e0
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:55:54.731Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added Stage 6 (FocusSelectionScreen) implementation notes to architecture.md, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md; added 6 new glossary terms (FocusSelectionScreen, rankCharacteristics, pickWeakestSlices, Passive tip, Cap-2 selection, ranking.ts).
+
+Old hash: 93ab597eb2d3c5700d8c9edc199f4944dac8eb2241447673be7cb99a932730e4
+New hash: 1f93bbf02eebfe3d45b4963e4677e12390c819c14140209886301de548456cd4
+Entry ID: f0e29a33-b26c-42a7-9ae6-6802efcf6a84
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:55:54.732Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added Stage 6 (FocusSelectionScreen) implementation notes to architecture.md, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md; added 6 new glossary terms (FocusSelectionScreen, rankCharacteristics, pickWeakestSlices, Passive tip, Cap-2 selection, ranking.ts).
+
+Old hash: b83c42863a7f7c04b6c63da0c44ecca77242fbfa653140325607f5a03217f7bd
+New hash: 156565f5d73c17617674204f6b41e6ba6e25a42666ef92fdf2e99c744d92e960
+Entry ID: 15eb1f91-8b3c-4095-84b1-ad45e5f49021
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:55:54.732Z** - `learnings/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added Stage 6 (FocusSelectionScreen) implementation notes to architecture.md, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md; added 6 new glossary terms (FocusSelectionScreen, rankCharacteristics, pickWeakestSlices, Passive tip, Cap-2 selection, ranking.ts).
+
+Old hash: dde2ec278394ab27b92b8259970009b6f336178e7e39d51e5f69890ca963018c
+New hash: c6b4083b2f6b4fd4c91e7ded61a9c225e4a7286e33df7fe0f4542cf7569ce2a8
+Entry ID: d86089ce-d965-43ad-a6c0-3312a97077aa
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T19:55:54.733Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added Stage 6 (FocusSelectionScreen) implementation notes to architecture.md, features/skill-wheel-onboarding.md, and learnings/skill-wheel-onboarding.md; added 6 new glossary terms (FocusSelectionScreen, rankCharacteristics, pickWeakestSlices, Passive tip, Cap-2 selection, ranking.ts).
+
+Old hash: 164cdcde2264c15cdf361659371afdcf4f342f94ea6fb833e2983c6575c414d7
+New hash: 1568726137353534d79412d2a86dab728bc4d19ac28a14e79dfbf4827b77ec64
+Entry ID: 9a3a3bf9-6eaf-4ce8-9794-83c11f0ba292
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:04:18.313Z** - `glossary.md` (lifecycle.task-completed)
+
+Summary: Added `useBaseline` hook to glossary, appended Progress tab + useBaseline implementation updates to architecture.md and features/skill-wheel-onboarding.md (conservative mode due to merge conflicts), created new learnings page `progress-tab-baseline-gating.md` documenting the useFocusEffect pattern and FR6.3 graceful degradation seam, and updated index.md Pages list.
+
+Old hash: 1568726137353534d79412d2a86dab728bc4d19ac28a14e79dfbf4827b77ec64
+New hash: 8d99e32184f0c145e35a76ee6af3081e4419eb69645e34ebdea3400ea3aec39e
+Entry ID: 28e12c8c-f077-48ac-aeff-29bdc7610f7e
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:04:18.313Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added `useBaseline` hook to glossary, appended Progress tab + useBaseline implementation updates to architecture.md and features/skill-wheel-onboarding.md (conservative mode due to merge conflicts), created new learnings page `progress-tab-baseline-gating.md` documenting the useFocusEffect pattern and FR6.3 graceful degradation seam, and updated index.md Pages list.
+
+Old hash: 1f93bbf02eebfe3d45b4963e4677e12390c819c14140209886301de548456cd4
+New hash: c8f79a071bb478fe5e8543c6e4fc523846d5e1e72458d233d7729e4c2dd28629
+Entry ID: e07c1034-1b3d-481f-9845-c5e8830ee398
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:04:18.314Z** - `features/skill-wheel-onboarding.md` (lifecycle.task-completed)
+
+Summary: Added `useBaseline` hook to glossary, appended Progress tab + useBaseline implementation updates to architecture.md and features/skill-wheel-onboarding.md (conservative mode due to merge conflicts), created new learnings page `progress-tab-baseline-gating.md` documenting the useFocusEffect pattern and FR6.3 graceful degradation seam, and updated index.md Pages list.
+
+Old hash: 156565f5d73c17617674204f6b41e6ba6e25a42666ef92fdf2e99c744d92e960
+New hash: fbcccbc69f726c5f146da7a90f34772c0fcf75c92828c987d0b52a09cc6177df
+Entry ID: 7bb6bf77-c7d1-49ca-9cca-2683c2db2626
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:04:18.314Z** - `learnings/progress-tab-baseline-gating.md` (lifecycle.task-completed)
+
+Summary: Added `useBaseline` hook to glossary, appended Progress tab + useBaseline implementation updates to architecture.md and features/skill-wheel-onboarding.md (conservative mode due to merge conflicts), created new learnings page `progress-tab-baseline-gating.md` documenting the useFocusEffect pattern and FR6.3 graceful degradation seam, and updated index.md Pages list.
+
+Old hash: (none)
+New hash: 6cec915ba2531e960f30afdea4391d4398f6c1a5635544b99ac4f937fbe81bd7
+Entry ID: 9485c9e1-0973-4dd9-8b5c-4c198da91879
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:04:18.314Z** - `index.md` (lifecycle.task-completed)
+
+Summary: Added `useBaseline` hook to glossary, appended Progress tab + useBaseline implementation updates to architecture.md and features/skill-wheel-onboarding.md (conservative mode due to merge conflicts), created new learnings page `progress-tab-baseline-gating.md` documenting the useFocusEffect pattern and FR6.3 graceful degradation seam, and updated index.md Pages list.
+
+Old hash: 2e1282c94f35dccb1182580409e6424a3524aae7fc91ca2785fa8bb130687a8b
+New hash: 30f67c37aeb14d0bdc16c0390fb228a04fe0760bff3f931823c641c94b419912
+Entry ID: edd266af-8b28-476d-b3b2-895d680b763b
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-25T20:08:48.815Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 9f6e0809-bf2e-4476-80dc-5889b51373bc
 
 Diff:
 ```diff

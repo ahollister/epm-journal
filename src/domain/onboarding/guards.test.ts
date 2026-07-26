@@ -82,6 +82,15 @@ describe('canAdvance', () => {
     expect(canAdvance('threeLists', state)).toBe(expected);
   });
 
+  it('requires all three lists at the final sub-step', () => {
+    const state = makeState({
+      threeLists: makeLists({ improvements: ['one', 'two', 'three'] }),
+    });
+    state.threeLists.who = ['one', 'two', 'three', 'four'];
+
+    expect(canAdvance('threeLists', state, 2)).toBe(false);
+  });
+
   it.each([
     ['fewer than three characteristics', [], false],
     ['exactly three characteristics', [characteristic(1), characteristic(2), characteristic(3)], true],

@@ -111,3 +111,27 @@ Tests use a real Zustand store instance (no mock store), calling actions and ass
 - [Persistence Layer](./persistence-layer.md) — two-layer design (storage.ts + baselineRepository)
 - [Skill Wheel + Onboarding](../features/skill-wheel-onboarding.md) — full feature spec and stage flow
 - [Glossary](../glossary.md) — Characteristic, ThreeLists, Baseline, OnboardingState, baselineRepository
+
+### Reorder / Rename / Remove characteristics (Stage 3 Part B)
+
+The store exposes three mutation actions used by the CharacteristicReview screen:
+
+**`reorderCharacteristics(fromIndex: number, toIndex: number)`** — Moves a characteristic from one position to another in the array. After the move, rewrites every characteristic's `order` field to be sequential (1-indexed, no gaps) based on the new array position. This order is consumed downstream as the coxcomb axis order and the tiebreaker for `rankCharacteristics` in Stage 6. The `id` and `score` are preserved across reorder.
+
+**`renameCharacteristic(id: string, newName: string)`** — Updates the `name` field of the characteristic with the given `id`. The `id` is stable (nanoid), so any existing rating (`score`) survives rename. This is called from the inline text edit mode on the CharacteristicReview screen.
+
+**`removeCharacteristic(id: string)`** — Removes the characteristic with the given `id` from the array entirely, along with any rating. After removal, rewrites `order` values on the remaining characteristics to keep them sequential. If the user later goes back to CharacteristicDefinition and re-adds a characteristic with the same name, it gets a new `id` and no previous rating — the removal is permanent.
+
+These three actions operate on the in-memory `characteristics[]` array. They do not persist to AsyncStorage — persistence only happens at `complete()` (Stage 7).
+
+### Stage 4 sequential rating: `next()` and `back()` behavior
+
+During Stage 4 (rating), `next()` increments `subStep` to move to the next characteristic. If the current characteristic is the last one, `next()` advances the stage to `confirm` (Stage 5) — gated by `canAdvance('rating', ...)`, which requires **all** characteristics to have a score.
+
+`back()` during Stage 4 decrements `subStep` to return to the previous characteristic. If the current characteristic is the first one (index 0), `back()` returns to Stage 3 Part B (CharacteristicReview) — this allows the user to review and potentially reorder/rename/remove characteristics before proceeding with rating.
+
+This means the user can walk backward through the rating flow all the way to the characteristic review screen, make edits, then walk forward again through any remaining unrated (or already-rated) characteristics.
+
+### `rateCharacteristic(id, score)` — ID-based, not index-based
+
+The `rateCharacteristic` action matches by `id`, not by array index. This ensures that reordering or renaming characteristics in Stage 3 doesn't break ratings — the `id` is a stable nanoid that survives all Stage 3 mutations. When the user returns from Stage 3 review back to Stage 4 rating, previously-rated characteristics still show their scores because they're matched by `id`.

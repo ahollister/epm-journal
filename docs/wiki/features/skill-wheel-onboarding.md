@@ -178,50 +178,95 @@ The user writes their three lists, one at a time:
 
 The lists are free-text but the UI provides prompts and examples. The user can write as many items as they want (minimum: 3 per list to ensure enough material for characteristic extraction).
 
-### Stage 3: Characteristic Extraction (1 screen per characteristic)
+### Stage 3: Characteristic Definition (free-text entry, inspiration panel)
 
-From the Three Lists, the app helps the user distill their raw list items into well-formed **characteristics** — observable behavioral statements.
+**Part A — CharacteristicDefinition (implemented):** Free-text entry screen with a read-only inspiration panel showing the user's Three Lists data (`store.threeLists`). The panel is scrollable/collapsible and purely inspirational — items are not tappable, selectable, or directly transformable into characteristics (FR-A1.2). The user reads their lists and decides what to type.
 
-For each list item the user wants to track, they:
-1. Select the raw list item (e.g., "I want to stop rushing fills").
-2. The app suggests a characteristic formulation (e.g., "Maintaining steady tempo through fills").
-3. The user refines and confirms: "Yes, that's what I mean" or edits it.
-4. The characteristic is added to their wheel as a dimension.
+Characteristic entry (FR-A2):
+- Free-text `TextInput` + "Add" button (or Enter key). Characteristic appended via `store.addCharacteristic(name)`.
+- Placeholder nudges toward broad areas: "Name a broad area of your musicianship — e.g., 'Tone quality' rather than 'Bending on the G string'" (FR-A2.2).
+- Growing list renders in real-time: each entry shows characteristic name + remove (✕) button.
+- No templating, suggestions, picklist, or pre-fill (FR-A2.4).
+- Empty/whitespace rejected (trim + check).
+- Duplicate name → inline warning (not block): "You already have a characteristic called 'X'. Did you mean to combine them?"
 
-The user can extract as many characteristics as they want (suggested: 4–8). They can also skip items — not every list item needs to become a wheel dimension.
+Gates:
+- Min 3 to proceed: "Next" disabled with "Define at least 3 characteristics to continue."
+- Suggested range 4–8: gentle copy "Most musicians define 4–8 characteristics."
+- Soft warn at >12: "That's a lot of dimensions — your wheel may be hard to read. Consider combining similar characteristics." Nudge, not block.
 
-After extraction, the user sees their full set of characteristics as a list: "Your skill wheel will track these dimensions." They can reorder, rename, or remove before proceeding.
+Navigation: "Next" → `store.next()` (advances subStep to CharacteristicReview intra-stage). Data persisted in store across back/forward.
 
-### Stage 4: Self-Rating on each characteristic (1 screen per characteristic)
+**Part B — CharacteristicReview (implemented):** After defining characteristics, the user reviews the full set as a list: "Your skill wheel will track these dimensions." They can reorder, rename, or remove before proceeding.
+
+Characteristic review (FR-A4.3):
+- All defined characteristics from `store.characteristics` displayed as a list.
+- **Reorder:** up/down arrow buttons per row. Each move rewrites the `order` field on affected characteristics to keep values sequential (1-indexed, no gaps). This order is the coxcomb axis order AND the ranking tiebreaker for Stage 6 (FR-A4.5).
+- **Rename:** tap on a characteristic name → inline text edit mode. Preserves `id` (rating survives rename).
+- **Remove:** ✕ button per row with confirmation ("Remove this characteristic?"). Drops the characteristic entirely. If the user later goes back and re-adds, it gets a new `id` and no previous rating.
+
+Coverage validation (FR-A4.2, FR-A4.4):
+- After the list, the validation question: *"If you were a 10 out of 10 in each of these areas, would you be fully satisfied with your playing? Would this allow you to do everything you want to do as a musician?"*
+- Two buttons:
+  - "No, I'm missing something" → `store.back()` (returns subStep to CharacteristicDefinition). User can add more.
+  - "Yes" → `store.next()` (advances stage to 'rating'). This is a stage boundary — the `canAdvance('characteristics', ...)` guard runs (≥3 characteristics).
+
+> **Design note:** The PRD's original Stage 3 description ("select raw list items, app suggests a characteristic formulation, user refines and confirms") was replaced with a simpler free-text entry model. The Three Lists serve as an inspiration panel, not a source of auto-suggested characteristics. This was a deliberate simplification — the "app suggests formulation" model was unbuildable for free-form list items without AI (a Vision non-goal). The user reads their own lists and types characteristics from scratch, which preserves the personal, self-driven nature of the exercise while being straightforward to implement.
+
+### Stage 4: Self-Rating on each characteristic (1 screen per characteristic) — ✅ IMPLEMENTED
+
+**Implemented at `src/features/onboarding/stages/RatingScreen.tsx`** with supporting prompt constants at `src/features/onboarding/stages/ratingPrompts.ts`. The stage is wired in `stages.tsx` and the store handles sequential rating navigation plus Stage 3 review back-navigation.
 
 The user rates themselves (0–10) on each characteristic, one at a time. This is where the "visualize your 10" self-assessment happens.
 
 Each screen contains:
-1. **Characteristic name** — the user's own wording (e.g., "Maintaining steady tempo through fills").
-2. **The four "visualize your 10" prompts** — characteristic-agnostic, same for every characteristic:
+1. **Characteristic name** — the user's own wording (e.g., "Maintaining steady tempo through fills"), prominently displayed; truncated >80 chars with tappable expand.
+2. **"Picture a 10" header** — `Picture a 10 in "{name}". Really go there for a second.`
+3. **The four "visualize your 10" prompts** — characteristic-agnostic, same for every characteristic, sourced from `ratingPrompts.ts`:
    - **What would you be able to do at a 10?**
    - **What elements are included?**
    - **Why aren't you already at 10?**
    - **What's the max?**
-3. **Slider or numeric pad** — the user selects a number 0–10. Default position is "not set."
-4. **Rating scale reference** — the 0–10 scale with midpoint 5 clearly marked.
-5. **Progress indicator** — "Characteristic 3 of 6" with dots or a progress bar.
+4. **Rating input** — row of tappable score buttons, 0–10 scale. Default unset. "Next" disabled until a score is selected. Scale uses `SCALE_MIN`/`SCALE_MAX` constants so the range can flip with a one-line edit when product confirms the final scale.
+5. **Gut-check copy** — "Don't overthink it. Your gut knows. You can always adjust later."
+
+**Midpoint nudge (Rule 1):**
+- When the user selects the scale midpoint (5 on 0–10), an inline prompt appears.
+- Two tappable options that overwrite the score: "I can do this sometimes" → 4, "I can usually do this" → 6.
+- Dismissible to keep the midpoint (a "Keep 5" dismissal).
+- Pure UI/store interaction — no domain function needed.
+
+**Navigation:**
+- "Next" → `store.next()`: if more characteristics remain, advances `subStep`; if last characteristic, advances stage to `confirm` (Stage 5). Gated by `canAdvance('rating', ...)` — every characteristic must have a score.
+- Back → `store.back()`: returns to previous characteristic, or CharacteristicReview (Stage 3 Part B) if at the first characteristic.
+- Data flow: `store.rateCharacteristic(id, score)` — updates `score` on the Characteristic object by id (not index), so reorder/rename in Stage 3 doesn't break ratings.
 
 > **Design decision (2026-05-14 — REVERSAL):** An earlier decision introduced a fixed 4-band rubric (Beginner/Intermediate/Advanced/Expert). This has been reversed — the book contains no behavioural bands. The authoritative mechanism is the four "visualize your 10" prompts above, which are static copy constants in the feature layer. The `ratingBands.ts` domain module (RATING_BANDS/bandForScore) is deleted. See [Decisions](../decisions.md).
 
 The order is user-defined (the order they confirmed characteristics in Stage 3).
 
-### Stage 5: Confirmation and wheel preview (1 screen)
+### Stage 5: Confirmation and wheel preview (1 screen) — ✅ IMPLEMENTED
 
-Shows the resulting rose chart with all characteristics plotted:
+**Implemented at `src/features/onboarding/stages/ConfirmationScreen.tsx`.** The stage is wired in `stages.tsx` and displays the user's completed rose chart for the first time.
 
-- **The wheel is the hero** — large, centered, immediately readable. Peaks and valleys are visually obvious.
-- Tap any characteristic point to go back and adjust that rating.
-- A summary text: "Your highest: [characteristic] (8). Your lowest: [characteristic] (3)."
-- **"Looks good"** primary button confirms and advances.
-- **"Adjust"** secondary option returns to the characteristic list for edits.
+**Interactive coxcomb:**
+- Renders `<SkillWheelChart characteristics={store.characteristics} interactive onWedgeTap={id => store.goToCharacteristicRating(id)} />`.
+- Tapping a wedge navigates back to Stage 4 at that characteristic's `subStep` — the user re-rates, then walks forward through remaining characteristics back to this confirmation screen.
 
-The wheel preview MUST use the same SkillWheelChart component from `src/shared/components/skill-wheel/SkillWheelChart.tsx`. Visual consistency between onboarding and ongoing tracking is non-negotiable.
+**Flat-wheel nudge (FR-B5):**
+- Computes `detectFlatWheel(store.characteristics)` from `src/domain/onboarding/wheel.ts` — a pure function: `max(scores) - min(scores)`, returns `{ isFlat: boolean, range: number }` with `threshold = 2`.
+- If `isFlat`:
+  - Displays nudge: "Your scores are very close together. Every musician has relative strengths and weaknesses. Would you like to review your ratings?"
+  - Two buttons: "Review ratings" → `store.back()` (back to Stage 4, first characteristic). "Proceed anyway" → `store.next()` (advances to Stage 6).
+- If not flat: the nudge is not shown. "Your skill wheel is ready" and a "Continue" button → `store.next()`.
+
+**Progress chrome:** "Step 5 of 7".
+
+**Self-gating:** This stage has no guard — `canAdvance('confirm', ...)` always returns true. The user decides when to proceed.
+
+**Domain function placement:** `detectFlatWheel` lives in `src/domain/onboarding/wheel.ts` (pure, tested). It is shared with Stage 6 (for tip selection) and also used in the ranking module for Focus Selection.
+
+The wheel preview uses the same `SkillWheelChart` component from `src/shared/components/skill-wheel/SkillWheelChart.tsx`. Visual consistency between onboarding and ongoing tracking is non-negotiable.
 
 ### Stage 6: Goal suggestion (1 screen)
 
@@ -345,10 +390,10 @@ The primary suggestion is always #1 (the absolute lowest). But the user sees all
 
 **Overarching constraint: Onboarding must NOT feel like a boring form-filling exercise.** Every design decision in the flow serves this goal. The four mechanisms that deliver it:
 
-1. **Characteristic-anchored self-rating** — users match themselves to concrete behavioral descriptions (the fixed 4-band rubric: Beginner 1–3, Intermediate 4–6, Advanced 7–8, Expert 9–10), rather than picking abstract numbers. The band descriptions do the heavy lifting; the number is just the summary.
+1. **"Visualize your 10" self-rating** — users build their own mental picture of mastery via four characteristic-agnostic prompts (What would you be able to do at a 10? What elements are included? Why aren't you already at 10? What's the max?), then rate by gut in ~10 seconds. No pre-authored bands — the user's own visualization does the anchoring. The number is just the summary.
 2. **10-second gut-check pace** — the flow encourages fast, intuitive answers. The UI doesn't enforce a hard timer, but the copy and scannable design push the user toward snap judgments. Overthinking produces inflated or deflated scores.
 3. **Progress visibility** — "Characteristic 3 of 6" keeps the user oriented and the end in sight. No surprise length; the user always knows where they are and how much remains.
-4. **The radar chart as visual payoff** — the wheel preview at confirmation is the reward for completing the rating screens. It transforms individual ratings into a meaningful, glanceable profile. This is the moment the user shifts from "I'm filling out a form" to "this is my musical fingerprint."
+4. **The rose chart as visual payoff** — the wheel preview at confirmation is the reward for completing the rating screens. It transforms individual ratings into a meaningful, glanceable profile. This is the moment the user shifts from "I'm filling out a form" to "this is my musical fingerprint."
 
 ### Principles from project context (restated here)
 
@@ -359,10 +404,11 @@ The primary suggestion is always #1 (the absolute lowest). But the user sees all
 
 ### Additional UX principles from the self-rating design
 
-- **Don't let the user rate until they've read.** The slider/input appears below the band descriptions, after a slight scroll. This encourages reading before rating.
-- **No zero or null scores.** All characteristics must be rated to produce a wheel. The confirmation screen is gated — "Confirm" is disabled until all characteristics have values.
+- **Don't let the user rate until they've read.** The prompts and characteristic name appear above the rating input, encouraging reflection before rating.
+- **No unrated characteristics.** All characteristics must be rated to produce a wheel. The confirmation screen is gated — "Next" at the final characteristic is disabled until scored, and the rating guard requires all characteristics scored.
 - **Progress is always visible.** The user always knows they're on "Characteristic 3 of 6" — no surprise length.
 - **The wheel is the reward.** After the rating screens, the confirmation screen with the rose chart feels like a payoff — "here's your musical profile."
+- **Midpoint nudge.** Selecting 5 (the arithmetic midpoint of 0–10) triggers an inline prompt offering "I can do this sometimes" → 4 or "I can usually do this" → 6, with a "Keep 5" dismissal. This gently discourages the low-signal midpoint, producing a wheel with real shape.
 
 ## Self-Assessment vs. Session-Derived Scores
 
@@ -466,3 +512,40 @@ The component accepts a variable-length array of characteristics as props. Two c
 
 
 **Update (2026-05-15): Stage 2 ImprovementsList (sub-step 3 of Three Lists) implemented.** Lives at `src/features/onboarding/stages/ImprovementsList.tsx`. Third and final sub-screen of Three Lists — all three sub-screens are now complete. Buffet framing: "All skills are freely available — take everything you want and put it on your plate. Don't worry about feasibility or realism yet." Add-as-you-type pattern with `TextInput` + "Add" button, per-item delete (✕). Stored in `store.threeLists.improvements` (`string[]`, order preserved); trimmed on submit; empty/whitespace rejected. Min 3 items gate (FR4.4). No hard max; soft nudge at ~12 items ("That's a lot — remember you'll distill these into characteristics next.") does not block input or advancement. No timer — this is a reflective exercise (FR4.5). Static prompts per FR4.2. "Next" triggers stage boundary: `canAdvance('threeLists', state)` revalidates all three lists before advancing to Stage 3 (characteristics). "Back" returns to WhyList. **Stage 2 (Three Lists) is now fully implemented.** Stages 3–6 remain pending.
+
+**Domain layer, routing, container, Stage 1, Stage 3 (Part A), and Stage 7 implemented; stages 2, 3 (Part B), 4–6 pending.** The stage machine (`stages.ts` — 7 stages, `Stage` type), navigation guards (`guards.ts` — `canAdvance` and `threeListsComplete` with 21 boundary/truth-table tests), and shared domain types (`types.ts` — `Characteristic`, `ThreeLists`, `Baseline`, `OnboardingState`) are implemented as pure zero-dependency domain functions. The onboarding store, route (`app/onboarding.tsx` — registered as full-screen modal above the tab bar), container (`OnboardingContainer.tsx` — stage-driven rendering with conditional `<ProgressChrome />` for stages 2–6), persistence layer (`baselineRepository`), Stage 1 (`IntroScreen.tsx` — example rose chart, value-prop copy, "Get Started" / "Skip for now"), Stage 3 Part A (`CharacteristicDefinition.tsx` — read-only Three Lists inspiration panel, free-text characteristic entry with add/remove/duplicate-warning, min-3 gate, 4–8 guidance, >12 soft warning, Next advances subStep to CharacteristicReview), and Stage 7 (`CompletionScreen.tsx` — confirms baseline saved, conditionally lists focus areas, uses `router.replace` for Practice/Progress CTAs) are also implemented. Dark theme is forced: `app.json` `userInterfaceStyle: "dark"`, `<StatusBar style="light" />` at route root, `backgroundColor: colors.bgBase` on container. Entry point: Progress tab empty state → `router.push('/onboarding')`. No auto-launch on first run. Stage screens for stages 2, 3 Part B (CharacteristicReview), and 4–6 are pending. The rose chart component (`SkillWheelChart`) is implemented and shared. Design corrected (2025-07-18): user-defined characteristics via Three Lists → characteristic extraction, not six canonical dimensions.
+
+**Update (2026-05-15): Stage 1 (IntroScreen) and Stage 3 Part A (CharacteristicDefinition) implemented.** IntroScreen at `src/features/onboarding/stages/IntroScreen.tsx` — example rose chart with 6 hardcoded dummy characteristics and scores `[3, 6, 7, 4, 5, 8]`, "Get Started" → Stage 2, "Skip for now" → dismiss. CharacteristicDefinition at `src/features/onboarding/stages/CharacteristicDefinition.tsx` — read-only Three Lists inspiration panel, free-text characteristic entry with add/Enter support, empty/whitespace rejection, duplicate inline warnings, remove buttons, min-3 gate, 4–8 guidance, >12 soft warning, intra-stage Next transition to CharacteristicReview. Stages 2, 3 Part B (CharacteristicReview), and 4–6 remain pending.
+
+**Single epic: Skill Wheel + Onboarding.** The full 7-stage onboarding flow plus the shared rose chart component are scoped as a single deliverable. The flow, self-rating rules, characteristic extraction model, and weakest-slice algorithm are fully defined. Domain functions (stages, guards, types), the onboarding store, route, container, persistence layer, Stage 1 (IntroScreen), Stage 3 Part A (CharacteristicDefinition), and Stage 7 (CompletionScreen) are implemented. Stages 2 (Three Lists), 3 Part B (CharacteristicReview), 4 (Self-Rating), 5 (Confirmation), and 6 (Goal Suggestion) are pending. The rose chart component (`SkillWheelChart`) is implemented and shared.
+
+
+**Update (2026-05-15): Stage 3 Part B (CharacteristicReview) implemented.** Lives at `src/features/onboarding/stages/CharacteristicReview.tsx` — reorder via up/down arrows (sequential `order` rewriting), inline rename (preserves `id`/score), confirmed removal (✕ with prompt), coverage validation question with "No, I'm missing something" → `store.back()` and "Yes" → `store.next()` (gated by `canAdvance`). The store gained `reorderCharacteristics`, `renameCharacteristic`, and `removeCharacteristic` actions; `order` values kept sequential (1-indexed, no gaps) after reorder/remove. 35 focused tests. Stages 2 (Three Lists), 4 (Self-Rating), 5 (Confirmation), and 6 (Goal Suggestion) remain pending.
+
+**Update (2026-05-15): Stage 3 Part B (CharacteristicReview) implemented.** Lives at `src/features/onboarding/stages/CharacteristicReview.tsx` — reorder via up/down arrows (sequential `order` rewriting), inline rename (preserves `id`/score), confirmed removal (✕ with prompt), coverage validation question with "No, I'm missing something" → `store.back()` and "Yes" → `store.next()` (gated by `canAdvance`). The store gained `reorderCharacteristics`, `renameCharacteristic`, and `removeCharacteristic` actions; `order` values kept sequential (1-indexed, no gaps) after reorder/remove. 35 focused tests. Stages 2 (Three Lists), 4 (Self-Rating), 5 (Confirmation), and 6 (Goal Suggestion) remain pending.
+
+**Update (2026-05-15): Stage 4 (RatingScreen) implemented.** Lives at `src/features/onboarding/stages/RatingScreen.tsx` with supporting prompt constants at `src/features/onboarding/stages/ratingPrompts.ts`. One screen per characteristic driven by `subStep`. Layout: characteristic name (truncated >80 chars, tappable expand), "Picture a 10" header, four static visualization prompts, row of tappable 0–10 score buttons (default unset, Next disabled until selected), gut-check copy. Midpoint nudge: selecting 5 shows inline "I can do this sometimes" → 4 / "I can usually do this" → 6 with "Keep 5" dismissal. Navigation: Next advances subStep (or to Stage 5 if last characteristic) gated by `canAdvance('rating', ...)`; Back returns to previous characteristic or CharacteristicReview. Data flow: `store.rateCharacteristic(id, score)` updates by id. Scale uses `SCALE_MIN`/`SCALE_MAX` constants for easy flip. 5 focused tests; 69 total project tests passing. Stages 2 (Three Lists), 5 (Confirmation), and 6 (Goal Suggestion) remain pending.
+
+
+**Update (2026-05-15): Stage 5 (ConfirmationScreen) implemented.** Lives at `src/features/onboarding/stages/ConfirmationScreen.tsx`. Renders interactive `<SkillWheelChart interactive onWedgeTap={...} />` — tapping a wedge navigates back to Stage 4 at that characteristic's rating subStep. Flat-wheel detection via `detectFlatWheel` from `src/domain/onboarding/wheel.ts` (pure: `max - min`, threshold 2). If flat: nudge with "Review ratings" → `store.back()` / "Proceed anyway" → `store.next()`. If not flat: "Your skill wheel is ready" + "Continue" → `store.next()`. Progress chrome "Step 5 of 7". Self-gating — `canAdvance('confirm', ...)` always returns true. 12 test suites, 77 tests passing. Stages 2 (Three Lists) and 6 (Goal Suggestion) remain pending.
+
+
+**Update (2026-05-15): Stage 6 (FocusSelectionScreen) implemented — all 7 onboarding stages complete.** The FocusSelectionScreen at `src/features/onboarding/stages/FocusSelectionScreen.tsx` implements the ranked-list focus selection stage. Key design details:
+
+- **Ranked list**: `rankCharacteristics(characteristics)` from `src/domain/onboarding/ranking.ts` — sorts by (score ASC, order ASC). Each row shows characteristic name + "X / 10" score + selection affordance (checkbox/tappable highlight).
+- **Passive tip (FR2)**: small, unobtrusive text styled like a loading-screen hint. Content selected by wheel shape (most-specific-wins):
+  - Flat (`detectFlatWheel().isFlat`): "Your scores are close together — any area you focus on will raise your overall playing. Pick what feels most motivating."
+  - Large gap (range ≥ 5, not flat): "Your strongest areas can pull your weaker ones up. Or you can double down on what's already working — both approaches are valid."
+  - Default: "Working on a weaker area often unlocks progress in stronger ones too."
+- **Selection cap**: tap toggles; max 2. Third tap → inline feedback, no selection change. Counter shows "N of 2 selected."
+- **Continue**: enabled at 0/1/2 selected. Calls `store.setFocusAreas(selectedIds)` then `store.next()`.
+- **Skip**: secondary action → `store.setFocusAreas([])` then `store.next()` with non-destructive copy.
+- **Back-preserving**: state lives in the store; back from Stage 7 preserves selection.
+- **Domain functions**: `rankCharacteristics` and `pickWeakestSlices` in `src/domain/onboarding/ranking.ts` (pure, unit-tested). `pickWeakestSlices` is built now for future Cycle Review but not used by this screen's UI. `detectFlatWheel` in `src/domain/onboarding/wheel.ts` shared with Stage 5.
+
+This is explicitly NOT a recommendation engine — the screen surfaces a ranked list and gets out of the way. The user knows their priorities better than an algorithm.
+
+With Stage 6 complete, **all seven onboarding stages are now fully implemented.**
+
+
+**Update (2026-05-15): Progress tab empty state and `useBaseline` hook implemented.** The Progress tab (`app/(tabs)/progress.tsx`) now implements conditional rendering: loading spinner → empty state with "Complete onboarding to see your skill wheel" + "Start Onboarding" CTA → `<SkillWheelChart interactive={false} />` when a baseline exists. The `useBaseline` hook at `src/features/onboarding/useBaseline.ts` uses `useFocusEffect` to re-read storage on mount and tab focus — the wheel appears immediately after the user navigates from Stage 7 (Completion) to the Progress tab. Defensive gating: "flag true but baseline null" → treated as not complete → empty state shown. This is the seam for FR6.3 (graceful degradation): any future baseline-dependent feature imports `useBaseline` and checks `baseline === null` before computing.
