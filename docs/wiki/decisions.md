@@ -258,3 +258,20 @@ The self-rating stage now anchors to the user's self-built "visualize your 10" v
 - `ThreeLists.why` is keyed by name, not id — matches Three Lists FR5 verbatim and the documented duplicate-name edge case.
 - `Baseline.userId` is `"local"` — no auth exists yet; field present so future multi-user doesn't require migration.
 - `Baseline.version` is `1` — explicit schema version for forward migration, even though V1 has no migration path.
+
+
+---
+
+## 2026-05-15 — Sequential feature branches consolidated on `feature/skillwheel-stage-3-4-5` integration branch
+
+**What was decided:** The seven remaining onboarding and Progress tasks (Stage 3A Characteristic Creation, 3B Characteristic Review/Edit, 4 Self-Rating, 5 Confirmation/Wheel Preview, 6 Goal Suggestion, Progress empty state, Progress skill wheel rendering) were each developed on separate feature branches and then merged into a single consolidated integration branch (`feature/skillwheel-stage-3-4-5`) rather than being merged directly to main individually.
+
+**Why:**
+- Each task touches overlapping files (onboarding store, container, stage components, Progress tab route), so merging sequentially to main would create repeated merge-conflict resolution for each subsequent branch.
+- A consolidated integration branch lets all seven tasks land together, with conflicts resolved once in the integration branch before a single merge to main.
+- The sequential queue order (3A → 3B → 4 → 5 → 6 → Progress empty state → Progress skill wheel rendering) means later tasks depend on earlier ones; landing them atomically avoids a broken intermediate state on main (e.g., Stage 3B merged but 3A missing).
+- The integration branch also serves as a test surface: the full 7-stage flow can be tested end-to-end before hitting main.
+
+**What was rejected:** Merging each feature branch directly to main in sequence — this would create repeated merge conflicts and risk intermediate broken states on main between merges.
+
+**Implications:** The `feature/skillwheel-stage-3-4-5` branch is the authoritative integration surface. Once validated, it will be merged to main as a single unit. All seven onboarding stages are now implemented end-to-end.

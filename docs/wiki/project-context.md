@@ -97,3 +97,5 @@ The Skill Wheel onboarding introduces new users to the skill assessment framewor
 ---
 
 *This page is the canonical starting point for the EPM Journal project. See the sidebar pages for deeper dives into architecture, decisions, glossary, and specific learnings.*
+
+| P3 | Skill Wheel onboarding flow | Progress | **Implemented** — full 7-stage flow (Intro → Three Lists → Characteristic Extraction → Self-Rating → Confirmation → Goal Suggestion → Completion), consolidated on `feature/skillwheel-stage-3-4-5` |

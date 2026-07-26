@@ -76,3 +76,6 @@ Prior models (all superseded):
 - Stacked horizontal bars (2025-07-18, recorded in error)
 
 See [Decisions](../decisions.md) for the full history and the 2026-05-13 authoritative decision.
+
+
+**Update (2026-05-15): Progress tab skill wheel rendering implemented.** The Progress tab now renders the shared `SkillWheelChart` component in static mode (`interactive={false}`) with the user's persisted baseline characteristics and scores when onboarding is complete. An empty state with a "Complete onboarding to see your skill wheel" CTA is shown when no baseline exists. Both merged on `feature/skillwheel-stage-3-4-5`.
