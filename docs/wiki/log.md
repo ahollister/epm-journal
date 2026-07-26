@@ -2518,6 +2518,36 @@ Diff:
 ```
 ---
 
+**2026-07-26T19:26:00.000Z** - `learnings/practice-tab-baseline-gating.md` (lifecycle.task-completed)
+
+Summary: Updated heading text from "Get your baseline" to "Create your baseline" to match the code change in `app/(tabs)/index.tsx`.
+
+Old hash: d6fba0a24547f34308745273d4b45b2265649eea2a34c081fcde36c0d8917ac4
+New hash: (not computed)
+Entry ID: 7a3c4e1b-92d5-48f3-a12d-8b6c7f3e1a9b
+
+Diff:
+```diff
+-| No baseline | `baseline === null && !loading` | "Get your baseline" heading
++| No baseline | `baseline === null && !loading` | "Create your baseline" heading
+```
+---
+
+**2026-07-26T19:26:00.001Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Updated Practice tab baseline-gating note from "Get your baseline" to "Create your baseline" to match the code change in `app/(tabs)/index.tsx`.
+
+Old hash: 57d3c4afe16e8a09dd5428a5350025d8f0dae531c54d38496b09a564496915ba
+New hash: (not computed)
+Entry ID: 8b2d5f2c-a346-49c4-b23e-9c7d8f4e2b0a
+
+Diff:
+```diff
+-onboarding CTA ("Get your baseline" + "Start Onboarding"
++onboarding CTA ("Create your baseline" + "Start Onboarding"
+```
+---
+
 **2026-07-26T13:05:48.808Z** - `architecture.md` (lifecycle.task-completed)
 
 Summary: Created learnings/practice-tab-baseline-gating.md documenting the Practice tab's new baseline-gating pattern; appended update notes to learnings/progress-tab-baseline-gating.md and architecture.md (conservative mode); index.md update blocked by conservative mode but new page is cross-referenced from the Progress tab learnings page.
