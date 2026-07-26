@@ -2487,3 +2487,46 @@ Diff:
 ```diff
 
 ```
+
+---
+
+**2026-07-26T13:05:48.807Z** - `learnings/practice-tab-baseline-gating.md` (lifecycle.task-completed)
+
+Summary: Created learnings/practice-tab-baseline-gating.md documenting the Practice tab's new baseline-gating pattern; appended update notes to learnings/progress-tab-baseline-gating.md and architecture.md (conservative mode); index.md update blocked by conservative mode but new page is cross-referenced from the Progress tab learnings page.
+
+Old hash: (none)
+New hash: d6fba0a24547f34308745273d4b45b2265649eea2a34c081fcde36c0d8917ac4
+Entry ID: de8b8c3d-2b77-48b8-b01b-e9d3f1530394
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-26T13:05:48.808Z** - `learnings/progress-tab-baseline-gating.md` (lifecycle.task-completed)
+
+Summary: Created learnings/practice-tab-baseline-gating.md documenting the Practice tab's new baseline-gating pattern; appended update notes to learnings/progress-tab-baseline-gating.md and architecture.md (conservative mode); index.md update blocked by conservative mode but new page is cross-referenced from the Progress tab learnings page.
+
+Old hash: 6cec915ba2531e960f30afdea4391d4398f6c1a5635544b99ac4f937fbe81bd7
+New hash: c005fc82dc9c226b18372f0ddad01d44980833e0da72cc932bce5804754b2257
+Entry ID: a605bbd6-b1db-4c57-88ea-20ce73f6e80f
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-26T13:05:48.808Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Created learnings/practice-tab-baseline-gating.md documenting the Practice tab's new baseline-gating pattern; appended update notes to learnings/progress-tab-baseline-gating.md and architecture.md (conservative mode); index.md update blocked by conservative mode but new page is cross-referenced from the Progress tab learnings page.
+
+Old hash: c8f79a071bb478fe5e8543c6e4fc523846d5e1e72458d233d7729e4c2dd28629
+New hash: 57d3c4afe16e8a09dd5428a5350025d8f0dae531c54d38496b09a564496915ba
+Entry ID: ff9a9511-fc8e-4ef4-a003-03ba7e8d3f33
+
+Diff:
+```diff
+
+```

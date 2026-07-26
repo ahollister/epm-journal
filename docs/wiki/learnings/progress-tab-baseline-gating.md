@@ -73,3 +73,7 @@ This makes the transition from onboarding completion to Progress tab feel seamle
 - [Skill Wheel + Onboarding](../features/skill-wheel-onboarding.md) — full feature spec and flow
 - [Persistence Layer](./persistence-layer.md) — two-layer design, atomic-ish writes, defensive reads
 - [Glossary](../glossary.md) — `useBaseline`, `baselineRepository`
+
+## Practice Tab Adopts the Same Pattern (2026-05-15)
+
+The Practice tab (`app/(tabs)/index.tsx`) now implements the identical baseline-gating pattern — same three-state rendering (loading → empty with onboarding CTA → content), same `useBaseline` hook, same styling. This means `useBaseline` is validated as a cross-tab seam: the default landing screen guides un-onboarded users to onboarding immediately, rather than showing a dead-end placeholder. See [Practice Tab & Baseline Gating](./practice-tab-baseline-gating.md).
