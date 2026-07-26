@@ -28,7 +28,11 @@ export function CompletionScreen() {
         <Text style={styles.focus}>
           Your focus for your first cycle: {focusAreaNames.join(', ')}
         </Text>
-      ) : null}
+      ) : (
+        <Text style={styles.focus}>
+          You can set a focus area anytime from your practice session.
+        </Text>
+      )}
 
       <Pressable
         accessibilityRole="button"
@@ -100,4 +104,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-

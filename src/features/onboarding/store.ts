@@ -28,6 +28,7 @@ export interface OnboardingState extends DomainOnboardingState {
   addCharacteristic(name: string): void;
   addImprovement(improvement: string): void;
   addWhoName(name: string): void;
+  moveCharacteristic(id: string, direction: 'up' | 'down'): void;
   renameCharacteristic(id: string, name: string): void;
   removeCharacteristic(id: string): void;
   removeImprovement(index: number): void;
@@ -69,11 +70,27 @@ function initialState(): Pick<
   };
 }
 
+function orderedCharacteristics(
+  characteristics: DomainOnboardingState['characteristics'],
+) {
+  return [...characteristics].sort((a, b) => a.order - b.order);
+}
+
+function withSequentialOrder(
+  characteristics: DomainOnboardingState['characteristics'],
+) {
+  return orderedCharacteristics(characteristics).map((characteristic, index) => ({
+    ...characteristic,
+    order: index + 1,
+  }));
+}
+
 function nextSubStepLimit(stage: Stage, state: OnboardingState): number | null {
   switch (stage) {
     case 'threeLists':
       return 2;
     case 'characteristics':
+      return 1;
     case 'rating':
       return Math.max(state.characteristics.length - 1, 0);
     default:
@@ -87,14 +104,24 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   next: () => {
     const state = get();
 
-    if (!canAdvance(state.stage, state, state.subStep)) {
-      return;
+    if (state.stage === 'rating') {
+      const currentCharacteristic = orderedCharacteristics(state.characteristics)[
+        state.subStep
+      ];
+
+      if (currentCharacteristic?.score == null) {
+        return;
+      }
     }
 
     const subStepLimit = nextSubStepLimit(state.stage, state);
 
     if (subStepLimit !== null && state.subStep < subStepLimit) {
       set({ subStep: state.subStep + 1 });
+      return;
+    }
+
+    if (!canAdvance(state.stage, state)) {
       return;
     }
 
@@ -126,6 +153,11 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
       return;
     }
 
+    if (state.stage === 'rating') {
+      set({ stage: 'characteristics', subStep: 1 });
+      return;
+    }
+
     const stageIndex = STAGES.indexOf(state.stage);
     const previousStage = STAGES[stageIndex - 1];
 
@@ -137,7 +169,7 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
   },
 
   goToCharacteristicRating: (id) => {
-    const index = get().characteristics.findIndex(
+    const index = orderedCharacteristics(get().characteristics).findIndex(
       (characteristic) => characteristic.id === id,
     );
 
@@ -204,6 +236,36 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
     }));
   },
 
+  moveCharacteristic: (id, direction) => {
+    set((state) => {
+      const characteristics = orderedCharacteristics(state.characteristics);
+      const index = characteristics.findIndex(
+        (characteristic) => characteristic.id === id,
+      );
+      const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+      if (
+        index === -1 ||
+        targetIndex < 0 ||
+        targetIndex >= characteristics.length
+      ) {
+        return state;
+      }
+
+      [characteristics[index], characteristics[targetIndex]] = [
+        characteristics[targetIndex],
+        characteristics[index],
+      ];
+
+      return {
+        characteristics: characteristics.map((characteristic, itemIndex) => ({
+          ...characteristic,
+          order: itemIndex + 1,
+        })),
+      };
+    });
+  },
+
   renameCharacteristic: (id, name) => {
     const trimmedName = name.trim();
 
@@ -222,12 +284,9 @@ export const useOnboardingStore = create<OnboardingState>((set, get) => ({
 
   removeCharacteristic: (id) => {
     set((state) => {
-      const characteristics = state.characteristics
-        .filter((characteristic) => characteristic.id !== id)
-        .map((characteristic, index) => ({
-          ...characteristic,
-          order: index + 1,
-        }));
+      const characteristics = withSequentialOrder(
+        state.characteristics.filter((characteristic) => characteristic.id !== id),
+      );
 
       const isCursorStage =
         state.stage === 'characteristics' || state.stage === 'rating';

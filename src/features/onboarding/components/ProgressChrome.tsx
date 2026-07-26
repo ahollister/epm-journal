@@ -17,7 +17,11 @@ export function ProgressChrome() {
   const label =
     stage === 'threeLists'
       ? `List ${position} of 3`
-      : stage === 'characteristics' || stage === 'rating'
+      : stage === 'characteristics'
+        ? subStep === 0
+          ? 'Stage 3 · Define'
+          : 'Stage 3 · Review'
+        : stage === 'rating'
         ? `Characteristic ${position} of ${characteristics.length}`
         : `Step ${STAGES.indexOf(stage) + 1} of 7`;
 
