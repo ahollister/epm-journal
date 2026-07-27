@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
+import * as SystemUI from 'expo-system-ui';
 
 import { colors } from '@/shared/lib/theme';
+
+SystemUI.setBackgroundColorAsync(colors.bgBase);
 
 export default function RootLayout() {
   return (
@@ -20,6 +23,7 @@ export default function RootLayout() {
             presentation: 'fullScreenModal',
             headerShown: false,
             gestureEnabled: false,
+            contentStyle: { backgroundColor: colors.bgBase },
           }}
         />
       </Stack>
