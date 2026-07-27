@@ -24,7 +24,7 @@ The architecture described above is the **target design**. The actual codebase i
 - **AsyncStorage** is the V1 persistence choice (no SQLite, no zustand/persist middleware). See the [2026-05-14 persistence decision](../decisions.md).
 - **Jest + jest-expo** test harness is configured with multiple test suites passing.
 - Routing lives at `app/` (repo root), not `src/app/` as previously documented.
-- `app.json` sets `userInterfaceStyle: "dark"` — the onboarding route forces dark theme and the app-wide default is now dark to prevent a white flash on mount.
+- `app.json` sets `userInterfaceStyle: "dark"` — the app-wide default is dark to prevent a white flash on mount. Background consistency is enforced through five layers: (1) `expo-system-ui` (`SystemUI.setBackgroundColorAsync`) sets the native root view background before React mounts, (2) `<StatusBar style="light" backgroundColor={colors.bgBase} />`, (3) `Stack screenOptions.contentStyle`, (4) `Tabs screenOptions.sceneStyle` + `tabBarStyle` + `headerStyle`, and (5) per-screen `StyleSheet` backgrounds. The `expo-system-ui` layer is critical — removing it reintroduces a white flash during app startup and navigation transitions.
 - Design tokens exist as CSS variables in an HTML mockup (`docs/designs/design-system.html`) with **double-prefixed names** (e.g. `--color-color-accent-primary`). A hand-authored TypeScript theme module at `src/shared/lib/theme.ts` exports single-prefix names and reconciles the mismatch. See [Design Tokens & Theme Module](../learnings/design-tokens-theme-module.md).
 - `AGENTS.md` references Expo v57 docs but `package.json` pins `expo ~53.0.0`.
 
@@ -67,7 +67,7 @@ The architecture described above is the **target design**. The actual codebase i
 - **AsyncStorage** is the V1 persistence choice (no SQLite, no zustand/persist middleware). See the [2026-05-14 persistence decision](../decisions.md).
 - **Jest + jest-expo** test harness is configured with multiple test suites passing.
 - Routing lives at `app/` (repo root), not `src/app/` as previously documented.
-- `app.json` sets `userInterfaceStyle: "dark"` — the onboarding route forces dark theme and the app-wide default is now dark to prevent a white flash on mount.
+- `app.json` sets `userInterfaceStyle: "dark"` — the app-wide default is dark to prevent a white flash on mount. Background consistency is enforced through five layers: (1) `expo-system-ui` (`SystemUI.setBackgroundColorAsync`) sets the native root view background before React mounts, (2) `<StatusBar style="light" backgroundColor={colors.bgBase} />`, (3) `Stack screenOptions.contentStyle`, (4) `Tabs screenOptions.sceneStyle` + `tabBarStyle` + `headerStyle`, and (5) per-screen `StyleSheet` backgrounds. The `expo-system-ui` layer is critical — removing it reintroduces a white flash during app startup and navigation transitions.
 - Design tokens exist as CSS variables in an HTML mockup (`docs/designs/design-system.html`) with **double-prefixed names** (e.g. `--color-color-accent-primary`). A hand-authored TypeScript theme module at `src/shared/lib/theme.ts` exports single-prefix names and reconciles the mismatch. See [Design Tokens & Theme Module](../learnings/design-tokens-theme-module.md).
 - `AGENTS.md` references Expo v57 docs but `package.json` pins `expo ~53.0.0`.
 
