@@ -23,7 +23,7 @@ export default function PracticeScreen() {
   if (baseline === null && !loading) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Get your baseline</Text>
+        <Text style={styles.title}>Create your baseline</Text>
         <Text style={styles.subtitle}>
           Take a 10-minute self-assessment to create your baseline and power progress tracking over time.
         </Text>
