@@ -1,17 +1,28 @@
+import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
+
+import { colors } from '@/shared/lib/theme';
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen
-        name="onboarding"
-        options={{
-          presentation: 'fullScreenModal',
+    <>
+      <StatusBar style="light" backgroundColor={colors.bgBase} />
+      <Stack
+        screenOptions={{
           headerShown: false,
-          gestureEnabled: false,
+          contentStyle: { backgroundColor: colors.bgBase },
         }}
-      />
-    </Stack>
+      >
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen
+          name="onboarding"
+          options={{
+            presentation: 'fullScreenModal',
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        />
+      </Stack>
+    </>
   );
 }

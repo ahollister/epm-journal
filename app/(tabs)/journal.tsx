@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import { colors, fontSize, space } from '@/shared/lib/theme';
+
 export default function JournalScreen() {
   return (
     <View style={styles.container}>
@@ -14,13 +16,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.bgBase,
+    padding: space.xl,
   },
   title: {
-    fontSize: 24,
+    color: colors.textPrimary,
+    fontSize: fontSize.xl,
     fontWeight: '600',
   },
   subtitle: {
-    marginTop: 8,
-    color: '#666',
+    color: colors.textSecondary,
+    marginTop: space.sm,
+    textAlign: 'center',
   },
 });
