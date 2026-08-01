@@ -118,3 +118,22 @@ The architecture described above is the **target design**. The actual codebase i
 
 
 **Update (2026-05-15): Practice tab baseline-gating implemented.** The Practice tab (`app/(tabs)/index.tsx`) is no longer a static placeholder for all users — it now implements the same baseline-gating pattern as the Progress tab: loading spinner → onboarding CTA ("Get your baseline" + "Start Onboarding" → `router.push('/onboarding')`) when no baseline exists → existing "Session runner coming soon" placeholder when a baseline is present. Uses `useBaseline` hook, theme tokens, and `<Pressable>` with `accessibilityRole="button"` matching Progress tab styling. This means the default landing screen now guides first-time users to onboarding rather than showing a dead-end placeholder.
+
+
+**Correction (2026-05-15):** The Practice tab baseline-gating heading changed from "Get your baseline" to "Create your baseline" in `app/(tabs)/index.tsx`. The onboarding CTA now reads "Create your baseline" + "Start Onboarding".
+
+### Dark Background Consistency (Five-Layer Mechanism) — added 2026-05-15
+
+To prevent a white flash during app startup and navigation transitions, the dark background (`#0a0f0d` / `colors.bgBase`) must be applied at five independent layers in React Native's view hierarchy. Each layer covers a surface that renders independently; a missing layer at any level produces a white rectangle at that level during transitions or before that layer's content mounts.
+
+| Layer | Mechanism | What it covers |
+|-------|-----------|----------------|
+| 1 | `expo-system-ui` (`SystemUI.setBackgroundColorAsync`) | Native root view background **before React mounts**. This is the critical first layer — removing it reintroduces the white flash on cold start. |
+| 2 | `<StatusBar style="light" backgroundColor={colors.bgBase} />` | Status bar background colour. |
+| 3 | `Stack screenOptions.contentStyle` | Background for all screens in the root stack navigator. |
+| 4 | `Tabs screenOptions.sceneStyle` + `tabBarStyle` + `headerStyle` | Background for tab scenes, the bottom tab bar, and headers. |
+| 5 | Per-screen `StyleSheet` backgrounds | Individual screen containers as defense-in-depth. |
+
+The `expo-system-ui` layer (layer 1) is non-obvious and essential: React Native's native root view has its own background colour, independent of any React-rendered content. Without `setBackgroundColorAsync`, the native view shows white (the system default) during the initial frame before React mounts and renders the first screen. The `app.json` `backgroundColor` and `userInterfaceStyle: "dark"` settings help but do not fully control the native root surface — only `expo-system-ui` does.
+
+**Implementation:** `expo-system-ui` added as a dependency; `setBackgroundColorAsync(colors.bgBase)` called in `app/_layout.tsx`; Android adaptive icon background set to `#0a0f0d` in `app.json`.

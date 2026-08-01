@@ -2530,3 +2530,101 @@ Diff:
 ```diff
 
 ```
+---
+
+**2026-07-26T19:24:49.190Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Appended correction notes to architecture.md and learnings/practice-tab-baseline-gating.md documenting the Practice tab heading change from "Get your baseline" to "Create your baseline".
+
+Old hash: 57d3c4afe16e8a09dd5428a5350025d8f0dae531c54d38496b09a564496915ba
+New hash: bcd2b43097868caaa1dc5ca59a45de8bb85d215dd19e1fd9699197b5173e0147
+Entry ID: fa4af4e7-5e1f-419e-98a8-2642ad63cad4
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-26T19:24:49.191Z** - `learnings/practice-tab-baseline-gating.md` (lifecycle.task-completed)
+
+Summary: Appended correction notes to architecture.md and learnings/practice-tab-baseline-gating.md documenting the Practice tab heading change from "Get your baseline" to "Create your baseline".
+
+Old hash: d6fba0a24547f34308745273d4b45b2265649eea2a34c081fcde36c0d8917ac4
+New hash: 067412682fd1c90ea10fedbbf91e7de56563d521716f6a92322edaac5c116c8f
+Entry ID: f7f0649e-192f-4839-966a-f2310ab65233
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-26T19:39:54.530Z** - `learnings/practice-tab-copy-update.md` (lifecycle.task-completed)
+
+Summary: Created learnings/practice-tab-copy-update.md capturing the non-obvious _layout.tsx tab bar label sync when changing tab screen copy. Existing docs (architecture.md, practice-tab-baseline-gating.md) already reflected the "Create your baseline" change from a prior refactor commit. Index update blocked by conservative mode.
+
+Old hash: (none)
+New hash: fd1f4eecd7fb89533c3885d3e643784a3497d36fef20ca5a8367abaceae26c48
+Entry ID: 4fec4287-6f59-4356-b510-6b82b7f690a1
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-27T07:05:41.337Z** - `(none)` (lifecycle.task-completed)
+
+Summary: Added practice-tab-copy-update.md link to index (blocked by conservative mode on index.md); all other pages already reflect the "Create your baseline" copy change.
+
+Old hash: (none)
+New hash: 5fcabd9ac06fa020307d13cd55faae8521bef80566576eb1477620e75b1699e0
+Entry ID: 33abf860-bf70-4c7b-b2b3-36ca5559a7f7
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-27T10:09:34.312Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes
+
+Old hash: (none)
+New hash: 44f9161c3a252925f55022d60f68918abf8fdc1a9a3fadbf5ab766549f6b3461
+Entry ID: 00fccb20-8446-4ede-97f2-80258e9e259a
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-27T19:50:04.826Z** - `(none)` (lifecycle.task-completed)
+
+Summary: no changes — the "Get your baseline" → "Create your baseline" copy change was already reflected in architecture.md and learnings/practice-tab-baseline-gating.md; learnings/practice-tab-copy-update.md exists but couldn't be added to the index due to a conservative-mode block on index.md
+
+Old hash: (none)
+New hash: 2109294023eb29cc913702756d0b2fe81a1be2c39886a5fbc988af94fe4ee187
+Entry ID: ebe2ee1e-4e3e-49ee-9396-1c7eacf4d977
+
+Diff:
+```diff
+
+```
+---
+
+**2026-07-27T20:17:52.722Z** - `architecture.md` (lifecycle.task-completed)
+
+Summary: Added "Dark Background Consistency (Five-Layer Mechanism)" section to architecture.md documenting the expo-system-ui → StatusBar → Stack → Tabs → per-screen layering needed to prevent white flash during startup and transitions.
+
+Old hash: bcd2b43097868caaa1dc5ca59a45de8bb85d215dd19e1fd9699197b5173e0147
+New hash: d12ddf6dd123c4227b5a8c5770c41da19f3489fb27ebd51f51fbdbaf1b194638
+Entry ID: 14ad9403-0150-4834-b5c7-d774069b7b8b
+
+Diff:
+```diff
+
+```

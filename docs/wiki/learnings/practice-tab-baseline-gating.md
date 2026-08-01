@@ -60,3 +60,6 @@ This validates the FR6.3 graceful degradation pattern: any future feature that n
 - [Persistence Layer](./persistence-layer.md) — two-layer design, defensive reads
 - [Skill Wheel + Onboarding](../features/skill-wheel-onboarding.md) — full onboarding flow
 - [Glossary](../glossary.md) — `useBaseline`
+
+
+**Correction (2026-05-15):** The heading copy in the "No baseline" state changed from "Get your baseline" to "Create your baseline". The table above has been updated to reflect the current copy.
